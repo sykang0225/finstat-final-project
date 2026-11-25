@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>금융통계 기말 프로젝트 · 강승윤</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--blue:oklch(0.620 0.191 258);--blue50:oklch(0.959 0.020 250);--ink:oklch(0.237 0.020 258);--g7:oklch(0.460 0.028 256);--g2:oklch(0.930 0.005 248);--g1:oklch(0.966 0.003 248)}
+*{box-sizing:border-box;margin:0}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--g1);color:var(--ink);line-height:1.55}
+main{max-width:860px;margin:48px auto;padding:0 20px}
+.card{background:#fff;border:1px solid var(--g2);border-radius:20px;padding:28px 30px;margin-bottom:18px}
+.chip{display:inline-block;padding:4px 12px;border-radius:999px;background:var(--blue50);color:var(--blue);font-size:13px;font-weight:600}
+h1{font-size:32px;letter-spacing:-.02em;margin:12px 0 6px}h2{font-size:20px;margin-bottom:10px}
+p,li,td{color:var(--g7);font-size:15px}
+.btn{display:inline-block;margin:14px 10px 0 0;padding:12px 20px;border-radius:12px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600}
+.btn.sub{background:var(--g1);color:var(--ink)}
+table{width:100%;border-collapse:collapse}td{padding:8px 6px;border-bottom:1px solid var(--g2);vertical-align:top}td:first-child{white-space:nowrap;color:var(--ink);font-weight:600}
+code{background:var(--g1);padding:1px 6px;border-radius:6px;font-size:13px}
+pre{background:var(--g1);border-radius:12px;padding:14px;overflow:auto;font-size:13px}
+</style>
+</head>
+<body><main>
+<div class="card">
+  <span class="chip">금융통계 (2026-2) · 기말 프로젝트</span>
+  <h1>한국 주식시장 2년 반 (2024.04 ~ 2026.09)</h1>
+  <p>통계학과 강승윤 · 교수 아카이브의 네이버 금융 원본 HTML 2,403,074개를 직접 읽어 코스피·코스닥 전 종목을 WICS 10개 업종으로 분석</p>
+  <a class="btn" href="slides/%EA%B8%B0%EB%A7%90%EB%B0%9C%ED%91%9C_1%EC%B0%A8.html">1차 발표 슬라이드 열기</a>
+  <a class="btn sub" href="https://github.com/sykang0225/finstat-final-project">코드·데이터 저장소</a>
+</div>
+<div class="card">
+  <h2>주요 결과</h2>
+  <table>
+    <tr><td>1. 시가총액</td><td>상장사 시총 2,572조 → 5,848조 원(+127%). 증가분의 73%가 IT, 삼성전자·SK하이닉스 두 종목이 61.5%. 상위 30 이탈 10개 중 4개는 시총이 늘었지만 시장보다 덜 올라 밀려남</td></tr>
+    <tr><td>2. 업종 수익률</td><td>업종 간 퍼짐 가운데값 12.7 → 39.0%p. 시총 가중 1위 IT(+180.9%)가 동일 가중으로는 5위(+19.6%)</td></tr>
+    <tr><td>3. 업종 동조</td><td>업종 간 평균 상관: 급변일 0.82 vs 보통일 0.36. 급변일 53일 중 48일이 2026년</td></tr>
+    <tr><td>4. 거래량</td><td>급증 전 5일 +1.8%, 급증 후 20일 −0.8%(가운데값). 급증 종목 최다일은 2026-03-04 폭락일</td></tr>
+  </table>
+</div>
+<div class="card">
+  <h2>저장소 구성과 재현</h2>
+  <table>
+    <tr><td><a href="https://github.com/sykang0225/finstat-final-project/tree/main/code">code/</a></td><td>원본 추출(extract), 1·2주차 분석(week1·week2), 기말 분석(final: wics.py, analysis.py, build_slides.py)</td></tr>
+    <tr><td><a href="https://github.com/sykang0225/finstat-final-project/tree/main/data">data/</a></td><td>거래일별 종목 표 550개, 날짜 품질표, 실적 표 전환 목록, 분석 결과(final/analysis.json)</td></tr>
+    <tr><td><a href="https://github.com/sykang0225/finstat-final-project#readme">README</a></td><td>분석 규칙(정의 메모), 자료 결함 처리, 재현 명령</td></tr>
+  </table>
+  <pre>python code/final/analysis.py --daily data/enriched_daily --sessions data/week2/tables/sessions.csv \
+  --kospi data/week1/kospi_reference.csv --start 2024-04-15 --end 2026-09-02 --out data/final/analysis.json</pre>
+  <p>Python 3.10 이상, 표준 라이브러리만 사용.</p>
+</div>
+</main></body>
+</html>

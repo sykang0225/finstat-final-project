@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>코스피 2년 반, 시장은 어떻게 바뀌었나 · 금융통계 기말 1차 발표</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* 디자인 토큰: getdesign.kr 토스(toss) DESIGN.md 의 colors·typography·spacing·rounded·elevation 을 그대로 옮김 */
+:root{
+  --blue-500:oklch(0.620 0.191 258); --blue-600:oklch(0.522 0.176 257); --blue-700:oklch(0.476 0.174 259); --blue-50:oklch(0.959 0.020 250);
+  --grey-900:oklch(0.237 0.020 258); --grey-800:oklch(0.357 0.028 257); --grey-700:oklch(0.460 0.028 256); --grey-600:oklch(0.562 0.025 254);
+  --grey-500:oklch(0.666 0.021 253); --grey-400:oklch(0.779 0.016 251); --grey-300:oklch(0.874 0.009 248); --grey-200:oklch(0.930 0.005 248);
+  --grey-100:oklch(0.966 0.003 248); --grey-50:oklch(0.985 0.002 248); --white:oklch(1 0 0);
+  --red-500:oklch(0.641 0.208 21); --orange-500:oklch(0.748 0.183 56); --green-500:oklch(0.493 0.143 154); --yellow-500:oklch(0.850 0.154 82);
+  --fg-tertiary:oklch(0.155 0.060 261 / 0.58);
+  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --radius-s:8px; --radius-m:12px; --radius-xl:16px; --radius-2xl:20px; --radius-3xl:24px; --radius-full:999px;
+  --shadow-2:0 4px 12px oklch(0.155 0.060 261 / 0.06),0 1px 2px oklch(0.155 0.060 261 / 0.04);
+  --shadow-3:0 12px 32px oklch(0.155 0.060 261 / 0.10),0 2px 6px oklch(0.155 0.060 261 / 0.06);
+  --ease:cubic-bezier(0.22,0.61,0.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--grey-100);font-family:var(--font);color:var(--grey-900);letter-spacing:-0.005em;-webkit-font-smoothing:antialiased}
+.num,table,svg text{font-variant-numeric:tabular-nums}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#stage{width:1280px;height:720px;position:relative;transform-origin:center center;flex:none}
+.slide{position:absolute;inset:0;background:var(--white);border-radius:var(--radius-3xl);box-shadow:var(--shadow-3);padding:44px 56px 40px;display:none;flex-direction:column;overflow:hidden}
+.slide.on{display:flex;animation:fade 200ms var(--ease)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:var(--radius-full);background:var(--blue-50);color:var(--blue-600);font-size:13px;font-weight:600;align-self:flex-start}
+.chip.grey{background:var(--grey-100);color:var(--grey-700)}
+h1{font-size:34px;font-weight:700;line-height:1.3;letter-spacing:-0.02em;margin-top:12px}
+h2{font-size:22px;font-weight:700;letter-spacing:-0.015em;line-height:1.3}
+h3{font-size:17px;font-weight:600;letter-spacing:-0.01em;line-height:1.45}
+p,li{font-size:15px;line-height:1.5;color:var(--grey-700)}
+.answer{margin-top:16px;background:var(--grey-50);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:14px 20px;display:flex;gap:14px;align-items:baseline}
+.answer b{flex:none;font-size:13px;font-weight:600;color:var(--blue-500)}
+.answer span{font-size:19px;font-weight:600;line-height:1.45;color:var(--grey-900);letter-spacing:-0.01em}
+.body{flex:1;display:grid;gap:24px;margin-top:20px;min-height:0;align-items:start}
+.two{grid-template-columns:1fr 340px}
+.card{background:var(--white);border:1px solid var(--grey-200);border-radius:var(--radius-xl);padding:18px 20px;min-height:0}
+.card.soft{background:var(--grey-50)}
+.card h3{margin-bottom:8px}
+.read dt{font-size:12px;font-weight:600;color:var(--grey-500);margin-top:10px}
+.read dt:first-child{margin-top:0}
+.read dd{font-size:14px;line-height:1.5;color:var(--grey-800)}
+.read dd strong{color:var(--blue-600)}
+.src{font-size:11px;color:var(--grey-500);margin-top:auto;padding-top:10px;line-height:1.4}
+.big{display:flex;gap:16px}
+.big .card{flex:1}
+.big .n{font-size:40px;font-weight:700;letter-spacing:-0.02em;line-height:1.2;color:var(--grey-900)}
+.big .n small{font-size:18px;font-weight:600;margin-left:2px}
+.big .l{font-size:14px;color:var(--grey-600);margin-top:4px}
+.blue{color:var(--blue-500)} .red{color:var(--red-500)}
+table{border-collapse:collapse;width:100%}
+th{font-size:12px;font-weight:600;color:var(--grey-500);text-align:left;padding:0 8px 6px;border-bottom:1px solid var(--grey-200)}
+td{font-size:14px;padding:6px 8px;border-bottom:1px solid var(--grey-200);color:var(--grey-800)}
+td.r,th.r{text-align:right}
+.tag{display:inline-block;padding:1px 8px;border-radius:var(--radius-s);background:var(--grey-100);color:var(--grey-700);font-size:12px;font-weight:500}
+.tag.bank{background:var(--blue-50);color:var(--blue-600)}
+ul.plain{list-style:none}
+ul.plain li{padding:6px 0;border-bottom:1px solid var(--grey-200);font-size:15px;color:var(--grey-800)}
+ul.plain li:last-child{border-bottom:0}
+table.tight td{padding:4px 6px;font-size:13px;vertical-align:top}
+svg{display:block;overflow:visible}
+.cap{font-size:13px;color:var(--grey-600);margin-bottom:6px}
+/* 진행 표시 */
+#bar{position:fixed;left:0;top:0;height:3px;background:var(--blue-500);transition:width 200ms var(--ease);z-index:5}
+#hud{position:fixed;right:20px;bottom:16px;display:flex;gap:8px;align-items:center;z-index:6;opacity:.35;transition:opacity 200ms var(--ease)}
+#hud:hover{opacity:1}
+#hud button{height:36px;padding:0 14px;border:0;border-radius:var(--radius-m);background:var(--white);box-shadow:var(--shadow-2);font:600 13px var(--font);color:var(--grey-800);cursor:pointer}
+#hud button.primary{background:var(--blue-500);color:var(--white)}
+#hud .count{font-size:13px;color:var(--grey-600);min-width:52px;text-align:center}
+/* 발표 대본 */
+#notes{position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;background:var(--white);box-shadow:0 -2px 12px oklch(0.155 0.060 261 / 0.06);border-radius:var(--radius-2xl) var(--radius-2xl) 0 0;padding:20px 28px 64px;display:none;z-index:4}
+#notes.on{display:block}
+#notes .meta{font-size:13px;color:var(--grey-500);margin-bottom:6px}
+#notes p{font-size:17px;line-height:1.6;color:var(--grey-900);margin-bottom:6px}
+.notes{display:none}
+@media print{
+  @page{size:1280px 720px;margin:0}
+  html,body{background:#fff}
+  #viewport{position:static;display:block}
+  #stage{transform:none!important;width:auto;height:auto}
+  .slide{display:flex!important;position:relative;width:1280px;height:720px;border-radius:0;box-shadow:none;page-break-after:always;animation:none}
+  #hud,#bar,#notes{display:none!important}
+}
+</style>
+
+</head>
+<body>
+<div id="bar"></div>
+<div id="viewport"><div id="stage">
+
+<!-- 1. 표지 -->
+<section class="slide" data-time="15">
+  <span class="chip">금융통계 기말 프로젝트 · 1차 발표</span>
+  <div style="margin-top:auto">
+    <p style="font-size:20px;font-weight:600;color:var(--blue-500)">2024년 4월 ~ 2026년 9월 · 코스피·코스닥 전 종목 · WICS 10개 업종</p>
+    <h1 style="font-size:50px;line-height:1.25;margin-top:10px">코스피 2,670에서 6,560까지,<br>2년 반 동안 시장은 어떻게 바뀌었나</h1>
+    <p style="font-size:19px;margin-top:18px;color:var(--grey-700)">시가총액 지형 · 업종 수익률 · 업종 동조 · 거래량을 실제 뉴스와 함께 해석</p>
+  </div>
+  <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end">
+    <p style="font-size:16px;color:var(--grey-800)">통계학과 강승윤 · 2차 발표 업종: <b>은행</b></p>
+    <p class="src" style="margin:0">→ / 스페이스: 다음 장 · N: 발표 대본 · 코드와 데이터: GitHub 저장소(마지막 장)</p>
+  </div>
+  <aside class="notes">안녕하세요, 금융통계 기말 프로젝트 1차 발표를 맡은 강승윤입니다. 교수님 아카이브의 2년 반 치 전 종목 자료로, 코스피가 2,670에서 6,560까지 오는 동안 시장 안에서 무엇이 바뀌었는지를 실제 뉴스와 함께 살펴보겠습니다.</aside>
+</section>
+
+<!-- 2. 타임라인 -->
+<section class="slide" data-time="60">
+  <span class="chip">한눈에 보기 · 2년 반의 흐름</span>
+  <h1>네 시기로 나뉘는 2년 반: 정체 → 정책 전환 → AI 메모리 랠리 → 급등락</h1>
+  <div class="body" style="grid-template-columns:1fr;margin-top:14px">
+    <div class="card" style="padding:14px 18px"><div id="tl-chart"></div></div>
+  </div>
+  <p class="src" id="tl-src"></p>
+  <aside class="notes">먼저 전체 흐름입니다. 2년 반은 크게 네 시기로 나뉩니다. 2024년에는 8월 블랙먼데이 같은 충격 속에 지수가 제자리였습니다. 2025년 4월 미국 상호관세로 한 번 더 흔들렸지만, 6월 새 정부의 상법 개정과 코스피 5000 정책으로 흐름이 바뀌었습니다. 하반기에는 조선·방산·원전과 반도체가 시장을 끌어올렸고, 2026년 1월 처음으로 5,000을 넘었습니다. 그리고 2026년은 완전히 다른 시장이었습니다. 이란 전쟁으로 하루 12% 폭락, 7월 말에는 하루 18% 폭등이 나왔습니다. 이 네 시기를 기억해 두시면 뒤의 분석이 쉽게 연결됩니다.</aside>
+</section>
+
+<!-- 3. 자료와 방법 -->
+<section class="slide" data-time="20">
+  <span class="chip grey">자료와 방법 · 제출 코드와 대조용</span>
+  <h1>네이버 금융 원본 240만 개를 직접 읽고, 업종은 WICS 10개 대분류로 묶음</h1>
+  <div class="big" style="margin-top:16px">
+    <div class="card"><div class="n num">2,403,074<small>개</small></div><div class="l">읽은 HTML 파일 (날짜 폴더 591개)</div></div>
+    <div class="card"><div class="n num">550<small>거래일</small></div><div class="l">2024-03-27 ~ 2026-09-02 (품질 통과 524~533일)</div></div>
+    <div class="card"><div class="n num">2,737<small>종목</small></div><div class="l">마지막 날 업종이 있는 상장사 (ETF 등 제외)</div></div>
+    <div class="card"><div class="n num">78 → 10<small>업종</small></div><div class="l">네이버 업종을 WICS 대분류로 묶음</div></div>
+  </div>
+  <div class="body" style="grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:14px">
+    <div class="card soft">
+      <h3>업종 대분류</h3>
+      <p style="font-size:13px">네이버 업종명은 WICS·GICS 산업 이름 체계와 같아 산업 → 대분류 소속을 그대로 따름. 2차전지(전기제품)는 WICS 기준 IT, 전력기기(전기장비)는 산업재, 부동산은 금융. 매핑표는 부록.</p>
+    </div>
+    <div class="card soft">
+      <h3>정리 규칙</h3>
+      <p style="font-size:13px">종가를 못 읽은 파일 294개 제외, 중복 저장 165,918행 통합, 자료가 빠진 날은 날짜 품질 검사로 제외. 하루 ±35% 초과 변동(분할·감자 가능성)은 수익률에서 제외. 종가 기준이라 배당 미포함.</p>
+    </div>
+    <div class="card soft">
+      <h3>뉴스 해석</h3>
+      <p style="font-size:13px">급변일·진입·이탈 종목은 같은 날짜의 국내 언론 보도로 원인을 확인. 출처는 각 장 하단과 부록에 기재. 뉴스는 데이터가 보여준 변화를 설명하는 근거로만 사용.</p>
+    </div>
+  </div>
+  <p class="src">코드: code/final/analysis.py (WICS 집계·질문 1~4), code/final/wics.py (매핑), code/week2 (원본 추출·2주차 규칙). 결과: data/final/analysis.json</p>
+  <aside class="notes">자료는 교수님 아카이브의 원본 HTML 240만 개를 모두 읽어 만들었고, 피드백대로 업종은 WICS 10개 대분류로 묶었습니다. 세부 규칙은 슬라이드와 제출 코드에 정리해 두었습니다.</aside>
+</section>
+
+<!-- 4. Q1 시총 지형 -->
+<section class="slide" data-time="50">
+  <span class="chip">공통 질문 1 · 시가총액 지형</span>
+  <h1>시장 몸집은 2.3배, 그런데 늘어난 돈의 대부분은 IT로 갔다</h1>
+  <div class="answer"><b>한 줄 결론</b><span id="q1-answer"></span></div>
+  <div class="body" style="grid-template-columns:1fr 330px;gap:16px">
+    <div class="card"><h3>업종별 시가총액 비중 <span class="cap">월말, 전체 = 100%</span></h3><div id="q1-area"></div></div>
+    <div class="card soft">
+      <h3>시총 증가액 기여 <span class="cap">조 원</span></h3>
+      <div id="q1-contrib"></div>
+      <p style="font-size:12px;margin-top:6px" id="q1-two"></p>
+    </div>
+  </div>
+  <p class="src" id="q1-src"></p>
+  <aside class="notes" id="q1-notes"></aside>
+</section>
+
+<!-- 5. Q1 진입·이탈 -->
+<section class="slide" data-time="55">
+  <span class="chip">공통 질문 1 · 상위 30 교체</span>
+  <h1>새로 들어온 종목은 'AI 인프라·안보', 나간 종목은 '전기차·성장주'</h1>
+  <div class="body" style="grid-template-columns:1fr 1fr;gap:16px;margin-top:14px">
+    <div class="card" style="padding:14px 16px"><h3>상위 30 진입 <span class="cap">시총 조 원, 시작 → 끝 · 이유</span></h3><table id="q1-in" class="tight"></table></div>
+    <div class="card" style="padding:14px 16px"><h3>상위 30 이탈 <span class="cap">시총 조 원, 시작 → 끝 · 이유</span></h3><table id="q1-out" class="tight"></table>
+      <p style="font-size:12px;margin-top:8px" id="q1-out-note"></p></div>
+  </div>
+  <p class="src" id="q1b-src"></p>
+  <aside class="notes" id="q1b-notes"></aside>
+</section>
+
+<!-- 6. Q2 누적 수익률 -->
+<section class="slide" data-time="40">
+  <span class="chip">공통 질문 2 · 업종 수익률</span>
+  <h1>10개 업종의 성적표: IT·산업재가 끌고, 소재·커뮤니케이션은 뒷걸음</h1>
+  <div class="answer"><b>한 줄 결론</b><span id="q2-answer"></span></div>
+  <div class="body two">
+    <div class="card"><div id="q2-chart"></div></div>
+    <div class="card soft">
+      <h3>그림 읽는 법</h3>
+      <dl class="read">
+        <dt>가로축 · 세로축</dt><dd>월말 날짜 · 시작일 대비 누적 수익률(%)</dd>
+        <dt>예시 하나</dt><dd id="q2-ex"></dd>
+        <dt>분석 방법</dt><dd>업종 하루 수익률 = 종목 수익률을 전일 시총으로 가중평균(코스피 방식). 업종당 5종목 이상, 시총 확인 80% 이상인 날만 계산하고 이어 붙임. 10개 업종 모두 계산된 524일 사용.</dd>
+      </dl>
+    </div>
+  </div>
+  <p class="src" id="q2-src"></p>
+  <aside class="notes" id="q2-notes"></aside>
+</section>
+
+<!-- 7. Q2 격차 -->
+<section class="slide" data-time="40">
+  <span class="chip">공통 질문 2 · 업종 간 격차</span>
+  <h1>업종 간 격차는 세 배로 벌어졌고, 벌어진 시점은 뉴스와 맞물린다</h1>
+  <div class="answer"><b>한 줄 결론</b><span id="q2b-answer"></span></div>
+  <div class="body two">
+    <div class="card"><div id="q2b-chart"></div></div>
+    <div class="card soft">
+      <h3>그림 읽는 법</h3>
+      <dl class="read">
+        <dt>세로축</dt><dd>매달 말 10개 업종 누적 수익률의 표준편차(%p). 높을수록 업종 간 차이가 큼.</dd>
+        <dt>예시 하나</dt><dd id="q2b-ex"></dd>
+        <dt>분석 방법</dt><dd id="q2b-method"></dd>
+      </dl>
+    </div>
+  </div>
+  <p class="src" id="q2b-src"></p>
+  <aside class="notes" id="q2b-notes"></aside>
+</section>
+
+<!-- 8. Q2 가중 방식 -->
+<section class="slide" data-time="40">
+  <span class="chip">공통 질문 2 · 정의를 바꾸면</span>
+  <h1>지수는 올랐지만 '보통 종목'은 덜 올랐다: IT +181% vs +20%</h1>
+  <div class="answer"><b>한 줄 결론</b><span id="q2c-answer"></span></div>
+  <div class="body" style="grid-template-columns:1fr 1fr 280px;gap:14px">
+    <div class="card"><h3>시총 가중 <span class="cap">큰 회사에 큰 비중</span></h3><div id="q2c-cap"></div></div>
+    <div class="card"><h3>동일 가중 <span class="cap">모든 회사 같은 비중</span></h3><div id="q2c-eq"></div></div>
+    <div class="card soft">
+      <h3>해석</h3>
+      <p style="font-size:13px" id="q2c-read"></p>
+      <dl class="read" style="margin-top:10px"><dt>분석 방법</dt><dd>같은 날짜·같은 종목으로 가중치만 바꿔 계산. 두 그림의 눈금은 동일.</dd></dl>
+    </div>
+  </div>
+  <p class="src" id="q2c-src"></p>
+  <aside class="notes" id="q2c-notes"></aside>
+</section>
+
+<!-- 9. Q3 동조 -->
+<section class="slide" data-time="50">
+  <span class="chip">공통 질문 3 · 업종 동조</span>
+  <h1>시장이 흔들리면 업종은 함께 움직이고, 2026년엔 그런 날이 일상이 됐다</h1>
+  <div class="answer"><b>한 줄 결론</b><span id="q3-answer"></span></div>
+  <div class="body" style="grid-template-columns:330px 1fr 300px;gap:14px">
+    <div class="card"><h3>업종 간 평균 상관</h3><div id="q3-bars"></div><p id="q3-wider" style="font-size:12px;margin-top:6px"></p></div>
+    <div class="card"><h3>급변일은 언제였나 <span class="cap">코스피 하루 등락 상위 10%</span></h3><div id="q3-shock"></div></div>
+    <div class="card soft">
+      <h3>읽는 법 · 방법</h3>
+      <dl class="read">
+        <dt>상관계수</dt><dd>두 업종이 같은 날 같은 방향으로 움직이는 정도. 1에 가까울수록 함께 움직임.</dd>
+        <dt>분석 방법</dt><dd id="q3-method"></dd>
+      </dl>
+    </div>
+  </div>
+  <p class="src" id="q3-src"></p>
+  <aside class="notes" id="q3-notes"></aside>
+</section>
+
+<!-- 10. Q4 거래량 -->
+<section class="slide" data-time="45">
+  <span class="chip">공통 질문 4 · 거래량과 가격</span>
+  <h1>거래량은 가격을 뒤따랐고, 급증이 가장 많았던 날은 '공포의 날'이었다</h1>
+  <div class="answer"><b>한 줄 결론</b><span id="q4-answer"></span></div>
+  <div class="body" style="grid-template-columns:1fr 330px;gap:16px">
+    <div class="card"><div id="q4-chart"></div></div>
+    <div class="card soft">
+      <h3>급증 종목이 가장 많았던 날</h3>
+      <table id="q4-days" class="tight"></table>
+      <dl class="read" style="margin-top:6px"><dt>분석 방법</dt><dd style="font-size:12px">거래량 ≥ 직전 20거래일 가운데값 × 2 (엄격 × 3). 급증 전 5일·후 5·10·20일 수익률 가운데값 비교.</dd></dl>
+    </div>
+  </div>
+  <p class="src" id="q4-src"></p>
+  <aside class="notes" id="q4-notes"></aside>
+</section>
+
+<!-- 11. 재무 준비 -->
+<section class="slide" data-time="25">
+  <span class="chip">재무제표 질문 준비 · 실적 발표일 추출</span>
+  <h1>추정치가 확정치로 바뀐 날 6,186건을 찾아 재무 질문의 기준일로 사용</h1>
+  <div class="body" style="grid-template-columns:1fr 300px">
+    <div class="card">
+      <h3>예시 <span class="cap">분기 영업이익, 억 원 (네이버 표 기준)</span></h3>
+      <table id="fin-table"></table>
+      <p style="font-size:13px;margin-top:8px">'확정치를 처음 본 날'은 저장본에서 그 숫자를 처음 확인한 날로, 실제 공시일과 대조가 필요하다.</p>
+    </div>
+    <div class="card soft">
+      <dl class="read">
+        <dt>분석 방법</dt><dd>매일 저장된 기업실적 표를 전날과 비교해, 같은 분기 숫자의 <strong>(E) 표시가 사라진 날</strong>을 탐지. 표 변경 버전 273,159개 중 분기 전환 6,186건.</dd>
+        <dt>다음 단계</dt><dd>발표일 전후 10일 수익률, 예상 상회·하회 그룹 비교(재무 질문 2·3)</dd>
+      </dl>
+    </div>
+  </div>
+  <p class="src">earnings_transitions.csv (2주차 추출). 재무 질문 1~5의 그림과 결론은 작업 중.</p>
+  <aside class="notes">재무제표 질문은 실적 발표일을 찾는 것부터 시작했습니다. 추정치가 확정치로 바뀐 날을 6,186건 찾아 두었고, 이 날짜를 기준으로 실적 발표 전후 주가 반응을 분석할 예정입니다.</aside>
+</section>
+
+<!-- 12. 정리 -->
+<section class="slide" data-time="40">
+  <span class="chip">정리 · 2차 발표로 이어지는 점</span>
+  <h1>2년 반의 결론: 시장은 커졌지만 더 좁아지고 더 거칠어졌다</h1>
+  <div class="body" style="grid-template-columns:1fr 1fr">
+    <div class="card">
+      <h3>네 질문의 답</h3>
+      <ul class="plain" id="sum-list"></ul>
+    </div>
+    <div class="card" style="background:var(--blue-50);border-color:transparent">
+      <h3>은행(금융)으로 이어보기</h3>
+      <ul class="plain" id="bank-list"></ul>
+    </div>
+  </div>
+  <p class="src">GitHub: <span id="repo-url">https://github.com/sykang0225/finstat-final-project</span> · 남은 일: 재무 질문 1~5 그림·결론, 2차 발표에서 은행 종목 단위 분석</p>
+  <aside class="notes" id="sum-notes"></aside>
+</section>
+
+<!-- 부록 A. 정의 메모 -->
+<section class="slide" data-time="0">
+  <span class="chip grey">부록 A · 질문별 정의 메모</span>
+  <h1 style="font-size:28px">질문별로 무엇을, 어떻게 쟀는지</h1>
+  <div class="card" style="margin-top:14px;padding:12px 16px"><table id="ap-table" style="font-size:13px"></table></div>
+  <p class="src">모든 값은 data/final/analysis.json에서 재현 가능. 수익률은 종가 기준 산술 수익률(배당 미포함).</p>
+  <aside class="notes">질의응답용 부록입니다.</aside>
+</section>
+
+<!-- 부록 B. WICS 매핑 -->
+<section class="slide" data-time="0">
+  <span class="chip grey">부록 B · 업종 매핑표</span>
+  <h1 style="font-size:28px">네이버 업종 → WICS 10개 대분류</h1>
+  <div class="card" style="margin-top:14px;padding:12px 16px"><table id="map-table" class="tight"></table></div>
+  <p class="src">code/final/wics.py. 업종이 없는 행(ETF·ETN 등)은 분석에서 제외.</p>
+  <aside class="notes">업종 매핑표입니다.</aside>
+</section>
+
+<!-- 부록 C. 급변일과 뉴스 -->
+<section class="slide" data-time="0">
+  <span class="chip grey">부록 C · 주요 급변일과 원인 보도</span>
+  <h1 style="font-size:28px">데이터에서 찾은 급변일, 그날의 뉴스</h1>
+  <div class="card" style="margin-top:14px;padding:12px 16px"><table id="news-table" class="tight"></table></div>
+  <p class="src">등락률은 아카이브 코스피 종가 기준이며 보도된 종가와 일치함을 확인.</p>
+  <aside class="notes">급변일과 원인 보도 목록입니다.</aside>
+</section>
+
+<!-- 부록 D. 종목 근거 -->
+<section class="slide" data-time="0">
+  <span class="chip grey">부록 D · 상위 30 진입·이탈 종목의 근거 보도</span>
+  <h1 style="font-size:28px">종목별 이유를 확인한 기사</h1>
+  <div class="card" style="margin-top:14px;padding:12px 16px"><table id="stock-table" class="tight"></table></div>
+  <p class="src">'올랐지만 시장보다 덜 오름'으로 분류한 종목(메리츠금융지주, 한미반도체, 한국전력, LG)은 데이터만으로 판단.</p>
+  <aside class="notes">종목별 근거 보도입니다.</aside>
+</section>
+
+</div></div>
+
+<div id="notes"><div class="meta" id="notes-meta"></div><div id="notes-body"></div></div>
+<div id="hud">
+  <button id="notes-btn">대본 N</button>
+  <button id="prev">이전</button>
+  <span class="count num" id="count"></span>
+  <button id="next" class="primary">다음</button>
+</div>
+
+<script id="data" type="application/json">{"a": {"wics": {"에너지": ["석유와가스", "에너지장비및서비스"], "소재": ["화학", "철강", "비철금속", "건축자재", "포장재", "종이와목재"], "산업재": ["조선", "전기장비", "기계", "우주항공과국방", "복합기업", "건설", "해운사", "항공사", "항공화물운송과물류", "무역회사와판매업체", "상업서비스와공급품", "도로와철도운송", "운송인프라", "건축제품", "문구류"], "경기관련소비재": ["자동차", "자동차부품", "섬유,의류,신발,호화품", "백화점과일반상점", "호텔,레스토랑,레저", "가정용기기와용품", "교육서비스", "인터넷과카탈로그소매", "판매업체", "전문소매", "레저용장비와제품", "가구", "다각화된소비자서비스"], "필수소비재": ["식품", "음료", "담배", "화장품", "가정용품", "식품과기본식료품소매"], "건강관리": ["제약", "생물공학", "건강관리장비와용품", "생명과학도구및서비스", "건강관리업체및서비스", "건강관리기술"], "금융": ["은행", "증권", "생명보험", "손해보험", "카드", "창업투자", "기타금융", "부동산"], "IT": ["반도체와반도체장비", "전자장비와기기", "전기제품", "전자제품", "IT서비스", "소프트웨어", "통신장비", "핸드셋", "디스플레이장비및부품", "디스플레이패널", "컴퓨터와주변기기", "사무용전자제품"], "커뮤니케이션서비스": ["무선통신서비스", "다각화된통신서비스", "양방향미디어와서비스", "게임엔터테인먼트", "방송과엔터테인먼트", "광고", "출판"], "유틸리티": ["전기유틸리티", "가스유틸리티", "복합유틸리티"]}, "q1": {"dates": ["2024-04-15", "2026-09-02"], "n": [2648, 2737], "total_jo": [2572.2, 5848.2], "sectors": [{"wics": "에너지", "cap": [41.2, 114.1], "share": [1.6, 2.0], "change_pct": 177.0, "contrib_jo": 72.9}, {"wics": "소재", "cap": [212.6, 183.4], "share": [8.3, 3.1], "change_pct": -13.7, "contrib_jo": -29.2}, {"wics": "산업재", "cap": [292.6, 738.1], "share": [11.4, 12.6], "change_pct": 152.3, "contrib_jo": 445.6}, {"wics": "경기관련소비재", "cap": [235.9, 287.3], "share": [9.2, 4.9], "change_pct": 21.8, "contrib_jo": 51.5}, {"wics": "필수소비재", "cap": [80.1, 114.9], "share": [3.1, 2.0], "change_pct": 43.4, "contrib_jo": 34.8}, {"wics": "건강관리", "cap": [236.7, 286.7], "share": [9.2, 4.9], "change_pct": 21.2, "contrib_jo": 50.1}, {"wics": "금융", "cap": [203.5, 442.5], "share": [7.9, 7.6], "change_pct": 117.5, "contrib_jo": 239.0}, {"wics": "IT", "cap": [1106.6, 3506.9], "share": [43.0, 60.0], "change_pct": 216.9, "contrib_jo": 2400.3}, {"wics": "커뮤니케이션서비스", "cap": [139.2, 138.5], "share": [5.4, 2.4], "change_pct": -0.5, "contrib_jo": -0.7}, {"wics": "유틸리티", "cap": [23.9, 35.6], "share": [0.9, 0.6], "change_pct": 48.9, "contrib_jo": 11.7}], "top30_jo": [1397.5, 4131.9], "top30_share": [54.3, 70.7], "entries": [{"code": "402340", "name": "SK스퀘어", "sector": "반도체와반도체장비", "wics": "IT", "cap": 129549400000000, "rank": 4, "cap_jo": 129.5, "other_rank": 36, "other_cap_jo": 11.1, "cap_change_pct": 1066.7}, {"code": "009150", "name": "삼성전기", "sector": "전자장비와기기", "wics": "IT", "cap": 104571200000000, "rank": 5, "cap_jo": 104.6, "other_rank": 35, "other_cap_jo": 11.4, "cap_change_pct": 817.5}, {"code": "012450", "name": "한화에어로스페이스", "sector": "우주항공과국방", "wics": "산업재", "cap": 52852500000000, "rank": 12, "cap_jo": 52.9, "other_rank": 39, "other_cap_jo": 10.6, "cap_change_pct": 399.1}, {"code": "034020", "name": "두산에너빌리티", "sector": "기계", "wics": "산업재", "cap": 49067000000000, "rank": 14, "cap_jo": 49.1, "other_rank": 45, "other_cap_jo": 9.7, "cap_change_pct": 406.2}, {"code": "329180", "name": "HD현대중공업", "sector": "조선", "wics": "산업재", "cap": 44293600000000, "rank": 16, "cap_jo": 44.3, "other_rank": 40, "other_cap_jo": 10.5, "cap_change_pct": 321.9}, {"code": "010120", "name": "LS ELECTRIC", "sector": "전기장비", "wics": "산업재", "cap": 29355000000000, "rank": 24, "cap_jo": 29.4, "other_rank": 85, "other_cap_jo": 4.3, "cap_change_pct": 583.7}, {"code": "298040", "name": "효성중공업", "sector": "전기장비", "wics": "산업재", "cap": 25782400000000, "rank": 27, "cap_jo": 25.8, "other_rank": 115, "other_cap_jo": 3.2, "cap_change_pct": 706.2}, {"code": "267260", "name": "HD현대일렉트릭", "sector": "전기장비", "wics": "산업재", "cap": 25629500000000, "rank": 28, "cap_jo": 25.6, "other_rank": 51, "other_cap_jo": 8.7, "cap_change_pct": 194.3}, {"code": "316140", "name": "우리금융지주", "sector": "은행", "wics": "금융", "cap": 25419100000000, "rank": 29, "cap_jo": 25.4, "other_rank": 44, "other_cap_jo": 10.1, "cap_change_pct": 151.5}, {"code": "010130", "name": "고려아연", "sector": "비철금속", "wics": "소재", "cap": 25381500000000, "rank": 30, "cap_jo": 25.4, "other_rank": 42, "other_cap_jo": 10.1, "cap_change_pct": 151.5}], "exits": [{"code": "051910", "name": "LG화학", "sector": "화학", "wics": "소재", "cap": 27848700000000, "rank": 11, "cap_jo": 27.8, "other_rank": 40, "other_cap_jo": 19.0, "cap_change_pct": -31.7}, {"code": "247540", "name": "에코프로비엠", "sector": "전기제품", "wics": "IT", "cap": 22298700000000, "rank": 16, "cap_jo": 22.3, "other_rank": 67, "other_cap_jo": 10.6, "cap_change_pct": -52.5}, {"code": "035720", "name": "카카오", "sector": "양방향미디어와서비스", "wics": "커뮤니케이션서비스", "cap": 21260400000000, "rank": 18, "cap_jo": 21.3, "other_rank": 52, "other_cap_jo": 15.5, "cap_change_pct": -27.2}, {"code": "003670", "name": "포스코퓨처엠", "sector": "화학", "wics": "소재", "cap": 20450300000000, "rank": 19, "cap_jo": 20.5, "other_rank": 51, "other_cap_jo": 15.7, "cap_change_pct": -23.4}, {"code": "138040", "name": "메리츠금융지주", "sector": "증권", "wics": "금융", "cap": 14970200000000, "rank": 23, "cap_jo": 15.0, "other_rank": 34, "other_cap_jo": 21.7, "cap_change_pct": 44.7}, {"code": "042700", "name": "한미반도체", "sector": "반도체와반도체장비", "wics": "IT", "cap": 14240700000000, "rank": 24, "cap_jo": 14.2, "other_rank": 36, "other_cap_jo": 20.3, "cap_change_pct": 43.0}, {"code": "086520", "name": "에코프로", "sector": "화학", "wics": "소재", "cap": 13766500000000, "rank": 25, "cap_jo": 13.8, "other_rank": 63, "other_cap_jo": 11.1, "cap_change_pct": -19.6}, {"code": "015760", "name": "한국전력", "sector": "전기유틸리티", "wics": "유틸리티", "cap": 13417000000000, "rank": 27, "cap_jo": 13.4, "other_rank": 37, "other_cap_jo": 20.1, "cap_change_pct": 50.0}, {"code": "028300", "name": "HLB", "sector": "제약", "wics": "건강관리", "cap": 12886800000000, "rank": 28, "cap_jo": 12.9, "other_rank": 118, "other_cap_jo": 4.4, "cap_change_pct": -65.9}, {"code": "003550", "name": "LG", "sector": "복합기업", "wics": "산업재", "cap": 12127900000000, "rank": 29, "cap_jo": 12.1, "other_rank": 45, "other_cap_jo": 17.9, "cap_change_pct": 47.9}], "stayed": [{"code": "005930", "name": "삼성전자", "sector": "반도체와반도체장비", "wics": "IT", "cap": 1464492800000000, "rank": 1, "cap_jo": 1464.5, "other_rank": 1, "other_cap_jo": 490.7}, {"code": "000660", "name": "SK하이닉스", "sector": "반도체와반도체장비", "wics": "IT", "cap": 1178284200000000, "rank": 2, "cap_jo": 1178.3, "other_rank": 2, "other_cap_jo": 137.0}, {"code": "005935", "name": "삼성전자우", "sector": "반도체와반도체장비", "wics": "IT", "cap": 148839900000000, "rank": 3, "cap_jo": 148.8, "other_rank": 5, "other_cap_jo": 55.8}, {"code": "373220", "name": "LG에너지솔루션", "sector": "전기제품", "wics": "IT", "cap": 81315000000000, "rank": 6, "cap_jo": 81.3, "other_rank": 3, "other_cap_jo": 87.3}, {"code": "005380", "name": "현대차", "sector": "자동차", "wics": "경기관련소비재", "cap": 77398400000000, "rank": 7, "cap_jo": 77.4, "other_rank": 6, "other_cap_jo": 51.1}, {"code": "207940", "name": "삼성바이오로직스", "sector": "제약", "wics": "건강관리", "cap": 69482700000000, "rank": 8, "cap_jo": 69.5, "other_rank": 4, "other_cap_jo": 56.4}, {"code": "028260", "name": "삼성물산", "sector": "복합기업", "wics": "산업재", "cap": 60488500000000, "rank": 9, "cap_jo": 60.5, "other_rank": 13, "other_cap_jo": 26.8}, {"code": "105560", "name": "KB금융", "sector": "은행", "wics": "금융", "cap": 59977700000000, "rank": 10, "cap_jo": 60.0, "other_rank": 14, "other_cap_jo": 26.7}, {"code": "032830", "name": "삼성생명", "sector": "생명보험", "wics": "금융", "cap": 58800000000000, "rank": 11, "cap_jo": 58.8, "other_rank": 20, "other_cap_jo": 16.3}, {"code": "055550", "name": "신한지주", "sector": "은행", "wics": "금융", "cap": 51874300000000, "rank": 13, "cap_jo": 51.9, "other_rank": 17, "other_cap_jo": 21.5}, {"code": "000270", "name": "기아", "sector": "자동차", "wics": "경기관련소비재", "cap": 48567400000000, "rank": 15, "cap_jo": 48.6, "other_rank": 7, "other_cap_jo": 46.1}, {"code": "006400", "name": "삼성SDI", "sector": "전기제품", "wics": "IT", "cap": 43355000000000, "rank": 17, "cap_jo": 43.4, "other_rank": 12, "other_cap_jo": 27.1}, {"code": "068270", "name": "셀트리온", "sector": "제약", "wics": "건강관리", "cap": 43336600000000, "rank": 18, "cap_jo": 43.3, "other_rank": 8, "other_cap_jo": 38.9}, {"code": "034730", "name": "SK", "sector": "석유와가스", "wics": "에너지", "cap": 39514000000000, "rank": 19, "cap_jo": 39.5, "other_rank": 30, "other_cap_jo": 12.1}, {"code": "012330", "name": "현대모비스", "sector": "자동차부품", "wics": "경기관련소비재", "cap": 37320500000000, "rank": 20, "cap_jo": 37.3, "other_rank": 15, "other_cap_jo": 22.7}, {"code": "086790", "name": "하나금융지주", "sector": "은행", "wics": "금융", "cap": 37012200000000, "rank": 21, "cap_jo": 37.0, "other_rank": 21, "other_cap_jo": 16.2}, {"code": "066570", "name": "LG전자", "sector": "전자제품", "wics": "IT", "cap": 32658400000000, "rank": 22, "cap_jo": 32.7, "other_rank": 22, "other_cap_jo": 15.1}, {"code": "035420", "name": "NAVER", "sector": "양방향미디어와서비스", "wics": "커뮤니케이션서비스", "cap": 31784000000000, "rank": 23, "cap_jo": 31.8, "other_rank": 10, "other_cap_jo": 29.7}, {"code": "000810", "name": "삼성화재", "sector": "손해보험", "wics": "금융", "cap": 29333400000000, "rank": 25, "cap_jo": 29.3, "other_rank": 26, "other_cap_jo": 13.7}, {"code": "005490", "name": "POSCO홀딩스", "sector": "철강", "wics": "소재", "cap": 26149700000000, "rank": 26, "cap_jo": 26.1, "other_rank": 9, "other_cap_jo": 33.0}], "top_gainers": [{"name": "SK하이닉스", "wics": "IT", "gain_jo": 1041.3}, {"name": "삼성전자", "wics": "IT", "gain_jo": 973.8}, {"name": "SK스퀘어", "wics": "IT", "gain_jo": 118.5}, {"name": "삼성전기", "wics": "IT", "gain_jo": 93.2}, {"name": "삼성전자우", "wics": "IT", "gain_jo": 93.0}, {"name": "삼성생명", "wics": "금융", "gain_jo": 42.5}, {"name": "한화에어로스페이스", "wics": "산업재", "gain_jo": 42.2}, {"name": "두산에너빌리티", "wics": "산업재", "gain_jo": 39.4}, {"name": "HD현대중공업", "wics": "산업재", "gain_jo": 33.8}, {"name": "삼성물산", "wics": "산업재", "gain_jo": 33.7}], "top_losers": [{"name": "에코프로비엠", "wics": "IT", "gain_jo": -11.7}, {"name": "LG화학", "wics": "소재", "gain_jo": -8.9}, {"name": "HLB", "wics": "건강관리", "gain_jo": -8.4}, {"name": "POSCO홀딩스", "wics": "소재", "gain_jo": -6.9}, {"name": "LG에너지솔루션", "wics": "IT", "gain_jo": -6.0}, {"name": "카카오", "wics": "커뮤니케이션서비스", "gain_jo": -5.7}, {"name": "엔켐", "wics": "IT", "gain_jo": -5.5}, {"name": "에코프로머티", "wics": "IT", "gain_jo": -5.3}, {"name": "금양", "wics": "소재", "gain_jo": -5.1}, {"name": "포스코퓨처엠", "wics": "소재", "gain_jo": -4.8}], "monthly": [{"month": "2024-04", "day": "2024-04-30", "share": {"에너지": 1.58, "소재": 8.43, "산업재": 11.78, "경기관련소비재": 9.32, "필수소비재": 3.33, "건강관리": 9.41, "금융": 8.4, "IT": 41.38, "커뮤니케이션서비스": 5.42, "유틸리티": 0.95}, "total_jo": 2596.7}, {"month": "2024-05", "day": "2024-05-31", "share": {"에너지": 1.6, "소재": 8.22, "산업재": 12.45, "경기관련소비재": 9.37, "필수소비재": 3.69, "건강관리": 8.94, "금융": 8.65, "IT": 40.71, "커뮤니케이션서비스": 5.42, "유틸리티": 0.96}, "total_jo": 2543.4}, {"month": "2024-06", "day": "2024-06-28", "share": {"에너지": 1.56, "소재": 7.78, "산업재": 12.43, "경기관련소비재": 9.62, "필수소비재": 3.56, "건강관리": 8.68, "금융": 8.38, "IT": 41.92, "커뮤니케이션서비스": 5.07, "유틸리티": 1.01}, "total_jo": 2678.3}, {"month": "2024-07", "day": "2024-07-31", "share": {"에너지": 1.54, "소재": 7.12, "산업재": 12.86, "경기관련소비재": 8.8, "필수소비재": 3.5, "건강관리": 10.18, "금융": 9.11, "IT": 40.58, "커뮤니케이션서비스": 5.31, "유틸리티": 1.01}, "total_jo": 2641.0}, {"month": "2024-08", "day": "2024-08-30", "share": {"에너지": 1.59, "소재": 7.15, "산업재": 12.92, "경기관련소비재": 9.04, "필수소비재": 3.32, "건강관리": 11.08, "금융": 9.33, "IT": 39.05, "커뮤니케이션서비스": 5.41, "유틸리티": 1.11}, "total_jo": 2550.6}, {"month": "2024-09", "day": "2024-09-30", "share": {"에너지": 1.65, "소재": 8.02, "산업재": 13.32, "경기관련소비재": 9.11, "필수소비재": 3.56, "건강관리": 11.16, "금융": 9.34, "IT": 37.2, "커뮤니케이션서비스": 5.57, "유틸리티": 1.09}, "total_jo": 2478.3}, {"month": "2024-10", "day": "2024-10-31", "share": {"에너지": 1.61, "소재": 7.81, "산업재": 13.44, "경기관련소비재": 8.81, "필수소비재": 3.43, "건강관리": 11.5, "금융": 9.73, "IT": 36.72, "커뮤니케이션서비스": 5.78, "유틸리티": 1.16}, "total_jo": 2438.2}, {"month": "2024-11", "day": "2024-11-29", "share": {"에너지": 1.87, "소재": 7.27, "산업재": 14.43, "경기관련소비재": 9.08, "필수소비재": 3.46, "건강관리": 11.11, "금융": 10.54, "IT": 34.45, "커뮤니케이션서비스": 6.52, "유틸리티": 1.27}, "total_jo": 2334.0}, {"month": "2024-12", "day": "2024-12-30", "share": {"에너지": 2.33, "소재": 6.75, "산업재": 14.99, "경기관련소비재": 9.3, "필수소비재": 3.51, "건강관리": 11.58, "금융": 9.9, "IT": 34.31, "커뮤니케이션서비스": 6.23, "유틸리티": 1.09}, "total_jo": 2288.9}, {"month": "2025-01", "day": "2025-01-31", "share": {"에너지": 2.44, "소재": 6.45, "산업재": 16.06, "경기관련소비재": 9.08, "필수소비재": 3.36, "건강관리": 11.6, "금융": 9.93, "IT": 33.76, "커뮤니케이션서비스": 6.22, "유틸리티": 1.1}, "total_jo": 2409.7}, {"month": "2025-02", "day": "2025-02-28", "share": {"에너지": 2.35, "소재": 6.46, "산업재": 16.47, "경기관련소비재": 8.66, "필수소비재": 3.35, "건강관리": 11.78, "금융": 9.58, "IT": 33.95, "커뮤니케이션서비스": 6.3, "유틸리티": 1.09}, "total_jo": 2436.9}, {"month": "2025-03", "day": "2025-03-31", "share": {"에너지": 2.25, "소재": 6.35, "산업재": 16.42, "경기관련소비재": 8.84, "필수소비재": 3.48, "건강관리": 11.07, "금융": 9.75, "IT": 34.6, "커뮤니케이션서비스": 6.11, "유틸리티": 1.12}, "total_jo": 2363.1}, {"month": "2025-04", "day": "2025-04-30", "share": {"에너지": 2.22, "소재": 6.1, "산업재": 17.97, "경기관련소비재": 8.72, "필수소비재": 3.67, "건강관리": 11.23, "금융": 10.11, "IT": 32.49, "커뮤니케이션서비스": 6.26, "유틸리티": 1.23}, "total_jo": 2446.4}, {"month": "2025-05", "day": "2025-05-30", "share": {"에너지": 2.38, "소재": 5.7, "산업재": 19.6, "경기관련소비재": 8.32, "필수소비재": 3.77, "건강관리": 10.92, "금융": 10.55, "IT": 31.48, "커뮤니케이션서비스": 5.98, "유틸리티": 1.3}, "total_jo": 2574.5}, {"month": "2025-06", "day": "2025-06-30", "share": {"에너지": 2.54, "소재": 5.41, "산업재": 20.08, "경기관련소비재": 7.97, "필수소비재": 3.64, "건강관리": 9.66, "금융": 10.68, "IT": 32.23, "커뮤니케이션서비스": 6.33, "유틸리티": 1.46}, "total_jo": 2901.2}, {"month": "2025-07", "day": "2025-07-01", "share": {"에너지": 2.62, "소재": 5.49, "산업재": 19.95, "경기관련소비재": 8.07, "필수소비재": 3.66, "건강관리": 9.68, "금융": 10.76, "IT": 32.04, "커뮤니케이션서비스": 6.32, "유틸리티": 1.42}, "total_jo": 2917.7}, {"month": "2025-08", "day": "2025-08-29", "share": {"에너지": 2.35, "소재": 5.51, "산업재": 20.24, "경기관련소비재": 7.98, "필수소비재": 3.49, "건강관리": 9.85, "금융": 10.44, "IT": 33.23, "커뮤니케이션서비스": 5.63, "유틸리티": 1.3}, "total_jo": 3021.6}, {"month": "2025-09", "day": "2025-09-30", "share": {"에너지": 2.28, "소재": 5.13, "산업재": 19.77, "경기관련소비재": 7.25, "필수소비재": 3.25, "건강관리": 9.52, "금융": 10.12, "IT": 36.15, "커뮤니케이션서비스": 5.35, "유틸리티": 1.18}, "total_jo": 3245.7}, {"month": "2025-10", "day": "2025-10-31", "share": {"에너지": 2.27, "소재": 5.13, "산업재": 19.47, "경기관련소비재": 6.81, "필수소비재": 2.66, "건강관리": 8.7, "금융": 8.65, "IT": 40.58, "커뮤니케이션서비스": 4.58, "유틸리티": 1.14}, "total_jo": 3841.6}, {"month": "2025-11", "day": "2025-11-28", "share": {"에너지": 2.3, "소재": 5.32, "산업재": 18.37, "경기관련소비재": 6.96, "필수소비재": 2.81, "건강관리": 9.76, "금융": 9.16, "IT": 39.51, "커뮤니케이션서비스": 4.47, "유틸리티": 1.35}, "total_jo": 3706.1}, {"month": "2025-12", "day": "2025-12-30", "share": {"에너지": 1.7, "소재": 4.83, "산업재": 18.25, "경기관련소비재": 6.99, "필수소비재": 2.54, "건강관리": 9.41, "금융": 8.72, "IT": 42.21, "커뮤니케이션서비스": 4.21, "유틸리티": 1.16}, "total_jo": 3966.9}, {"month": "2026-01", "day": "2026-01-30", "share": {"에너지": 1.63, "소재": 4.7, "산업재": 18.21, "경기관련소비재": 7.14, "필수소비재": 2.23, "건강관리": 8.16, "금융": 7.98, "IT": 45.09, "커뮤니케이션서비스": 3.74, "유틸리티": 1.12}, "total_jo": 4932.0}, {"month": "2026-02", "day": "2026-02-27", "share": {"에너지": 1.65, "소재": 4.55, "산업재": 17.39, "경기관련소비재": 7.41, "필수소비재": 2.0, "건강관리": 7.36, "금융": 8.2, "IT": 47.26, "커뮤니케이션서비스": 3.17, "유틸리티": 1.0}, "total_jo": 5784.0}, {"month": "2026-03", "day": "2026-03-31", "share": {"에너지": 1.78, "소재": 4.5, "산업재": 17.84, "경기관련소비재": 6.78, "필수소비재": 2.28, "건강관리": 7.85, "금융": 8.82, "IT": 45.86, "커뮤니케이션서비스": 3.34, "유틸리티": 0.96}, "total_jo": 4724.3}, {"month": "2026-04", "day": "2026-04-30", "share": {"에너지": 1.8, "소재": 4.31, "산업재": 18.93, "경기관련소비재": 5.97, "필수소비재": 1.96, "건강관리": 6.01, "금융": 7.53, "IT": 49.94, "커뮤니케이션서비스": 2.73, "유틸리티": 0.81}, "total_jo": 6051.5}, {"month": "2026-05", "day": "2026-05-27", "share": {"에너지": 1.53, "소재": 3.17, "산업재": 15.79, "경기관련소비재": 5.65, "필수소비재": 1.46, "건강관리": 4.65, "금융": 6.29, "IT": 58.82, "커뮤니케이션서비스": 2.06, "유틸리티": 0.58}, "total_jo": 7344.7}, {"month": "2026-06", "day": "2026-06-30", "share": {"에너지": 1.6, "소재": 2.48, "산업재": 11.17, "경기관련소비재": 4.48, "필수소비재": 1.35, "건강관리": 4.04, "금융": 5.98, "IT": 66.53, "커뮤니케이션서비스": 1.86, "유틸리티": 0.52}, "total_jo": 7428.3}, {"month": "2026-07", "day": "2026-07-31", "share": {"에너지": 1.72, "소재": 2.81, "산업재": 12.08, "경기관련소비재": 5.12, "필수소비재": 1.76, "건강관리": 4.6, "금융": 7.44, "IT": 61.46, "커뮤니케이션서비스": 2.37, "유틸리티": 0.63}, "total_jo": 5830.0}, {"month": "2026-08", "day": "2026-08-31", "share": {"에너지": 1.9, "소재": 3.18, "산업재": 12.83, "경기관련소비재": 4.96, "필수소비재": 1.97, "건강관리": 4.85, "금융": 7.34, "IT": 60.04, "커뮤니케이션서비스": 2.34, "유틸리티": 0.6}, "total_jo": 6071.9}, {"month": "2026-09", "day": "2026-09-02", "share": {"에너지": 1.95, "소재": 3.14, "산업재": 12.62, "경기관련소비재": 4.91, "필수소비재": 1.96, "건강관리": 4.9, "금융": 7.57, "IT": 59.97, "커뮤니케이션서비스": 2.37, "유틸리티": 0.61}, "total_jo": 5848.2}]}, "q23": {"sectors": ["IT", "건강관리", "경기관련소비재", "금융", "산업재", "소재", "에너지", "유틸리티", "커뮤니케이션서비스", "필수소비재"], "dates": ["2024-04-11", "2026-09-02"], "days": 524, "returns": [["2024-04-30", [-3.806, 1.203, 5.332, 2.533, 4.088, -0.201, -6.613, -1.576, -1.768, 9.03], 19.17], ["2024-05-31", [-7.487, -5.97, 3.587, 3.51, 5.682, -4.701, -6.996, -2.904, -3.716, 18.902], 59.97], ["2024-06-28", [0.286, -4.228, 11.523, 5.603, 10.889, -4.974, -5.261, 6.276, -4.767, 20.725], 71.46], ["2024-07-31", [-0.571, 10.387, 2.584, 12.663, 15.037, -10.879, -5.252, 6.665, -4.581, 17.194], 82.13], ["2024-08-30", [-7.634, 15.636, 1.588, 11.479, 9.985, -13.306, -5.425, 13.019, -5.978, 7.214], 92.99], ["2024-09-30", [-9.98, 19.825, 6.991, 13.301, 12.105, -8.8, -2.286, 8.07, -2.614, 12.801], 93.93], ["2024-10-31", [-10.907, 18.078, 3.824, 12.335, 9.107, -7.469, -1.428, 10.491, -1.805, 11.212], 80.37], ["2024-11-29", [-21.33, 11.072, 2.08, 15.254, 11.43, -18.688, -8.124, 14.688, 5.536, 7.149], 162.16], ["2024-12-30", [-22.182, 13.985, 2.949, 6.307, 12.92, -26.438, -10.377, -2.877, -0.951, 7.482], 173.8], ["2025-01-31", [-19.41, 20.283, 5.524, 12.26, 27.379, -25.965, -1.437, 2.783, 3.728, 7.817], 236.89], ["2025-02-28", [-18.664, 23.219, 1.738, 9.589, 32.215, -24.829, -4.068, 2.899, 6.307, 8.703], 263.95], ["2025-03-31", [-19.421, 12.278, 0.748, 7.126, 27.702, -28.446, -11.58, 2.878, 0.016, 9.997], 239.8], ["2025-04-30", [-21.649, 17.063, 2.684, 15.69, 44.554, -28.595, -9.688, 16.807, 5.995, 19.865], 422.94], ["2025-05-30", [-15.951, 13.424, 6.708, 21.329, 49.219, -24.325, 1.885, 17.405, 5.262, 22.289], 383.41], ["2025-06-30", [-3.43, 13.231, 15.352, 39.122, 73.053, -18.314, 20.831, 48.086, 25.763, 33.131], 604.05], ["2025-07-01", [-3.447, 14.053, 17.481, 41.005, 72.864, -16.66, 25.395, 45.029, 26.233, 34.471], 575.67], ["2025-08-29", [-4.848, 13.077, 18.633, 41.547, 73.668, -18.678, 24.702, 35.682, 22.954, 28.641], 573.4], ["2025-09-30", [11.163, 17.258, 16.043, 47.866, 82.314, -18.365, 27.221, 32.876, 25.496, 28.97], 605.94], ["2025-10-31", [43.002, 28.132, 31.622, 53.505, 111.877, -6.609, 50.697, 51.467, 25.558, 26.849], 834.27], ["2025-11-28", [34.033, 35.394, 30.223, 56.664, 92.772, -6.247, 46.921, 72.276, 17.778, 29.326], 704.28], ["2025-12-30", [53.022, 36.686, 39.532, 59.646, 99.926, -7.992, 43.28, 58.061, 18.479, 24.572], 743.57], ["2026-01-30", [103.218, 47.315, 77.269, 81.81, 147.722, 9.995, 69.245, 90.928, 30.902, 35.994], 1457.21], ["2026-02-27", [151.274, 55.834, 115.676, 120.086, 177.378, 25.047, 100.951, 99.961, 29.873, 43.231], 2432.45], ["2026-03-31", [99.049, 35.174, 61.286, 92.227, 132.839, 0.94, 76.342, 55.81, 11.882, 34.125], 1524.45], ["2026-04-30", [179.287, 32.451, 81.965, 111.498, 215.689, 24.615, 128.987, 69.032, 17.043, 47.73], 4094.59], ["2026-05-27", [299.185, 24.207, 108.988, 114.469, 218.895, 11.091, 135.727, 47.664, 7.407, 35.985], 8443.58], ["2026-06-30", [298.965, 14.629, 60.511, 106.724, 176.523, -10.288, 145.171, 36.579, -9.93, 27.981], 8748.8], ["2026-07-31", [187.068, 2.109, 44.35, 101.938, 133.82, -20.123, 107.094, 30.596, -10.316, 31.641], 4219.48], ["2026-08-31", [191.972, 11.426, 45.95, 108.304, 158.001, -6.046, 134.006, 30.162, -7.289, 52.861], 4579.46], ["2026-09-02", [180.88, 8.595, 39.139, 106.757, 144.389, -10.613, 131.439, 26.813, -9.47, 46.964], 4276.34]], "sizes": {"IT": [88, 732.0, 733], "건강관리": [67, 370.0, 385], "경기관련소비재": [176, 366.0, 362], "금융": [64, 179.0, 166], "산업재": [175, 376.0, 382], "소재": [199, 303.0, 301], "에너지": [18, 45.0, 50], "유틸리티": [16, 18.0, 18], "커뮤니케이션서비스": [27, 132.0, 133], "필수소비재": [89, 179.0, 179]}, "correlations": [[[1.0, 0.4448, 0.6158, 0.564, 0.6851, 0.5991, 0.6309, 0.4372, 0.4389, 0.2712], [0.4448, 1.0, 0.4979, 0.5432, 0.6484, 0.6444, 0.5252, 0.42, 0.6047, 0.6109], [0.6158, 0.4979, 1.0, 0.611, 0.6823, 0.6698, 0.5742, 0.5283, 0.5489, 0.4835], [0.564, 0.5432, 0.611, 1.0, 0.6696, 0.6014, 0.6451, 0.5301, 0.5862, 0.5213], [0.6851, 0.6484, 0.6823, 0.6696, 1.0, 0.7123, 0.7372, 0.5769, 0.5731, 0.5135], [0.5991, 0.6444, 0.6698, 0.6014, 0.7123, 1.0, 0.7047, 0.5585, 0.6135, 0.5539], [0.6309, 0.5252, 0.5742, 0.6451, 0.7372, 0.7047, 1.0, 0.5062, 0.5419, 0.4598], [0.4372, 0.42, 0.5283, 0.5301, 0.5769, 0.5585, 0.5062, 1.0, 0.4735, 0.4052], [0.4389, 0.6047, 0.5489, 0.5862, 0.5731, 0.6135, 0.5419, 0.4735, 1.0, 0.6059], [0.2712, 0.6109, 0.4835, 0.5213, 0.5135, 0.5539, 0.4598, 0.4052, 0.6059, 1.0]], [[1.0, 0.6797, 0.8014, 0.8098, 0.8588, 0.8032, 0.8194, 0.7557, 0.6366, 0.4788], [0.6797, 1.0, 0.8176, 0.8763, 0.8549, 0.9043, 0.8103, 0.8001, 0.8036, 0.8702], [0.8014, 0.8176, 1.0, 0.8969, 0.8935, 0.9148, 0.7869, 0.8756, 0.817, 0.7317], [0.8098, 0.8763, 0.8969, 1.0, 0.9194, 0.9346, 0.8535, 0.8801, 0.8001, 0.774], [0.8588, 0.8549, 0.8935, 0.9194, 1.0, 0.9566, 0.9123, 0.8575, 0.8062, 0.6992], [0.8032, 0.9043, 0.9148, 0.9346, 0.9566, 1.0, 0.8753, 0.9012, 0.8639, 0.8038], [0.8194, 0.8103, 0.7869, 0.8535, 0.9123, 0.8753, 1.0, 0.7871, 0.7586, 0.665], [0.7557, 0.8001, 0.8756, 0.8801, 0.8575, 0.9012, 0.7871, 1.0, 0.8462, 0.7422], [0.6366, 0.8036, 0.817, 0.8001, 0.8062, 0.8639, 0.7586, 0.8462, 1.0, 0.8249], [0.4788, 0.8702, 0.7317, 0.774, 0.6992, 0.8038, 0.665, 0.7422, 0.8249, 1.0]], [[1.0, 0.1895, 0.3715, 0.2685, 0.3906, 0.3832, 0.3959, 0.1945, 0.2114, 0.0605], [0.1895, 1.0, 0.2387, 0.2991, 0.4651, 0.4572, 0.2988, 0.2168, 0.4562, 0.4523], [0.3715, 0.2387, 1.0, 0.3615, 0.4444, 0.4633, 0.3698, 0.3215, 0.3197, 0.3052], [0.2685, 0.2991, 0.3615, 1.0, 0.4201, 0.3463, 0.4668, 0.3333, 0.4246, 0.3522], [0.3906, 0.4651, 0.4444, 0.4201, 1.0, 0.483, 0.5489, 0.4024, 0.3466, 0.3693], [0.3832, 0.4572, 0.4633, 0.3463, 0.483, 1.0, 0.5624, 0.3724, 0.4221, 0.3932], [0.3959, 0.2988, 0.3698, 0.4668, 0.5489, 0.5624, 1.0, 0.3416, 0.3571, 0.3139], [0.1945, 0.2168, 0.3215, 0.3333, 0.4024, 0.3724, 0.3416, 1.0, 0.2704, 0.2389], [0.2114, 0.4562, 0.3197, 0.4246, 0.3466, 0.4221, 0.3571, 0.2704, 1.0, 0.4691], [0.0605, 0.4523, 0.3052, 0.3522, 0.3693, 0.3932, 0.3139, 0.2389, 0.4691, 1.0]]], "rho": [0.5637666666666666, 0.8168622222222223, 0.35932888888888886], "groups": [524, 53, 471], "threshold": 3.763357, "roll": [["2024-07-09", 0.3245777777777778], ["2024-07-25", 0.23141777777777778], ["2024-08-08", 0.6215133333333334], ["2024-08-23", 0.6161733333333334], ["2024-09-12", 0.6184], ["2024-10-02", 0.6296622222222222], ["2024-10-28", 0.6265222222222222], ["2024-11-11", 0.6194], ["2024-11-27", 0.31498444444444446], ["2024-12-11", 0.4501977777777778], ["2024-12-26", 0.46531333333333336], ["2025-01-13", 0.4656822222222222], ["2025-01-31", 0.46671111111111113], ["2025-02-14", 0.48312], ["2025-02-28", 0.5145111111111111], ["2025-03-17", 0.40898444444444443], ["2025-03-31", 0.41384666666666664], ["2025-04-14", 0.5810088888888889], ["2025-04-28", 0.5963977777777778], ["2025-05-30", 0.5596511111111111], ["2025-06-17", 0.5228022222222223], ["2025-07-01", 0.5114533333333333], ["2025-08-25", 0.49161333333333335], ["2025-09-08", 0.2951022222222222], ["2025-09-22", 0.2852955555555556], ["2025-10-15", 0.34346], ["2025-10-29", 0.31845111111111113], ["2025-11-12", 0.3483222222222222], ["2025-11-26", 0.4191022222222222], ["2025-12-10", 0.3979311111111111], ["2025-12-24", 0.40748], ["2026-01-12", 0.3686844444444444], ["2026-01-26", 0.3209488888888889], ["2026-02-09", 0.43401555555555554], ["2026-02-26", 0.3778066666666667], ["2026-03-13", 0.6922666666666667], ["2026-03-27", 0.7177355555555556], ["2026-04-10", 0.7576733333333333], ["2026-04-24", 0.8085755555555556], ["2026-05-12", 0.7801177777777778], ["2026-05-27", 0.7741177777777778], ["2026-06-16", 0.6580577777777777], ["2026-06-30", 0.6332666666666666], ["2026-07-14", 0.5649222222222222], ["2026-07-29", 0.5994088888888889], ["2026-08-12", 0.6126377777777777], ["2026-08-27", 0.5999822222222222], ["2026-09-02", 0.5894622222222222]], "equal_returns": [["2024-04-30", [1.318, 0.901, 1.393, -0.183, 2.166, 1.01, -3.298, 0.872, -0.703, 4.68], 3.76], ["2024-05-31", [-0.058, -1.186, 0.834, -0.875, 3.53, 1.016, 1.701, 5.874, -1.196, 14.922], 21.75], ["2024-06-28", [-2.813, -2.925, -0.814, -0.218, 4.949, 0.583, -1.84, 15.01, -5.712, 16.893], 53.53], ["2024-07-31", [-8.475, 3.224, -3.634, 0.436, 3.969, -1.406, -3.584, 13.951, -8.292, 11.994], 52.67], ["2024-08-30", [-13.35, 4.946, -6.372, -1.172, -1.13, -4.315, -6.689, 15.577, -12.211, 4.195], 67.65], ["2024-09-30", [-10.346, 6.55, -3.035, -0.024, 1.576, -2.343, -5.83, 14.406, -8.356, 8.701], 55.4], ["2024-10-31", [-11.362, 3.508, -4.246, -0.181, -0.322, -1.947, -7.406, 14.157, -5.809, 6.769], 49.35], ["2024-11-29", [-18.745, -3.518, -9.822, -3.102, 0.127, -8.514, -11.21, 15.297, -5.857, 0.968], 74.03], ["2024-12-30", [-16.963, -4.374, -8.436, -3.581, 0.965, -9.343, -13.139, 5.42, -8.76, 0.938], 43.07], ["2025-01-31", [-12.156, -2.298, -5.331, -2.089, 7.997, -6.5, -9.681, 8.311, -6.991, 1.974], 43.6], ["2025-02-28", [-10.299, -1.331, -4.327, 0.307, 9.372, -4.53, -8.847, 7.919, -1.146, 5.651], 40.4], ["2025-03-31", [-17.304, -7.202, -8.608, -1.433, 3.868, -8.683, -14.737, 4.835, -9.124, 3.756], 55.73], ["2025-04-30", [-10.624, -0.201, 0.084, 6.138, 14.703, -1.11, -1.332, 15.51, 1.678, 13.979], 65.78], ["2025-05-30", [-6.824, 1.25, 4.029, 10.703, 18.066, 2.989, 4.973, 16.92, 5.557, 17.469], 59.68], ["2025-06-30", [-0.456, 1.468, 8.146, 17.504, 25.44, 6.902, 17.073, 32.635, 17.084, 26.038], 109.1], ["2025-07-01", [0.114, 2.177, 9.581, 18.716, 26.64, 8.109, 18.149, 35.514, 17.468, 28.499], 120.88], ["2025-08-29", [-1.12, 0.496, 6.857, 18.147, 24.689, 5.37, 15.013, 30.859, 13.927, 24.522], 106.37], ["2025-09-30", [4.711, 5.168, 7.123, 22.099, 28.03, 5.546, 16.081, 29.569, 10.986, 24.259], 88.81], ["2025-10-31", [6.748, 5.48, 7.188, 24.585, 33.288, 6.596, 19.836, 36.156, 8.129, 22.149], 124.54], ["2025-11-28", [3.298, 12.307, 7.782, 24.566, 31.764, 5.721, 13.434, 36.627, 3.86, 20.286], 126.78], ["2025-12-30", [4.831, 14.78, 11.645, 25.749, 40.24, 8.147, 12.57, 32.05, 0.051, 20.203], 142.04], ["2026-01-30", [20.616, 20.905, 18.637, 34.848, 57.885, 12.735, 21.377, 46.956, 4.757, 22.691], 230.26], ["2026-02-27", [24.572, 23.846, 24.467, 51.608, 69.97, 18.834, 35.026, 60.871, -2.112, 26.19], 420.04], ["2026-03-31", [18.71, 15.009, 12.29, 41.872, 55.697, 13.178, 48.75, 53.773, -9.179, 17.604], 425.12], ["2026-04-30", [48.378, 19.955, 24.082, 50.435, 88.525, 29.32, 71.42, 67.487, -3.429, 26.746], 705.5], ["2026-05-27", [41.376, 6.698, 10.921, 42.933, 69.598, 12.961, 40.896, 44.442, -17.948, 11.991], 588.21], ["2026-06-30", [19.948, -5.702, 0.733, 36.274, 49.591, 4.033, 29.362, 31.867, -27.647, 4.988], 483.15], ["2026-07-31", [5.331, -14.085, -1.724, 31.997, 38.004, -0.387, 17.004, 31.921, -29.319, 7.641], 417.79], ["2026-08-31", [21.76, -5.095, 6.187, 39.4, 54.926, 10.917, 33.876, 42.042, -23.176, 20.234], 504.48], ["2026-09-02", [19.556, -6.428, 5.499, 38.531, 50.844, 9.531, 31.125, 40.013, -23.898, 17.4], 473.96]], "monthly_spread": [["2024-04-30", 4.377841428925977], ["2024-05-31", 4.129077052846063], ["2024-06-28", 3.5427780656319614], ["2024-07-31", 6.3015054127368435], ["2024-08-30", 4.3287669471575025], ["2024-09-30", 3.1469219287966137], ["2024-10-31", 1.6716936939517264], ["2024-11-29", 6.293114001800888], ["2024-12-30", 5.495012852877479], ["2025-01-31", 3.6897121896048586], ["2025-02-28", 2.3431584006233304], ["2025-03-31", 3.221591092824668], ["2025-04-30", 5.185210607197981], ["2025-05-30", 4.257854716209329], ["2025-06-30", 7.064255915453358], ["2025-07-01", 1.4699831973575077], ["2025-08-29", 2.215692254600096], ["2025-09-30", 5.161884740314232], ["2025-10-31", 8.662529359689014], ["2025-11-28", 6.287666368922923], ["2025-12-30", 5.888686895691907], ["2026-01-30", 7.750810502719612], ["2026-02-27", 8.095878141423071], ["2026-03-31", 5.344352804543457], ["2026-04-30", 13.39821264119672], ["2026-05-27", 15.78854411634577], ["2026-06-30", 8.166717266924865], ["2026-07-31", 8.561800624597574], ["2026-08-31", 6.23968871943422], ["2026-09-02", 1.4834642185945262]], "wider": {"threshold": 2.251504, "n": 105, "fast": 0.76654, "normal": 0.28295777777777775}, "spread": [["2024-04-30", 4.4], ["2024-05-31", 7.7], ["2024-06-28", 8.5], ["2024-07-31", 9.1], ["2024-08-30", 9.6], ["2024-09-30", 9.7], ["2024-10-31", 9.0], ["2024-11-29", 12.7], ["2024-12-30", 13.2], ["2025-01-31", 15.4], ["2025-02-28", 16.2], ["2025-03-31", 15.5], ["2025-04-30", 20.6], ["2025-05-30", 19.6], ["2025-06-30", 24.6], ["2025-07-01", 24.0], ["2025-08-29", 23.9], ["2025-09-30", 24.6], ["2025-10-31", 28.9], ["2025-11-28", 26.5], ["2025-12-30", 27.3], ["2026-01-30", 38.2], ["2026-02-27", 49.3], ["2026-03-31", 39.0], ["2026-04-30", 64.0], ["2026-05-27", 91.9], ["2026-06-30", 93.5], ["2026-07-31", 65.0], ["2026-08-31", 67.7], ["2026-09-02", 65.4]], "spread_half": [12.7, 39.0], "iqr_half": [15.7, 53.9], "shock_days": [["2024-08-05", -8.77, "유틸리티", -6.93, "소재", -10.66], ["2025-04-07", -5.57, "유틸리티", -0.98, "산업재", -7.32], ["2025-04-10", 6.6, "IT", 7.76, "유틸리티", 3.09], ["2025-11-14", -3.81, "건강관리", 0.16, "IT", -6.01], ["2025-11-21", -3.79, "필수소비재", 0.04, "IT", -6.01], ["2026-02-02", -5.26, "필수소비재", -1.58, "IT", -6.75], ["2026-02-03", 6.84, "IT", 9.09, "필수소비재", 1.41], ["2026-02-05", -3.86, "필수소비재", 0.0, "IT", -5.37], ["2026-02-09", 4.1, "IT", 4.83, "경기관련소비재", 2.17], ["2026-03-03", -7.24, "에너지", 1.45, "IT", -9.86], ["2026-03-04", -12.06, "필수소비재", -8.68, "소재", -15.06], ["2026-03-05", 9.63, "IT", 11.5, "필수소비재", 4.62], ["2026-03-09", -5.96, "커뮤니케이션서비스", -1.91, "IT", -7.75], ["2026-03-10", 5.35, "IT", 8.43, "에너지", 1.31], ["2026-03-18", 5.04, "IT", 6.84, "커뮤니케이션서비스", 0.75], ["2026-03-23", -6.49, "필수소비재", -4.31, "산업재", -7.03], ["2026-03-31", -4.26, "필수소비재", 0.03, "IT", -5.57], ["2026-04-01", 8.44, "IT", 11.12, "커뮤니케이션서비스", 2.76], ["2026-04-02", -4.47, "소재", -2.92, "IT", -5.74], ["2026-04-08", 6.87, "IT", 8.29, "필수소비재", 2.34], ["2026-05-04", 5.12, "IT", 7.16, "건강관리", -0.13], ["2026-05-06", 6.45, "IT", 10.33, "필수소비재", -2.43], ["2026-05-11", 4.32, "IT", 6.95, "소재", -2.12], ["2026-05-15", -6.12, "유틸리티", -1.87, "IT", -7.53], ["2026-05-21", 8.42, "경기관련소비재", 11.17, "필수소비재", 0.79], ["2026-06-05", -5.54, "금융", -0.22, "IT", -7.07], ["2026-06-08", -8.29, "커뮤니케이션서비스", 0.23, "IT", -8.98], ["2026-06-09", 8.18, "IT", 10.84, "커뮤니케이션서비스", -1.27], ["2026-06-10", -4.52, "유틸리티", 0.63, "IT", -6.31], ["2026-06-12", 4.63, "유틸리티", 8.34, "필수소비재", -0.32], ["2026-06-15", 5.2, "산업재", 6.01, "커뮤니케이션서비스", 0.03], ["2026-06-23", -9.99, "필수소비재", -2.42, "IT", -11.69], ["2026-06-25", 5.42, "에너지", 8.49, "소재", -2.14], ["2026-06-26", -5.81, "커뮤니케이션서비스", -1.76, "IT", -6.42], ["2026-07-02", -7.89, "필수소비재", 1.6, "IT", -11.11], ["2026-07-03", 5.76, "IT", 8.0, "커뮤니케이션서비스", -1.56], ["2026-07-07", -4.91, "필수소비재", 4.34, "IT", -6.4], ["2026-07-08", -5.35, "커뮤니케이션서비스", -1.4, "산업재", -6.61], ["2026-07-13", -8.95, "필수소비재", -0.08, "IT", -12.04], ["2026-07-15", 6.24, "IT", 7.83, "유틸리티", 0.6], ["2026-07-16", -6.37, "필수소비재", 1.84, "IT", -9.55], ["2026-07-20", -4.46, "에너지", -1.13, "금융", -5.84], ["2026-07-23", 4.4, "에너지", 8.56, "금융", 1.5], ["2026-07-24", -5.72, "건강관리", 1.96, "IT", -7.9], ["2026-07-28", -10.84, "건강관리", -2.59, "IT", -13.51], ["2026-07-29", -5.98, "필수소비재", 0.06, "IT", -7.01], ["2026-07-31", 17.91, "IT", 26.2, "필수소비재", -0.95], ["2026-08-03", -5.12, "필수소비재", 0.49, "IT", -7.17], ["2026-08-05", 3.76, "산업재", 4.85, "커뮤니케이션서비스", -0.12], ["2026-08-06", -4.58, "필수소비재", 3.75, "IT", -7.42], ["2026-08-19", -5.8, "건강관리", -0.54, "IT", -7.62], ["2026-08-20", 5.89, "IT", 9.26, "에너지", -0.44], ["2026-09-02", -3.99, "필수소비재", -1.49, "산업재", -4.44]], "kospi": [["2024-04-15", 2670.43], ["2024-04-16", 2609.63], ["2024-04-17", 2584.18], ["2024-04-18", 2634.7], ["2024-04-19", 2591.86], ["2024-04-22", 2629.44], ["2024-04-23", 2623.02], ["2024-04-24", 2675.75], ["2024-04-25", 2628.62], ["2024-04-26", 2656.33], ["2024-04-29", 2687.44], ["2024-04-30", 2692.06], ["2024-05-02", 2683.65], ["2024-05-03", 2676.63], ["2024-05-07", 2734.36], ["2024-05-08", 2745.05], ["2024-05-09", 2712.14], ["2024-05-10", 2727.63], ["2024-05-13", 2727.21], ["2024-05-14", 2730.34], ["2024-05-16", 2753.0], ["2024-05-17", 2724.62], ["2024-05-20", 2742.14], ["2024-05-21", 2724.18], ["2024-05-22", 2723.46], ["2024-05-23", 2721.81], ["2024-05-24", 2687.6], ["2024-05-27", 2722.99], ["2024-05-28", 2722.85], ["2024-05-29", 2677.3], ["2024-05-30", 2635.44], ["2024-05-31", 2636.52], ["2024-06-03", 2682.52], ["2024-06-04", 2662.1], ["2024-06-05", 2689.5], ["2024-06-07", 2722.67], ["2024-06-10", 2701.17], ["2024-06-11", 2705.32], ["2024-06-12", 2728.17], ["2024-06-13", 2754.89], ["2024-06-14", 2758.42], ["2024-06-17", 2744.1], ["2024-06-18", 2763.92], ["2024-06-19", 2797.33], ["2024-06-20", 2807.63], ["2024-06-21", 2784.26], ["2024-06-24", 2764.73], ["2024-06-25", 2774.39], ["2024-06-26", 2792.05], ["2024-06-27", 2784.06], ["2024-06-28", 2797.82], ["2024-07-01", 2804.31], ["2024-07-02", 2780.86], ["2024-07-03", 2794.01], ["2024-07-04", 2824.94], ["2024-07-05", 2862.23], ["2024-07-08", 2857.76], ["2024-07-09", 2867.38], ["2024-07-10", 2867.99], ["2024-07-11", 2891.35], ["2024-07-12", 2857.0], ["2024-07-15", 2860.92], ["2024-07-16", 2866.09], ["2024-07-17", 2843.29], ["2024-07-18", 2824.35], ["2024-07-19", 2795.46], ["2024-07-22", 2763.51], ["2024-07-23", 2774.29], ["2024-07-24", 2758.71], ["2024-07-25", 2710.65], ["2024-07-26", 2731.9], ["2024-07-29", 2765.53], ["2024-07-30", 2738.19], ["2024-07-31", 2770.69], ["2024-08-01", 2777.68], ["2024-08-02", 2676.19], ["2024-08-05", 2441.55], ["2024-08-06", 2522.15], ["2024-08-07", 2568.41], ["2024-08-08", 2556.73], ["2024-08-09", 2588.43], ["2024-08-12", 2618.3], ["2024-08-13", 2621.5], ["2024-08-14", 2644.5], ["2024-08-16", 2697.23], ["2024-08-19", 2674.36], ["2024-08-20", 2696.63], ["2024-08-21", 2701.13], ["2024-08-22", 2707.67], ["2024-08-23", 2701.69], ["2024-08-26", 2698.01], ["2024-08-27", 2689.25], ["2024-08-28", 2689.83], ["2024-08-29", 2662.28], ["2024-08-30", 2674.31], ["2024-09-02", 2681.0], ["2024-09-03", 2664.63], ["2024-09-04", 2580.8], ["2024-09-05", 2575.5], ["2024-09-06", 2544.28], ["2024-09-09", 2535.93], ["2024-09-10", 2523.43], ["2024-09-11", 2513.37], ["2024-09-12", 2572.09], ["2024-09-13", 2575.41], ["2024-09-19", 2580.8], ["2024-09-20", 2593.37], ["2024-09-23", 2602.01], ["2024-09-24", 2631.68], ["2024-09-25", 2596.32], ["2024-09-26", 2671.57], ["2024-09-27", 2649.78], ["2024-09-30", 2593.27], ["2024-10-02", 2561.69], ["2024-10-04", 2569.71], ["2024-10-07", 2610.38], ["2024-10-08", 2594.36], ["2024-10-10", 2599.16], ["2024-10-11", 2596.91], ["2024-10-14", 2623.29], ["2024-10-15", 2633.45], ["2024-10-16", 2610.36], ["2024-10-17", 2609.3], ["2024-10-18", 2593.82], ["2024-10-21", 2604.92], ["2024-10-22", 2570.7], ["2024-10-23", 2599.62], ["2024-10-24", 2581.03], ["2024-10-25", 2583.27], ["2024-10-28", 2612.43], ["2024-10-29", 2617.8], ["2024-10-30", 2593.79], ["2024-10-31", 2556.15], ["2024-11-01", 2542.36], ["2024-11-04", 2588.97], ["2024-11-05", 2576.88], ["2024-11-06", 2563.51], ["2024-11-07", 2564.63], ["2024-11-08", 2561.15], ["2024-11-11", 2531.66], ["2024-11-12", 2482.57], ["2024-11-13", 2417.08], ["2024-11-14", 2418.86], ["2024-11-15", 2416.86], ["2024-11-18", 2469.07], ["2024-11-19", 2471.95], ["2024-11-20", 2482.29], ["2024-11-21", 2480.63], ["2024-11-22", 2501.24], ["2024-11-25", 2534.34], ["2024-11-26", 2520.36], ["2024-11-27", 2503.06], ["2024-11-28", 2504.67], ["2024-11-29", 2455.91], ["2024-12-02", 2454.48], ["2024-12-03", 2500.1], ["2024-12-04", 2464.0], ["2024-12-05", 2441.85], ["2024-12-06", 2428.16], ["2024-12-09", 2360.58], ["2024-12-10", 2417.84], ["2024-12-11", 2442.51], ["2024-12-12", 2482.12], ["2024-12-13", 2494.46], ["2024-12-16", 2488.97], ["2024-12-17", 2456.81], ["2024-12-18", 2484.43], ["2024-12-19", 2435.93], ["2024-12-20", 2404.15], ["2024-12-23", 2442.01], ["2024-12-24", 2440.52], ["2024-12-26", 2429.67], ["2024-12-27", 2404.77], ["2024-12-30", 2399.49], ["2025-01-02", 2398.94], ["2025-01-03", 2441.92], ["2025-01-06", 2488.64], ["2025-01-07", 2492.1], ["2025-01-08", 2521.05], ["2025-01-09", 2521.9], ["2025-01-10", 2515.78], ["2025-01-13", 2489.56], ["2025-01-14", 2497.4], ["2025-01-15", 2496.81], ["2025-01-16", 2527.49], ["2025-01-17", 2523.55], ["2025-01-20", 2520.05], ["2025-01-21", 2518.03], ["2025-01-22", 2547.06], ["2025-01-23", 2515.49], ["2025-01-24", 2536.8], ["2025-01-31", 2517.37], ["2025-02-03", 2453.95], ["2025-02-04", 2481.69], ["2025-02-05", 2509.27], ["2025-02-06", 2536.75], ["2025-02-07", 2521.92], ["2025-02-10", 2521.27], ["2025-02-11", 2539.05], ["2025-02-12", 2548.39], ["2025-02-13", 2583.17], ["2025-02-14", 2591.05], ["2025-02-17", 2610.42], ["2025-02-18", 2626.81], ["2025-02-19", 2671.52], ["2025-02-20", 2654.06], ["2025-02-21", 2654.58], ["2025-02-24", 2645.27], ["2025-02-25", 2630.29], ["2025-02-26", 2641.09], ["2025-02-27", 2621.75], ["2025-02-28", 2532.78], ["2025-03-04", 2528.92], ["2025-03-05", 2558.13], ["2025-03-06", 2576.16], ["2025-03-07", 2563.48], ["2025-03-10", 2570.39], ["2025-03-11", 2537.6], ["2025-03-12", 2574.82], ["2025-03-13", 2573.64], ["2025-03-14", 2566.36], ["2025-03-17", 2610.69], ["2025-03-18", 2612.34], ["2025-03-19", 2628.62], ["2025-03-20", 2637.1], ["2025-03-21", 2643.13], ["2025-03-24", 2632.07], ["2025-03-25", 2615.81], ["2025-03-26", 2643.94], ["2025-03-27", 2607.15], ["2025-03-28", 2557.98], ["2025-03-31", 2481.12], ["2025-04-01", 2521.39], ["2025-04-02", 2505.86], ["2025-04-03", 2486.7], ["2025-04-04", 2465.42], ["2025-04-07", 2328.2], ["2025-04-08", 2334.23], ["2025-04-09", 2293.7], ["2025-04-10", 2445.06], ["2025-04-11", 2432.72], ["2025-04-14", 2455.89], ["2025-04-15", 2477.41], ["2025-04-16", 2447.43], ["2025-04-17", 2470.41], ["2025-04-18", 2483.42], ["2025-04-21", 2488.42], ["2025-04-22", 2486.64], ["2025-04-23", 2525.56], ["2025-04-24", 2522.33], ["2025-04-25", 2546.3], ["2025-04-28", 2548.86], ["2025-04-29", 2565.42], ["2025-04-30", 2556.61], ["2025-05-02", 2559.79], ["2025-05-07", 2573.8], ["2025-05-08", 2579.48], ["2025-05-09", 2577.27], ["2025-05-12", 2607.33], ["2025-05-13", 2608.42], ["2025-05-14", 2640.57], ["2025-05-15", 2621.36], ["2025-05-16", 2626.87], ["2025-05-19", 2603.42], ["2025-05-20", 2601.8], ["2025-05-21", 2625.58], ["2025-05-22", 2593.67], ["2025-05-23", 2592.09], ["2025-05-26", 2644.4], ["2025-05-27", 2637.22], ["2025-05-28", 2670.15], ["2025-05-29", 2720.64], ["2025-05-30", 2697.67], ["2025-06-02", 2698.97], ["2025-06-04", 2770.84], ["2025-06-05", 2812.05], ["2025-06-09", 2855.77], ["2025-06-10", 2871.85], ["2025-06-11", 2907.04], ["2025-06-12", 2920.03], ["2025-06-13", 2894.62], ["2025-06-16", 2946.66], ["2025-06-17", 2950.3], ["2025-06-18", 2972.19], ["2025-06-19", 2977.74], ["2025-06-20", 3021.84], ["2025-06-23", 3014.47], ["2025-06-24", 3103.64], ["2025-06-25", 3108.25], ["2025-06-26", 3079.56], ["2025-06-27", 3055.94], ["2025-06-30", 3071.7], ["2025-07-01", 3089.65], ["2025-07-02", 3075.06], ["2025-07-03", 3116.27], ["2025-07-04", 3054.28], ["2025-07-07", 3059.47], ["2025-07-08", 3114.95], ["2025-07-09", 3133.74], ["2025-07-10", 3183.23], ["2025-07-11", 3175.77], ["2025-07-14", 3202.03], ["2025-07-15", 3215.28], ["2025-07-16", 3186.38], ["2025-07-17", 3192.29], ["2025-07-18", 3188.07], ["2025-07-21", 3210.81], ["2025-07-22", 3169.94], ["2025-07-23", 3183.77], ["2025-07-24", 3190.45], ["2025-07-25", 3196.05], ["2025-07-28", 3209.52], ["2025-07-29", 3230.57], ["2025-07-30", 3254.47], ["2025-07-31", 3245.44], ["2025-08-01", 3119.41], ["2025-08-04", 3147.75], ["2025-08-05", 3198.0], ["2025-08-06", 3198.14], ["2025-08-07", 3227.68], ["2025-08-08", 3210.01], ["2025-08-11", 3206.77], ["2025-08-12", 3189.91], ["2025-08-13", 3224.37], ["2025-08-14", 3225.66], ["2025-08-18", 3177.28], ["2025-08-19", 3151.56], ["2025-08-20", 3130.09], ["2025-08-21", 3141.74], ["2025-08-22", 3168.73], ["2025-08-25", 3209.86], ["2025-08-26", 3179.36], ["2025-08-27", 3187.16], ["2025-08-28", 3196.32], ["2025-08-29", 3186.01], ["2025-09-01", 3142.93], ["2025-09-02", 3172.35], ["2025-09-03", 3184.42], ["2025-09-04", 3200.83], ["2025-09-05", 3205.12], ["2025-09-08", 3219.59], ["2025-09-09", 3260.05], ["2025-09-10", 3314.53], ["2025-09-11", 3344.2], ["2025-09-12", 3395.54], ["2025-09-15", 3407.31], ["2025-09-16", 3449.62], ["2025-09-17", 3413.4], ["2025-09-18", 3461.3], ["2025-09-19", 3445.24], ["2025-09-22", 3468.65], ["2025-09-23", 3486.19], ["2025-09-24", 3472.14], ["2025-09-25", 3471.11], ["2025-09-26", 3386.05], ["2025-09-29", 3431.21], ["2025-09-30", 3424.6], ["2025-10-01", 3455.83], ["2025-10-02", 3549.21], ["2025-10-10", 3610.6], ["2025-10-13", 3584.55], ["2025-10-14", 3561.81], ["2025-10-15", 3657.28], ["2025-10-16", 3748.37], ["2025-10-17", 3748.89], ["2025-10-20", 3814.69], ["2025-10-21", 3823.84], ["2025-10-22", 3883.68], ["2025-10-23", 3845.56], ["2025-10-24", 3941.59], ["2025-10-27", 4042.83], ["2025-10-28", 4010.41], ["2025-10-29", 4081.15], ["2025-10-30", 4086.89], ["2025-10-31", 4107.5], ["2025-11-03", 4221.87], ["2025-11-04", 4121.74], ["2025-11-05", 4004.42], ["2025-11-06", 4026.45], ["2025-11-07", 3953.76], ["2025-11-10", 4073.24], ["2025-11-11", 4106.39], ["2025-11-12", 4150.39], ["2025-11-13", 4170.63], ["2025-11-14", 4011.57], ["2025-11-17", 4089.25], ["2025-11-18", 3953.62], ["2025-11-19", 3929.51], ["2025-11-20", 4004.85], ["2025-11-21", 3853.26], ["2025-11-24", 3846.06], ["2025-11-25", 3857.78], ["2025-11-26", 3960.87], ["2025-11-27", 3986.91], ["2025-11-28", 3926.59], ["2025-12-01", 3920.37], ["2025-12-02", 3994.93], ["2025-12-03", 4036.3], ["2025-12-04", 4028.51], ["2025-12-05", 4100.05], ["2025-12-08", 4154.85], ["2025-12-09", 4143.55], ["2025-12-10", 4135.0], ["2025-12-11", 4110.62], ["2025-12-12", 4167.16], ["2025-12-15", 4090.59], ["2025-12-16", 3999.13], ["2025-12-17", 4056.41], ["2025-12-18", 3994.51], ["2025-12-19", 4020.55], ["2025-12-22", 4105.93], ["2025-12-23", 4117.32], ["2025-12-24", 4108.62], ["2025-12-26", 4129.68], ["2025-12-29", 4220.56], ["2025-12-30", 4214.17], ["2026-01-02", 4309.63], ["2026-01-05", 4457.52], ["2026-01-06", 4525.48], ["2026-01-07", 4551.06], ["2026-01-08", 4552.37], ["2026-01-09", 4586.32], ["2026-01-12", 4624.79], ["2026-01-13", 4692.64], ["2026-01-14", 4723.1], ["2026-01-15", 4797.55], ["2026-01-16", 4840.74], ["2026-01-19", 4904.66], ["2026-01-20", 4885.75], ["2026-01-21", 4909.93], ["2026-01-22", 4952.53], ["2026-01-23", 4990.07], ["2026-01-26", 4949.59], ["2026-01-27", 5084.85], ["2026-01-28", 5170.81], ["2026-01-29", 5221.25], ["2026-01-30", 5224.36], ["2026-02-02", 4949.67], ["2026-02-03", 5288.08], ["2026-02-04", 5371.1], ["2026-02-05", 5163.57], ["2026-02-06", 5089.14], ["2026-02-09", 5298.04], ["2026-02-10", 5301.69], ["2026-02-11", 5354.49], ["2026-02-12", 5522.27], ["2026-02-13", 5507.01], ["2026-02-19", 5677.25], ["2026-02-20", 5808.53], ["2026-02-23", 5846.09], ["2026-02-24", 5969.64], ["2026-02-25", 6083.86], ["2026-02-26", 6307.27], ["2026-02-27", 6244.13], ["2026-03-03", 5791.91], ["2026-03-04", 5093.54], ["2026-03-05", 5583.9], ["2026-03-06", 5584.87], ["2026-03-09", 5251.87], ["2026-03-10", 5532.59], ["2026-03-11", 5609.95], ["2026-03-12", 5583.25], ["2026-03-13", 5487.24], ["2026-03-16", 5549.85], ["2026-03-17", 5640.48], ["2026-03-18", 5925.03], ["2026-03-19", 5763.22], ["2026-03-20", 5781.2], ["2026-03-23", 5405.75], ["2026-03-24", 5553.92], ["2026-03-25", 5642.21], ["2026-03-26", 5460.46], ["2026-03-27", 5438.87], ["2026-03-30", 5277.3], ["2026-03-31", 5052.46], ["2026-04-01", 5478.7], ["2026-04-02", 5234.05], ["2026-04-03", 5377.3], ["2026-04-06", 5450.33], ["2026-04-07", 5494.78], ["2026-04-08", 5872.34], ["2026-04-09", 5778.01], ["2026-04-10", 5858.87], ["2026-04-13", 5808.62], ["2026-04-14", 5967.75], ["2026-04-15", 6091.39], ["2026-04-16", 6226.05], ["2026-04-17", 6191.92], ["2026-04-20", 6219.09], ["2026-04-21", 6388.47], ["2026-04-22", 6417.93], ["2026-04-23", 6475.81], ["2026-04-24", 6475.63], ["2026-04-27", 6615.03], ["2026-04-28", 6641.02], ["2026-04-29", 6690.9], ["2026-04-30", 6598.87], ["2026-05-04", 6936.99], ["2026-05-06", 7384.56], ["2026-05-07", 7490.05], ["2026-05-08", 7498.0], ["2026-05-11", 7822.24], ["2026-05-12", 7643.15], ["2026-05-13", 7844.01], ["2026-05-14", 7981.41], ["2026-05-15", 7493.18], ["2026-05-18", 7516.04], ["2026-05-19", 7271.66], ["2026-05-20", 7208.95], ["2026-05-21", 7815.59], ["2026-05-22", 7847.71], ["2026-05-26", 8047.51], ["2026-05-27", 8228.7], ["2026-05-28", 8185.29], ["2026-05-29", 8476.15], ["2026-06-01", 8788.38], ["2026-06-02", 8801.49], ["2026-06-04", 8639.41], ["2026-06-05", 8160.59], ["2026-06-08", 7484.41], ["2026-06-09", 8096.93], ["2026-06-10", 7730.82], ["2026-06-11", 7763.95], ["2026-06-12", 8123.62], ["2026-06-15", 8545.98], ["2026-06-16", 8726.6], ["2026-06-17", 8864.24], ["2026-06-18", 9063.84], ["2026-06-19", 9052.42], ["2026-06-22", 9114.55], ["2026-06-23", 8203.84], ["2026-06-24", 8471.02], ["2026-06-25", 8930.3], ["2026-06-26", 8411.21], ["2026-06-29", 8394.65], ["2026-06-30", 8476.48], ["2026-07-01", 8303.41], ["2026-07-02", 7648.09], ["2026-07-03", 8088.34], ["2026-07-06", 8051.33], ["2026-07-07", 7656.31], ["2026-07-08", 7246.79], ["2026-07-09", 7291.91], ["2026-07-10", 7475.94], ["2026-07-13", 6806.93], ["2026-07-14", 6856.83], ["2026-07-15", 7284.41], ["2026-07-16", 6820.6], ["2026-07-20", 6516.27], ["2026-07-21", 6747.95], ["2026-07-22", 6797.7], ["2026-07-23", 7096.89], ["2026-07-24", 6690.62], ["2026-07-27", 6755.75], ["2026-07-28", 6023.66], ["2026-07-29", 5663.24], ["2026-07-30", 5593.56], ["2026-07-31", 6595.45], ["2026-08-03", 6257.45], ["2026-08-04", 6358.95], ["2026-08-05", 6598.26], ["2026-08-06", 6296.38], ["2026-08-07", 6258.77], ["2026-08-10", 6299.66], ["2026-08-11", 6345.53], ["2026-08-12", 6579.04], ["2026-08-13", 6813.34], ["2026-08-14", 6977.94], ["2026-08-18", 6869.83], ["2026-08-19", 6471.17], ["2026-08-20", 6852.58], ["2026-08-21", 6912.95], ["2026-08-24", 6696.96], ["2026-08-25", 6742.74], ["2026-08-26", 6808.21], ["2026-08-27", 6912.37], ["2026-08-28", 6788.88], ["2026-08-31", 6820.02], ["2026-09-01", 6835.8], ["2026-09-02", 6562.72]]}, "q4": {"results": [{"cutoff": 2, "n": 99515, "returns": [1.8, -0.258, -0.429, -0.839]}, {"cutoff": 3, "n": 57273, "returns": [3.009, -0.565, -0.885, -1.596]}], "top_days": [["2026-03-04", 1113, -12.06], ["2026-07-29", 1047, -5.98], ["2026-01-29", 850, 0.98], ["2026-01-28", 802, 1.69], ["2026-01-26", 740, -0.81], ["2026-01-30", 730, 0.06], ["2026-01-07", 714, 0.57], ["2025-02-19", 711, 1.7], ["2026-01-20", 704, -0.39], ["2026-01-05", 685, 3.43]], "per_day_median": 410, "by_wics": {"건강관리": 12326, "경기관련소비재": 13625, "소재": 11984, "필수소비재": 6882, "산업재": 14001, "금융": 6127, "IT": 27579, "에너지": 1730, "유틸리티": 632, "커뮤니케이션서비스": 4629}}}, "earn": [{"code": "005380", "frequency": "quarterly", "period": "2026-06", "previous_observed_date": "2026-08-21", "first_actual_observed_date": "2026-08-24", "estimate_observed_date": "2026-08-21", "operating_profit_estimate": "30232", "operating_profit_actual": "28509", "previous_archive_date": "2026-08-21", "first_actual_archive_date": "2026-08-24", "name": "현대차"}, {"code": "005930", "frequency": "quarterly", "period": "2026-06", "previous_observed_date": "2026-08-20", "first_actual_observed_date": "2026-08-21", "estimate_observed_date": "2026-08-20", "operating_profit_estimate": "850494", "operating_profit_actual": "894924", "previous_archive_date": "2026-08-20", "first_actual_archive_date": "2026-08-21", "name": "삼성전자"}, {"code": "000660", "frequency": "quarterly", "period": "2026-06", "previous_observed_date": "2026-08-20", "first_actual_observed_date": "2026-08-21", "estimate_observed_date": "2026-08-20", "operating_profit_estimate": "642448", "operating_profit_actual": "605426", "previous_archive_date": "2026-08-20", "first_actual_archive_date": "2026-08-21", "name": "SK하이닉스"}, {"code": "105560", "frequency": "quarterly", "period": "2026-03", "previous_observed_date": "2026-06-10", "first_actual_observed_date": "2026-06-11", "estimate_observed_date": "2026-06-10", "operating_profit_estimate": "24898", "operating_profit_actual": "27276", "previous_archive_date": "2026-06-10", "first_actual_archive_date": "2026-06-11", "name": "KB금융"}, {"code": "055550", "frequency": "quarterly", "period": "2026-03", "previous_observed_date": "2026-06-10", "first_actual_observed_date": "2026-06-11", "estimate_observed_date": "2026-06-10", "operating_profit_estimate": "21122", "operating_profit_actual": "21545", "previous_archive_date": "2026-06-10", "first_actual_archive_date": "2026-06-11", "name": "신한지주"}]}</script>
+<script>
+const C = {blue:"oklch(0.620 0.191 258)", blueD:"oklch(0.476 0.174 259)", blueL:"oklch(0.80 0.09 255)", grey:"oklch(0.930 0.005 248)", grey3:"oklch(0.874 0.009 248)",
+  grey5:"oklch(0.666 0.021 253)", grey7:"oklch(0.460 0.028 256)", ink:"oklch(0.237 0.020 258)", red:"oklch(0.641 0.208 21)", orange:"oklch(0.748 0.183 56)", green:"oklch(0.493 0.143 154)"};
+const $ = id => document.getElementById(id);
+const f1 = v => (v>0?"+":"")+v.toFixed(1);
+const comma = v => Math.round(v).toLocaleString("ko-KR");
+const short = s => ({"반도체와반도체장비":"반도체","가스유틸리티":"가스","건강관리업체및서비스":"건강관리서비스","생명과학도구및서비스":"생명과학도구","백화점과일반상점":"백화점"}[s]||s);
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs={}, parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent&&parent.appendChild(e);return e}
+function text(parent,x,y,s,a={}){const t=el("text",{x,y,"font-size":13,fill:C.grey7,...a},parent);t.textContent=s;return t}
+function svg(host,w,h){const s=el("svg",{width:w,height:h,viewBox:`0 0 ${w} ${h}`});$(host).appendChild(s);return s}
+
+/* 가로 막대: 토스 bar-chart 규칙(기본 grey-200, 강조만 blue-500, 축선 없음) */
+function hbars(host,items,{w=700,row=30,label=150,max,unit="%"}={}){
+  const h=items.length*row, s=svg(host,w,h);
+  const vals=items.filter(i=>!i.gap).map(i=>i.value), lo=Math.min(0,...vals), hi=max??Math.max(...vals);
+  const span=w-label-70, x=v=>label+(v-lo)/(hi-lo)*span, x0=x(0);
+  items.forEach((it,i)=>{
+    const y=i*row, bw=Math.abs(x(it.value)-x0), bx=Math.min(x(it.value),x0);
+    if(it.gap){text(s,0,y+row*0.62,it.label,{"font-size":12,fill:C.grey5,"font-weight":600});return}
+    text(s,label-10,y+row*0.62,it.label,{"text-anchor":"end",fill:it.hl?C.ink:C.grey7,"font-weight":it.hl?700:400,"font-size":14});
+    el("rect",{x:bx,y:y+row*0.2,width:Math.max(bw,2),height:row*0.6,rx:6,fill:it.color||(it.hl?C.blue:C.grey3)},s);
+    const tx=it.value>=0?x(it.value)+8:x0+8;
+    text(s,tx,y+row*0.62,it.display??(it.value.toFixed(1)+unit),{"text-anchor":"start",fill:it.hl?C.blue:C.grey7,"font-weight":600,"font-size":13});
+  });
+  if(lo<0) el("line",{x1:x0,x2:x0,y1:0,y2:h,stroke:C.grey3},s);
+}
+
+/* 선 그래프 */
+function lines(host,dates,series,{w=740,h=330,pad=[16,90,28,44],yfmt=v=>v+"%",zero=true,ticks}={}){
+  const s=svg(host,w,h), [t,r,b,l]=pad, all=series.flatMap(x=>x.values);
+  let lo=Math.min(...all), hi=Math.max(...all); if(zero) lo=Math.min(lo,0);
+  const step=ticks||niceStep((hi-lo)/4); lo=Math.floor(lo/step)*step; hi=Math.ceil(hi/step)*step;
+  const X=i=>l+i/(dates.length-1)*(w-l-r), Y=v=>t+(hi-v)/(hi-lo)*(h-t-b);
+  for(let v=lo;v<=hi+1e-9;v+=step){el("line",{x1:l,x2:w-r,y1:Y(v),y2:Y(v),stroke:v===0?C.grey3:C.grey,"stroke-width":1},s);text(s,l-8,Y(v)+4,yfmt(+v.toFixed(2)),{"text-anchor":"end","font-size":12,fill:C.grey5})}
+  dates.forEach((d,i)=>{if(d.endsWith("-01")||i===0||i===dates.length-1){} });
+  [...new Set(dates.map(d=>d.slice(0,4)))].forEach(y=>{const i=dates.findIndex(d=>d.startsWith(y));text(s,X(i),h-6,y+"년",{"font-size":12,fill:C.grey5,"text-anchor":i===0?"start":"middle"})});
+  const labels=[];
+  series.forEach(se=>{
+    const d=se.values.map((v,i)=>(i?"L":"M")+X(i).toFixed(1)+" "+Y(v).toFixed(1)).join(" ");
+    if(se.area) el("path",{d:d+` L${X(se.values.length-1)} ${Y(Math.max(lo,0))} L${X(0)} ${Y(Math.max(lo,0))} Z`,fill:"oklch(0.959 0.020 250)"},s);
+    el("path",{d,fill:"none",stroke:se.color,"stroke-width":se.width||2,"stroke-linejoin":"round"},s);
+    if(se.label) labels.push({y:Y(se.values.at(-1)),se});
+  });
+  labels.sort((a,b)=>a.y-b.y); for(let i=1;i<labels.length;i++) if(labels[i].y-labels[i-1].y<16) labels[i].y=labels[i-1].y+16;
+  labels.forEach(({y,se})=>text(s,w-r+8,y+4,se.label,{fill:se.color,"font-weight":700,"font-size":13}));
+  return {s,X,Y};
+}
+function niceStep(raw){const p=10**Math.floor(Math.log10(raw)),m=raw/p;return (m<1.5?1:m<3?2:m<7?5:10)*p}
+
+const D = JSON.parse(document.getElementById("data").textContent);
+const A = D.a, Q1 = A.q1, S = A.q23, Q4 = A.q4;
+const WC = {"IT":"oklch(0.620 0.191 258)","산업재":"oklch(0.748 0.183 56)","금융":"oklch(0.493 0.143 154)","경기관련소비재":"oklch(0.70 0.11 200)",
+  "건강관리":"oklch(0.641 0.208 21)","소재":"oklch(0.80 0.13 90)","커뮤니케이션서비스":"oklch(0.58 0.15 300)","필수소비재":"oklch(0.72 0.06 150)",
+  "에너지":"oklch(0.55 0.08 50)","유틸리티":"oklch(0.80 0.02 250)"};
+const ORDER = ["IT","산업재","금융","경기관련소비재","건강관리","소재","커뮤니케이션서비스","필수소비재","에너지","유틸리티"];
+const W = s => s==="커뮤니케이션서비스"?"커뮤니케이션":s==="경기관련소비재"?"경기소비재":s;
+const pct = (a,b) => 100*(b/a-1);
+/* 날짜별 원인 보도: 데이터에서 찾은 날짜에 같은 날 보도를 붙임 */
+const EV = [
+  ["2024-08-05","블랙먼데이","미국 경기침체 우려로 아시아 증시 동반 폭락, 서킷브레이커","뉴스1","https://v.daum.net/v/20240805163230715",[-40,0]],
+  ["2025-04-07","상호관세 충격","미국 상호관세·중국 맞불관세로 관세전쟁 우려","뉴데일리","https://biz.newdaily.co.kr/site/data/html/2025/04/07/2025040700304.amp.html",[52,0]],
+  ["2025-04-10","관세 유예","트럼프 상호관세 부과 유예 발표","뉴시스","https://www.newsis.com/view/NISX20250410_0003134676",[-48,0]],
+  ["2025-06-04","새 정부·상법 개정","코스피 5000 정책, 상법·세제 개편이 흐름을 바꿈","이투데이","https://www.etoday.co.kr/news/view/2548259",[34,20]],
+  ["2025-08-07","한미 관세 타결·MASGA","대미 투자 3,500억 달러 중 1,500억 달러 조선 협력","뉴데일리","https://biz.newdaily.co.kr/site/data/html/2025/08/07/2025080700168.amp.html",[-70,0]],
+  ["2025-10-27","4,000 돌파","정책 기대 + 반도체 실적, 4000 시대 진입","이투데이","https://www.etoday.co.kr/news/view/2548259",[62,0]],
+  ["2025-11-21","AI 거품론","엔비디아 호실적에도 AI 고평가 논란, 외국인 매도","머니투데이","https://www.mt.co.kr/stock/2025/11/21/2025112115494760635",[-80,-10]],
+  ["2026-01-27","첫 5,000 마감","종가 기준 사상 첫 5,000","서울신문","https://m.seoul.co.kr/news/2026/02/02/20260202500224",null],
+  ["2026-02-02","워시 쇼크","긴축파 연준 의장 지명, 외국인 역대 최대 매도","MTN","https://news.mtn.co.kr/news-detail/2026020216022667902",[-110,-50]],
+  ["2026-03-04","이란 전쟁","미국·이란 전쟁으로 중동 리스크, 사상 최대 하락률","머니투데이","https://www.mt.co.kr/article/2026030415494823974",[78,-10]],
+  ["2026-03-05","하루 만의 반등","전날 공포가 역대급 반등으로 뒤집힘","에스콰이어","https://www.esquirekorea.co.kr/article/1898256",null],
+  ["2026-04-01","종전 기대","중동 종전 기대 + 세계국채지수(WGBI) 편입","뉴스토마토","https://newstomato.com/ReadNews.aspx?no=1296401",[48,40]],
+  ["2026-06-23","반도체 쏠림 조정","삼성전자·SK하이닉스 12% 급락, 외국인·기관 12조 매도","쿠키뉴스","https://www.kukinews.com/article/view/kuk202606230139",[-30,-70]],
+  ["2026-07-28","반도체 고점론","AI 자금조달 리스크·중국 반도체 자립 우려","파이낸셜뉴스","https://fnnews.com/news/202607281629568435",[56,0]],
+  ["2026-07-31","사상 최대 상승","MS·아마존 실적에 외국인 매수, SK하이닉스 상한가","뉴스토마토","https://newstomato.com/ReadNews.aspx?no=1308892",[-70,30]],
+];
+const K = Object.fromEntries(S.kospi), KD = S.kospi.map(r=>r[0]);
+const kret = d => { const i=KD.indexOf(d); return i>0 ? pct(K[KD[i-1]],K[d]) : null; };
+
+/* ---------- 2. 타임라인 ---------- */
+(()=>{
+  const w=1150,h=440,l=56,r=20,t=46,b=60, s=svg("tl-chart",w,h);
+  const vals=S.kospi.map(x=>x[1]), lo=2000, hi=10000;
+  const X=i=>l+i/(KD.length-1)*(w-l-r), Y=v=>t+(hi-v)/(hi-lo)*(h-t-b), XI=d=>X(KD.findIndex(x=>x>=d));
+  const phases=[["2024-04-15","2025-06-02","① 정체"],["2025-06-02","2026-01-02","② 정책 전환·주도주 랠리"],["2026-01-02","2026-06-23","③ AI 메모리 랠리"],["2026-06-23","2026-09-02","④ 급등락"]];
+  phases.forEach(([a,z,lab],i)=>{const x0=XI(a),x1=z==="2026-09-02"?X(KD.length-1):XI(z);
+    el("rect",{x:x0,y:t-30,width:x1-x0,height:h-t-b+30,fill:i%2?"oklch(0.985 0.002 248)":"oklch(0.959 0.020 250 / 0.5)"},s);
+    const a0=K[KD[KD.findIndex(x=>x>=a)]], z0=K[z]||vals.at(-1);
+    text(s,i===3?x1-4:x0+8,t-14,`${lab}  ${comma(a0)} → ${comma(z0)}`,{"font-size":13,"font-weight":700,fill:C.ink,"text-anchor":i===3?"end":"start"});});
+  for(let v=lo;v<=hi;v+=2000){el("line",{x1:l,x2:w-r,y1:Y(v),y2:Y(v),stroke:C.grey},s);text(s,l-8,Y(v)+4,comma(v),{"text-anchor":"end","font-size":12,fill:C.grey5})}
+  ["2025","2026"].forEach(y=>{const x=XI(y+"-01-01");text(s,x,h-b+18,y+"년",{"text-anchor":"middle","font-size":12,fill:C.grey5})});
+  el("path",{d:vals.map((v,i)=>(i?"L":"M")+X(i).toFixed(1)+" "+Y(v).toFixed(1)).join(" "),fill:"none",stroke:C.ink,"stroke-width":2},s);
+  // 사건 표시: 겹치지 않게 위·아래 번갈아
+  const show=EV.filter(e=>K[e[0]]&&e[5]);
+  show.forEach(e=>{const x=XI(e[0]), y=Y(K[e[0]]), ch=kret(e[0]), [dy,dx]=e[5], up=dy<0, ly=y+dy, lx=x+dx;
+    el("line",{x1:x,x2:lx,y1:y,y2:ly+(up?6:-14),stroke:C.grey5,"stroke-dasharray":"2 3"},s);
+    el("circle",{cx:x,cy:y,r:4,fill:ch!==null&&Math.abs(ch)>=S.threshold?(ch<0?C.blue:C.red):C.ink},s);
+    const lab=`${e[1]}${ch!==null&&Math.abs(ch)>=2?` ${f1(ch)}%`:""}`;
+    text(s,lx,ly,lab,{"text-anchor":"middle","font-size":12,"font-weight":600,fill:C.ink});
+    text(s,lx,ly+14,e[0].slice(2).replace(/-/g,"."),{"text-anchor":"middle","font-size":11,fill:C.grey5});});
+  $("tl-src").textContent=`검은 선: 아카이브 코스피 종가. 점 색: 하루 ±${S.threshold.toFixed(2)}% 이상(급변일) 하락 파랑·상승 빨강. 사건 설명과 출처는 부록 C. 급변일 53일 중 2024년 1일, 2025년 4일, 2026년 48일.`;
+})();
+
+/* ---------- 4. 시총 지형 ---------- */
+(()=>{
+  const M=Q1.monthly, w=760,h=360,l=44,r=110,t=10,b=28, s=svg("q1-area",w,h);
+  const X=i=>l+i/(M.length-1)*(w-l-r), Y=v=>t+(100-v)/100*(h-t-b);
+  let base=M.map(()=>0); const lbs=[];
+  ORDER.forEach(k=>{const top=M.map((m,i)=>base[i]+m.share[k]);
+    const d=top.map((v,i)=>(i?"L":"M")+X(i)+" "+Y(v)).join(" ")+" "+base.map((v,i)=>"L"+X(M.length-1-i)+" "+Y(base[M.length-1-i])).join(" ")+" Z";
+    el("path",{d,fill:WC[k],"fill-opacity":k==="IT"?0.9:0.75,stroke:"#fff","stroke-width":0.6},s);
+    const mid=(base.at(-1)+top.at(-1))/2; if(top.at(-1)-base.at(-1)>2.2) lbs.push({y:Y(mid)+4,t:`${W(k)} ${M.at(-1).share[k].toFixed(0)}%`,b:k==="IT"});
+    base=top;});
+  lbs.sort((a,b)=>b.y-a.y); for(let i=1;i<lbs.length;i++) if(lbs[i-1].y-lbs[i].y<14) lbs[i].y=lbs[i-1].y-14;
+  lbs.forEach(o=>text(s,w-r+6,o.y,o.t,{"font-size":12,fill:C.ink,"font-weight":o.b?700:400}));
+  [0,25,50,75,100].forEach(v=>text(s,l-6,Y(v)+4,v+"%",{"text-anchor":"end","font-size":11,fill:C.grey5}));
+  ["2024","2025","2026"].forEach(y=>{const i=M.findIndex(m=>m.month.startsWith(y));text(s,X(i),h-8,y+"년",{"font-size":12,fill:C.grey5,"text-anchor":i===0?"start":"middle"})});
+  const lowIT=M.reduce((a,m)=>m.share.IT<a.share.IT?m:a), hiIT=M.reduce((a,m)=>m.share.IT>a.share.IT?m:a);
+  [[lowIT,"IT 비중 최저"],[hiIT,"IT 비중 최고"]].forEach(([m,lab])=>{const i=M.indexOf(m);
+    text(s,X(i)+(lab.includes("최고")?-8:0),Y(m.share.IT)+(lab.includes("최고")?18:-6),`${lab} ${m.share.IT.toFixed(0)}% (${m.month})`,{"text-anchor":lab.includes("최고")?"end":"middle","font-size":12,"font-weight":700,fill:"#fff"});});
+  const sec=Object.fromEntries(Q1.sectors.map(x=>[x.wics,x])), inc=Q1.total_jo[1]-Q1.total_jo[0];
+  const items=[...Q1.sectors].sort((a,b)=>b.contrib_jo-a.contrib_jo).map(x=>({label:W(x.wics),value:x.contrib_jo,hl:x.wics==="IT",color:x.wics==="IT"?C.blue:x.contrib_jo<0?C.blueL:C.grey3,display:comma(x.contrib_jo)}));
+  hbars("q1-contrib",items,{w:300,row:25,label:92,unit:""});
+  const two=Q1.top_gainers.slice(0,2), twoSum=two[0].gain_jo+two[1].gain_jo;
+  $("q1-two").innerHTML=`<b>${two[0].name}·${two[1].name}</b> 두 종목이 늘어난 ${comma(inc)}조 원 중 <b>${comma(twoSum)}조 원(${(100*twoSum/inc).toFixed(1)}%)</b>을 차지.`;
+  $("q1-answer").textContent=`상장사 시총은 ${comma(Q1.total_jo[0])}조 → ${comma(Q1.total_jo[1])}조 원(+${pct(Q1.total_jo[0],Q1.total_jo[1]).toFixed(0)}%). 늘어난 금액의 ${(100*sec.IT.contrib_jo/inc).toFixed(0)}%가 IT이고, IT 비중은 ${sec.IT.share[0]}% → ${sec.IT.share[1]}%가 됐다.`;
+  $("q1-src").textContent=`분석 방법: 매월 마지막 품질 통과일에 업종이 있는 코스피·코스닥 전 종목(ETF·ETN 제외) 시총을 WICS 대분류별로 합산. 기여 = 업종 시총(${Q1.dates[1]}) − 업종 시총(${Q1.dates[0]}). 2025년 7월은 자료 누락으로 7/1 값.`;
+  $("q1-notes").textContent=`첫 번째 질문은 시가총액입니다. 피드백대로 종목 개수가 아니라 금액으로 봤습니다. 상장사 시가총액은 ${comma(Q1.total_jo[0])}조에서 ${comma(Q1.total_jo[1])}조 원으로 2.3배가 됐는데, 늘어난 돈의 ${(100*sec.IT.contrib_jo/inc).toFixed(0)}%가 IT로 갔고, 그중에서도 삼성전자와 SK하이닉스 두 종목이 ${(100*twoSum/inc).toFixed(0)}%를 차지합니다. 흥미로운 점은 처음부터 IT가 독주한 게 아니라는 겁니다. 2025년 중반까지는 IT 비중이 오히려 ${lowIT.share.IT.toFixed(0)}%까지 떨어지고 조선·방산·전력기기 같은 산업재가 커졌습니다. 그러다 2026년 메모리 슈퍼사이클이 오면서 IT 비중이 ${hiIT.share.IT.toFixed(0)}%까지 치솟았습니다. 시장이 커지는 동안 '어디로 돈이 갔는지'가 두 번 바뀐 셈입니다.`;
+})();
+
+/* ---------- 5. 상위 30 진입·이탈 ---------- */
+const R={"402340":["SK하이닉스 지분 20% 가치 재평가·주주환원","한국경제 26.05","https://www.hankyung.com/amp/2026050454411"],"009150":["AI 서버용 MLCC·기판, 빅테크 대형 수주","한국경제 26.05","https://www.hankyung.com/article/2026052576016"],
+    "012450":["유럽 중심 수조 원대 방산 수출","한국경제 25.12","https://www.hankyung.com/article/2025123034181"],"034020":["AI 전력 부족 → 원전 재평가","한국경제 25.12","https://www.hankyung.com/article/2025123034181"],"329180":["MASGA(한미 조선 협력) 파트너","한국경제 25.12","https://www.hankyung.com/article/2025123034181"],
+    "010120":["AI 데이터센터·북미 전력망 변압기 수요","비즈워치 25.11","https://news.bizwatch.co.kr/article/industry/2025/11/11/0048"],"298040":["AI 데이터센터·북미 전력망 변압기 수요","비즈워치 25.11","https://news.bizwatch.co.kr/article/industry/2025/11/11/0048"],"267260":["AI 데이터센터·북미 전력망 변압기 수요","비즈워치 25.11","https://news.bizwatch.co.kr/article/industry/2025/11/11/0048"],
+    "316140":["상법 개정·자사주 소각 등 주주환원","아시아경제 25.09","https://view.asiae.co.kr/article/2025091909012033555"],"010130":["미 정부 참여 전략광물 제련소·경영권 분쟁","아시아경제 25.12","https://core.asiae.co.kr/article/2025121509275795979"],
+    "051910":["전기차 수요 둔화(2차전지 소재)","더팩트 26.01","https://news.tf.co.kr/read/economy/2280639.htm"],"247540":["전기차 수요 둔화·계약 변경(2차전지)","더팩트 26.01","https://news.tf.co.kr/read/economy/2280639.htm"],"003670":["전기차 수요 둔화(2차전지 소재)","더팩트 26.01","https://news.tf.co.kr/read/economy/2280639.htm"],"086520":["전기차 수요 둔화(2차전지 소재)","더팩트 26.01","https://news.tf.co.kr/read/economy/2280639.htm"],
+    "035720":["창업자 구속 사법리스크·성장 정체","SBS Biz 24.07","https://biz.sbs.co.kr/amp/article/20000183256"],"028300":["간암 신약 FDA 보완요구 반복","SBS Biz 25.03","https://biz.sbs.co.kr/amp/article/20000224190"]};
+(()=>{
+  const mkt=pct(Q1.total_jo[0],Q1.total_jo[1]);
+  const row=(r,a,b,ra,rb)=>{const c=pct(a,b), why=R[r.code]||[c>0?`올랐지만 시장(+${mkt.toFixed(0)}%)보다 덜 오름`:"하락","데이터"];
+    return `<tr><td style="white-space:nowrap"><b>${r.name}</b> <span style="font-size:11px;color:var(--grey-500)">${W(r.wics)} · ${ra}→${rb}위</span></td><td class="r num" style="white-space:nowrap">${a.toFixed(0)}→<b>${b.toFixed(0)}</b> <span style="color:${c>=0?C.red:C.blue};font-weight:600">${f1(c).replace(".0","")}%</span></td><td style="font-size:12px">${why[0]} <span style="color:var(--grey-500);font-size:11px">${why[1]}</span></td></tr>`};
+  $("q1-in").innerHTML=Q1.entries.map(r=>row(r,r.other_cap_jo,r.cap_jo,r.other_rank,r.rank)).join("");
+  $("q1-out").innerHTML=Q1.exits.map(r=>row(r,r.cap_jo,r.other_cap_jo,r.rank,r.other_rank)).join("");
+  const fell=Q1.exits.filter(r=>r.other_cap_jo<r.cap_jo).length;
+  $("q1-out-note").innerHTML=`이탈 10개 중 <b>${fell}개만 실제로 시총이 줄었다</b>. 나머지 ${10-fell}개는 올랐지만 시장 전체(+${mkt.toFixed(0)}%)보다 덜 올라 밀려났다. 이탈 = 하락이 아니다.`;
+  const inSum=Q1.entries.reduce((a,r)=>a+r.cap_jo-r.other_cap_jo,0);
+  $("q1b-src").textContent=`분석 방법: ${Q1.dates[0]}·${Q1.dates[1]} 업종이 있는 상장사(ETF 제외)를 시총 순으로 정렬해 상위 30 비교. 이유는 해당 종목 보도로 확인(출처 링크는 부록 D). 진입 10개의 시총 증가 합계 ${comma(inSum)}조 원.`;
+  $("q1b-notes").textContent=`그럼 상위 30위는 어떻게 바뀌었을까요. 새로 들어온 10개는 두 갈래입니다. 하나는 AI 인프라입니다. SK하이닉스 지분을 가진 SK스퀘어, AI 서버 부품을 만드는 삼성전기, 그리고 데이터센터 전력 수요로 변압기 주문이 몰린 전력기기 3사입니다. 다른 하나는 안보입니다. 방산 수출의 한화에어로스페이스, 미국과의 조선 협력인 MASGA의 HD현대중공업, 원전의 두산에너빌리티, 미국 정부가 참여한 전략광물 제련소의 고려아연입니다. 나간 쪽은 전기차 수요 둔화를 맞은 2차전지 4개와 사법리스크의 카카오, FDA 승인이 계속 막힌 HLB입니다. 다만 나간 10개 중 ${10-fell}개는 실제로 시총이 늘었습니다. 시장 전체가 ${mkt.toFixed(0)}% 오르는 동안 덜 올라서 밀려난 것이라, 순위만 보면 놓치는 부분입니다.`;
+})();
+
+/* ---------- 6. 업종 누적 수익률 ---------- */
+(()=>{
+  const secs=S.sectors, dates=[S.dates[0],...S.returns.map(r=>r[0])];
+  const fin=secs.map((s,i)=>({s,v:S.returns.at(-1)[1][i]})).sort((a,b)=>b.v-a.v);
+  const hl=new Set([...fin.slice(0,4),...fin.slice(-2)].map(r=>r.s));
+  const series=secs.map((s,i)=>({values:[0,...S.returns.map(r=>r[1][i])],color:hl.has(s)?WC[s]:C.grey,width:hl.has(s)?2.5:1.3,label:hl.has(s)?W(s):null}));
+  series.sort((a,b)=>(a.label?1:0)-(b.label?1:0));
+  lines("q2-chart",dates,series,{w:750,h:370,pad:[16,100,28,44]});
+  $("q2-answer").textContent=`누적 수익률은 IT ${f1(fin[0].v)}%, ${W(fin[1].s)} ${f1(fin[1].v)}%, ${W(fin[2].s)} ${f1(fin[2].v)}% 순. ${W(fin.at(-2).s)}(${f1(fin.at(-2).v)}%)와 ${W(fin.at(-1).s)}(${f1(fin.at(-1).v)}%)는 2년 반 동안 오히려 하락.`;
+  $("q2-ex").innerHTML=`파란 선 끝 <strong>${f1(fin[0].v)}%</strong>: 시작일 IT 업종에 100만 원을 넣었다면 약 ${comma(100+fin[0].v)}만 원(배당 제외).`;
+  $("q2-src").textContent=`${S.dates[0]} ~ ${S.dates[1]} 중 10개 업종이 모두 계산된 ${S.days}일. 색칠: 상위 4개·하위 2개, 회색: 나머지.`;
+  $("q2-notes").textContent=`두 번째 질문은 업종별 수익률입니다. IT가 ${Math.round(fin[0].v)}%로 가장 많이 올랐고, 조선·방산·전력기기가 속한 산업재가 ${Math.round(fin[1].v)}%로 뒤를 이었습니다. 반대로 화학·2차전지 소재가 속한 소재와, 카카오·NAVER가 속한 커뮤니케이션은 2년 반 동안 오히려 마이너스였습니다. 같은 시장 안에서도 업종에 따라 결과가 정반대였다는 뜻입니다.`;
+})();
+
+/* ---------- 7. 업종 간 격차 ---------- */
+(()=>{
+  const sp=S.spread, sd=[S.dates[0],...sp.map(r=>r[0])];
+  const g=lines("q2b-chart",sd,[{values:[0,...sp.map(r=>r[1])],color:C.blue,width:2.5,area:true}],{w:750,h:370,yfmt:v=>v+"%p",pad:[16,30,28,50]});
+  const mid=Math.floor(sp.length/2);
+  [[1,mid,S.spread_half[0],"전반부 가운데값"],[mid+1,sp.length,S.spread_half[1],"후반부 가운데값"]].forEach(([a,z,v,lab],k)=>{
+    el("line",{x1:g.X(a),x2:g.X(z),y1:g.Y(v),y2:g.Y(v),stroke:C.ink,"stroke-dasharray":"4 4"},g.s);
+    text(g.s,k?g.X(z):g.X(a)+4,g.Y(v)+(k?16:-8),`${lab} ${v.toFixed(1)}%p`,{fill:C.ink,"font-weight":600,"text-anchor":k?"end":"start"});});
+  const mark=[["2025-06","정책 전환"],["2026-01","5,000 돌파"],["2026-06","반도체 쏠림 정점"]];
+  mark.forEach(([m,lab])=>{const i=sp.findIndex(r=>r[0].startsWith(m))+1; const v=sp[i-1][1];
+    el("circle",{cx:g.X(i),cy:g.Y(v),r:4,fill:C.ink},g.s); text(g.s,g.X(i)-6,g.Y(v)-10,`${lab} ${v}%p`,{"text-anchor":"end","font-size":12,"font-weight":600,fill:C.ink});});
+  const pk=sp.reduce((x,y)=>y[1]>x[1]?y:x);
+  $("q2b-answer").textContent=`벌어졌다. 업종 간 퍼짐의 가운데값이 전반부 ${S.spread_half[0].toFixed(1)}%p → 후반부 ${S.spread_half[1].toFixed(1)}%p로 약 3배. 가장 컸던 때는 ${pk[0].slice(0,7)}(${pk[1]}%p).`;
+  $("q2b-ex").innerHTML=`${pk[0].slice(0,7)}의 <strong>${pk[1]}%p</strong>: 그달 말 업종 누적 수익률이 평균에서 보통 ${Math.round(pk[1])}%p 떨어져 있었다는 의미.`;
+  $("q2b-method").textContent=`월말 비교일 ${sp.length}개를 절반씩 나눠 가운데값 비교. 극단값에 덜 민감한 사분위 범위로도 ${S.iqr_half[0]} → ${S.iqr_half[1]}%p로 같은 방향.`;
+  $("q2b-src").textContent=`10개 업종 · 시총 가중 누적 수익률. 사건 시점은 부록 C 보도 기준.`;
+  $("q2b-notes").textContent=`그럼 업종 간 차이는 벌어졌을까요. 벌어졌습니다. 전반부와 후반부를 비교하면 약 세 배입니다. 그런데 벌어진 시점이 앞에서 본 뉴스와 정확히 맞물립니다. 2025년 6월 정책 전환 이후 한 단계, 2026년 1월 5,000 돌파 이후 또 한 단계 커졌고, 반도체 쏠림이 가장 심했던 2026년 6월에 정점을 찍었습니다. 그리고 6월 23일 반도체 급락 이후에는 격차가 다시 줄었습니다.`;
+})();
+
+/* ---------- 8. 시총 가중 vs 동일 가중 ---------- */
+(()=>{
+  const secs=S.sectors, f=secs.map((s,i)=>({s,v:S.returns.at(-1)[1][i]})).sort((a,b)=>b.v-a.v), e=secs.map((s,i)=>({s,v:S.equal_returns.at(-1)[1][i]})).sort((a,b)=>b.v-a.v);
+  const mx=Math.max(f[0].v,e[0].v), bars=a=>a.map((r,i)=>({label:W(r.s),value:r.v,hl:r.s==="IT",display:`${i+1}위 ${f1(r.v)}%`}));
+  hbars("q2c-cap",bars(f),{w:370,row:30,label:88,max:mx}); hbars("q2c-eq",bars(e),{w:370,row:30,label:88,max:mx});
+  const itc=f.find(r=>r.s==="IT"), ite=e.find(r=>r.s==="IT"), ri=e.findIndex(r=>r.s==="IT")+1;
+  $("q2c-answer").textContent=`큰 회사 비중을 키우면 IT가 ${f1(itc.v)}%로 1위지만, 모든 종목을 똑같이 보면 IT는 ${f1(ite.v)}%(${ri}위)이고 1위는 ${W(e[0].s)}(${f1(e[0].v)}%)다.`;
+  $("q2c-read").innerHTML=`IT 업종 수익률은 <b>삼성전자·SK하이닉스 두 종목</b>이 대부분 만들었다. 동일 가중 1위 ${W(e[0].s)}는 조선·방산·전력기기가 고르게 올라 순위가 유지됐다. 6월 급락 직후에도 지수와 달리 대다수 종목은 1년 전 수준까지 내려왔다는 보도가 있었다.`;
+  $("q2c-src").textContent=`기준일 ${S.dates[1]} 누적 수익률. 보도: 인베스팅닷컴 2026-06-23 '반도체 폭락에 서킷브레이커 발동된 증시'.`;
+  $("q2c-notes").textContent=`이 장은 가이드의 '정의를 바꾸면 결론이 바뀌는 경우'입니다. 왼쪽처럼 큰 회사에 큰 비중을 주면 IT가 ${Math.round(itc.v)}%로 1위인데, 오른쪽처럼 모든 종목에 같은 비중을 주면 IT는 ${Math.round(ite.v)}%로 ${ri}위까지 내려갑니다. IT의 성과는 사실상 삼성전자와 SK하이닉스 두 종목의 성과였다는 뜻입니다. 지수는 사상 최고를 썼지만, IT 업종의 보통 종목을 가진 투자자는 그만큼 벌지 못했습니다. 반면 산업재는 어느 방식으로 봐도 상위라서, 업종 전체가 고르게 오른 경우입니다.`;
+})();
+
+/* ---------- 9. 업종 동조 ---------- */
+(()=>{
+  const [all,fast,norm]=S.rho, [n,nf,nn]=S.groups;
+  hbars("q3-bars",[{label:`급변일 ${nf}일`,value:fast,hl:true,display:fast.toFixed(2)},{label:`보통일 ${nn}일`,value:norm,display:norm.toFixed(2)},{label:`전체 ${n}일`,value:all,display:all.toFixed(2)}],{w:300,row:44,label:96,max:1,unit:""});
+  $("q3-wider").textContent=`급변일을 상위 20%(${S.wider.n}일)로 넓혀도 ${S.wider.fast.toFixed(2)} 대 ${S.wider.normal.toFixed(2)}.`;
+  // 월별 급변일 수 (하락 파랑 / 상승 빨강 누적)
+  const months=[...new Set(KD.filter(d=>d>=S.dates[0]).map(d=>d.slice(0,7)))], cnt={};
+  months.forEach(m=>cnt[m]={up:0,dn:0}); S.shock_days.forEach(x=>cnt[x[0].slice(0,7)][x[1]<0?"dn":"up"]++);
+  const w=470,h=250,l=26,b=40,t=14, s=svg("q3-shock",w,h), bw=(w-l)/months.length, mx=Math.ceil(Math.max(...months.map(m=>cnt[m].up+cnt[m].dn))/4)*4, Y=v=>t+(1-v/mx)*(h-t-b);
+  [0,mx/2,mx].forEach(v=>{el("line",{x1:l,x2:w,y1:Y(v),y2:Y(v),stroke:C.grey},s);text(s,l-6,Y(v)+4,v,{"text-anchor":"end","font-size":11,fill:C.grey5})});
+  months.forEach((m,i)=>{const c=cnt[m], x=l+i*bw+1;
+    if(c.dn) el("rect",{x,y:Y(c.dn),width:bw-2,height:Y(0)-Y(c.dn),fill:C.blue,rx:2},s);
+    if(c.up) el("rect",{x,y:Y(c.dn+c.up),width:bw-2,height:Y(c.dn)-Y(c.dn+c.up),fill:C.red,rx:2},s);
+    if(m.endsWith("-01")||i===0) text(s,x,h-b+16,m.slice(0,4),{"font-size":11,fill:C.grey5});});
+  const ys={}; S.shock_days.forEach(x=>ys[x[0].slice(0,4)]=(ys[x[0].slice(0,4)]||0)+1);
+  text(s,l+4,h-6,`연도별: 2024년 ${ys["2024"]||0}일 · 2025년 ${ys["2025"]||0}일 · 2026년 ${ys["2026"]||0}일 (파랑 하락, 빨강 상승)`,{"font-size":11,fill:C.ink,"font-weight":600});
+  $("q3-answer").textContent=`급변일에는 업종 간 평균 상관이 ${fast.toFixed(2)}로 보통일(${norm.toFixed(2)})의 2배 이상. 급변일 ${nf}일 중 ${ys["2026"]}일이 2026년에 몰려, 분산투자 효과가 약한 날이 크게 늘었다.`;
+  $("q3-method").textContent=`급변일 = 코스피 하루 등락 절댓값 상위 10%(±${S.threshold.toFixed(2)}% 이상). 10개 업종 45쌍 상관의 평균. 업종 수익률은 6장과 동일.`;
+  $("q3-src").textContent=`상관은 함께 움직이는 정도일 뿐 인과가 아님. 급변일별 원인 보도는 부록 C.`;
+  $("q3-notes").textContent=`세 번째 질문은 업종들이 같이 움직이느냐입니다. 시장이 크게 흔들린 날에는 업종 간 상관이 ${fast.toFixed(2)}로, 보통 날의 두 배가 넘습니다. 여러 업종에 나눠 담는 효과가 정작 필요할 때 약해진다는 뜻입니다. 더 중요한 건 그런 날이 언제였느냐입니다. 급변일 ${nf}일 중 ${ys["2026"]}일이 2026년에 몰려 있습니다. 워시 쇼크, 이란 전쟁, 6월과 7월의 반도체 급락, 그리고 7월 31일 하루 18% 폭등까지, 2026년의 한국 시장은 업종을 나눠 담아도 함께 출렁이는 시장이었습니다.`;
+})();
+
+/* ---------- 10. 거래량 ---------- */
+(()=>{
+  const V=Q4.results, lab=["급증 전 5일","급증 후 5일","후 10일","후 20일"];
+  const w=760,h=350,l=50,b=60,t=30, s=svg("q4-chart",w,h), hi=3.5, lo=-2, Y=v=>t+(hi-v)/(hi-lo)*(h-t-b), gw=(w-l-20)/4;
+  for(let v=-2;v<=3;v+=1){el("line",{x1:l,x2:w-10,y1:Y(v),y2:Y(v),stroke:v===0?C.grey3:C.grey},s);text(s,l-8,Y(v)+4,(v>0?"+":"")+v+"%",{"text-anchor":"end","font-size":12,fill:C.grey5})}
+  el("line",{x1:l+gw,x2:l+gw,y1:t-10,y2:h-b+8,stroke:C.grey5,"stroke-dasharray":"3 4"},s);
+  text(s,l+gw,t-14,"급증한 날",{"text-anchor":"middle","font-weight":600,fill:C.ink});
+  lab.forEach((lb,gi)=>{text(s,l+gw*gi+gw/2,h-b+24,lb,{"text-anchor":"middle","font-size":14,fill:C.ink,"font-weight":600});
+    V.forEach((r,k)=>{const v=r.returns[gi], bw=40, x=l+gw*gi+gw/2-bw-4+k*(bw+8), y=Math.min(Y(v),Y(0));
+      el("rect",{x,y,width:bw,height:Math.abs(Y(v)-Y(0)),rx:6,fill:v>=0?(k?C.red:"oklch(0.80 0.10 21)"):(k?C.blue:C.blueL)},s);
+      text(s,x+bw/2,v>=0?Y(v)-6:Y(v)+16,f1(v),{"text-anchor":"middle","font-size":12,"font-weight":600,fill:C.ink});});});
+  [[0,"연한 색 · 2배 기준"],[1,"진한 색 · 3배 기준"]].forEach(([k,lb])=>{const x=l+k*200;el("rect",{x,y:h-22,width:14,height:14,rx:4,fill:k?C.red:"oklch(0.80 0.10 21)"},s);text(s,x+20,h-10,`${lb} ${comma(V[k].n)}건`,{"font-size":13,fill:C.ink})});
+  const evn=Object.fromEntries(EV.map(e=>[e[0],e[1]]));
+  const tag=d=>evn[d]||(d==="2026-07-29"?"7/28 폭락 다음 날":d.startsWith("2026-01")?"5,000 돌파 전후":"");
+  $("q4-days").innerHTML=`<tr><th>날짜</th><th class="r">급증</th><th class="r">코스피</th><th>그날</th></tr>`+Q4.top_days.slice(0,6).map(([d,n,k])=>`<tr><td class="num" style="white-space:nowrap">${d.slice(2).replace(/-/g,".")}</td><td class="r num"><b>${comma(n)}</b></td><td class="r num" style="color:${k<0?C.blue:C.red}">${f1(k)}%</td><td style="font-size:12px">${tag(d)}</td></tr>`).join("");
+  const [b2,b3]=V, top=Q4.top_days[0];
+  $("q4-answer").textContent=`주가가 먼저 오르고(급증 전 5일 ${f1(b2.returns[0])}%) 거래량이 뒤따랐다. 급증 뒤 20일 가운데값은 ${f1(b2.returns[3])}%. 급증 종목이 가장 많았던 날은 ${top[0]} 이란 전쟁 폭락일(${comma(top[1])}개, 평소 ${comma(Q4.per_day_median)}개).`;
+  $("q4-src").textContent=`품질 통과일 · 코스피·코스닥. 같은 종목의 다른 날 급증은 별도 사건, 3배 사건은 2배 사건에 포함. 급증 당일 수익률은 전후 어디에도 넣지 않음. 전후 비교라 인과관계 아님.`;
+  $("q4-notes").textContent=`네 번째 질문은 거래량입니다. 거래량이 평소의 두 배 이상 터진 날을 보면, 그 전 5일 동안 주가가 이미 올라 있었고 그 뒤에는 오히려 조금 내려갔습니다. 거래량이 가격을 예고했다기보다, 가격이 움직인 뒤 사람들이 몰려든 모습에 가깝습니다. 그리고 거래량 급증 종목이 가장 많았던 날은 상승장이 아니라 이란 전쟁으로 12% 폭락한 3월 4일이었습니다. 평소 하루 ${comma(Q4.per_day_median)}개 정도인데 그날은 ${comma(top[1])}개였습니다. 거래가 가장 몰린 날은 공포의 날이었습니다.`;
+})();
+
+/* ---------- 11. 재무 ---------- */
+(()=>{
+  $("fin-table").innerHTML=`<tr><th>회사</th><th>분기</th><th class="r">추정치</th><th class="r">확정치</th><th class="r">차이</th><th class="r">확정치를 처음 본 날</th></tr>`+
+    D.earn.map(e=>{const a=+e.operating_profit_estimate,b=+e.operating_profit_actual,p=pct(a,b);
+      return `<tr><td><b>${e.name}</b></td><td class="num">${e.period.replace("-03","년 1분기").replace("-06","년 2분기").replace("-09","년 3분기").replace("-12","년 4분기")}</td><td class="r num">${comma(a)}</td><td class="r num"><b>${comma(b)}</b></td><td class="r num" style="color:${p>=0?C.red:C.blue};font-weight:600">${f1(p)}%</td><td class="r num">${e.first_actual_observed_date}</td></tr>`}).join("");
+})();
+
+/* ---------- 12. 정리 · 부록 ---------- */
+(()=>{
+  const sec=Object.fromEntries(Q1.sectors.map(x=>[x.wics,x])), inc=Q1.total_jo[1]-Q1.total_jo[0];
+  const two=Q1.top_gainers[0].gain_jo+Q1.top_gainers[1].gain_jo;
+  const fi=S.sectors.indexOf("금융"), fc=S.returns.at(-1)[1][fi], fe=S.equal_returns.at(-1)[1][fi];
+  const rk=a=>[...a].sort((x,y)=>y-x), fcr=rk(S.returns.at(-1)[1]).indexOf(fc)+1, fer=rk(S.equal_returns.at(-1)[1]).indexOf(fe)+1;
+  const ys=S.shock_days.filter(x=>x[0].startsWith("2026")).length, woori=Q1.entries.find(r=>r.code==="316140");
+  const kb=D.earn.find(e=>e.code==="105560");
+  $("sum-list").innerHTML=[
+    `<b>1</b>&nbsp; 시총 2.3배, 증가분의 ${(100*sec.IT.contrib_jo/inc).toFixed(0)}%가 IT, 두 종목이 ${(100*two/inc).toFixed(0)}% → <b>더 좁아짐</b>`,
+    `<b>2</b>&nbsp; 업종 격차 ${S.spread_half[0].toFixed(1)} → ${S.spread_half[1].toFixed(1)}%p, 동일 가중이면 IT 우위가 사라짐`,
+    `<b>3</b>&nbsp; 급변일 상관 ${S.rho[1].toFixed(2)} vs ${S.rho[2].toFixed(2)}, 급변일 ${S.groups[1]}일 중 ${ys}일이 2026년 → <b>더 거칠어짐</b>`,
+    `<b>4</b>&nbsp; 거래량은 가격을 뒤따름, 급증 최다일은 3/4 폭락일`,
+  ].map(x=>`<li>${x}</li>`).join("");
+  $("bank-list").innerHTML=[
+    `금융 시총 ${comma(sec["금융"].cap[0])}조 → ${comma(sec["금융"].cap[1])}조 원(${f1(sec["금융"].change_pct)}%), 비중은 ${sec["금융"].share[0]}% → ${sec["금융"].share[1]}%로 시장과 비슷하게 성장`,
+    `우리금융지주 ${woori.other_rank}위 → ${woori.rank}위로 상위 30 진입: 상법 개정·자사주 소각 수혜`,
+    `금융 누적 수익률: 시총 가중 ${f1(fc)}%(${fcr}위), 동일 가중 ${f1(fe)}%(${fer}위) → 대형 금융지주만이 아니라 업종 전반이 상승`,
+    `KB금융 1분기 영업이익 확정치가 추정 대비 ${f1(pct(+kb.operating_profit_estimate,+kb.operating_profit_actual))}%`,
+    `2차 발표: 은행 종목 단위로 밸류업 정책 전후의 수익률·주주환원 비교`,
+  ].map(x=>`<li style="font-size:14px">${x}</li>`).join("");
+  $("sum-notes").textContent=`정리하겠습니다. 2년 반 동안 한국 시장은 2.3배 커졌지만, 늘어난 돈은 IT, 그중에서도 두 종목에 몰려 더 좁아졌고, 2026년에는 급변일이 ${ys}일이나 나올 만큼 더 거칠어졌습니다. 제 2차 발표 업종인 은행이 속한 금융은 시장과 비슷한 속도로 컸고, 동일 가중으로 봐도 상위권이라 대형 금융지주만이 아니라 업종 전반이 올랐습니다. 상법 개정과 주주환원 정책이 배경으로 보이는데, 2차 발표에서는 은행 종목 하나하나로 들어가 이 정책 효과를 확인하겠습니다. 감사합니다.`;
+  // 부록 A
+  const it=S.sectors.indexOf("IT"), fcap=S.returns.at(-1)[1], feq=S.equal_returns.at(-1)[1];
+  const top=a=>S.sectors[a.indexOf(Math.max(...a))];
+  $("ap-table").innerHTML=`<tr><th style="width:90px">질문</th><th>핵심 양</th><th>쓴 방법 (비교한 다른 방법)</th><th>뺀 것</th><th>바꾸면?</th></tr>`+[
+    ["1 시총 지형","WICS 업종별 시총 합계·비중","월말 마지막 품질 통과일, 업종 있는 전 종목","ETF·ETN 등 업종 없는 행, 시총 충돌 행",`IT 비중 ${sec.IT.share[0]} → ${sec.IT.share[1]}%`],
+    ["1 상위 30","진입·이탈 종목의 시총 금액","순위가 아닌 금액 변화로 해석","ETF·ETN",`이탈 10개 중 ${Q1.exits.filter(r=>r.other_cap_jo<r.cap_jo).length}개만 시총 감소`],
+    ["2 수익률","업종 누적 수익률","전일 시총 가중 (동일 가중)","±35% 초과일, 5종목 미만·시총 확인 80% 미만 날",`1위 ${W(top(fcap))} → ${W(top(feq))}`],
+    ["2 격차","월말 누적 수익률 표준편차","전·후반 가운데값 (사분위 범위)","10개 업종 중 하나라도 빠진 날",`${S.spread_half.join(" → ")}%p / IQR ${S.iqr_half.join(" → ")}%p`],
+    ["3 동조","업종 45쌍 평균 상관","급변일 상위 10% (상위 20%)","위와 같음",`${S.rho[1].toFixed(2)}/${S.rho[2].toFixed(2)} → ${S.wider.fast.toFixed(2)}/${S.wider.normal.toFixed(2)}`],
+    ["4 거래량","급증 전후 수익률 가운데값","20일 가운데값의 2배 (3배)","거래일이 끊긴 구간, 20일 뒤를 못 보는 사건","3배에서 전후 차이가 더 커짐, 방향 동일"],
+  ].map(r=>`<tr>${r.map((c,i)=>`<td>${i?c:`<b>${c}</b>`}</td>`).join("")}</tr>`).join("");
+  // 부록 B
+  $("map-table").innerHTML=`<tr><th style="width:150px">WICS 대분류</th><th>네이버 업종</th></tr>`+ORDER.map(k=>`<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${WC[k]};margin-right:6px"></span><b>${k}</b></td><td style="font-size:12px">${A.wics[k].join(", ")}</td></tr>`).join("");
+  // 부록 D
+  const seen=new Map(); [...Q1.entries,...Q1.exits].forEach(r=>{const x=R[r.code]; if(!x) return; const k=x[2]; if(!seen.has(k)) seen.set(k,{src:x[1],why:"",ws:new Set(),names:[]}); const v=seen.get(k); v.names.push(r.name); v.ws.add(x[0]); v.why=[...v.ws].join(" / ");});
+  seen.set("https://kr.investing.com/analysis/article-200457879",{src:"인베스팅닷컴 26.06",why:"6월 급락 뒤 대다수 종목은 1년 전 수준 (8장)",names:["시장 전반"]});
+  $("stock-table").innerHTML=`<tr><th>종목</th><th>근거 요지</th><th>출처</th></tr>`+[...seen].map(([u,v])=>`<tr><td><b>${v.names.join(", ")}</b></td><td style="font-size:12px">${v.why}</td><td style="font-size:11px"><a href="${u}" target="_blank" style="color:var(--blue-600)">${v.src}</a></td></tr>`).join("");
+  // 부록 C
+  $("news-table").innerHTML=`<tr><th>날짜</th><th class="r">코스피 종가</th><th class="r">등락</th><th>사건</th><th>보도 요지</th><th>출처</th></tr>`+EV.map(([d,t,why,src,url])=>{const c=kret(d);
+    return `<tr><td class="num">${d}</td><td class="r num">${K[d]?comma(K[d]):"-"}</td><td class="r num" style="color:${c===null?"inherit":c<0?C.blue:C.red}">${c===null?"-":f1(c)+"%"}</td><td><b>${t}</b></td><td style="font-size:12px">${why}</td><td style="font-size:11px"><a href="${url}" target="_blank" style="color:var(--blue-600)">${src}</a></td></tr>`}).join("");
+})();
+
+/* ---------- 넘기기 · 대본 ---------- */
+const slides=[...document.querySelectorAll(".slide")];
+let cur=Math.min(Math.max(0,(+location.hash.slice(1)||1)-1),slides.length-1), t0=Date.now();
+const total=slides.reduce((a,s)=>a+(+s.dataset.time||0),0);
+function show(i){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>s.classList.toggle("on",k===cur));
+  $("count").textContent=`${cur+1} / ${slides.length}`;
+  $("bar").style.width=((cur+1)/slides.length*100)+"%";
+  try{history.replaceState(null,"","#"+(cur+1))}catch(e){} /* 미리보기 iframe에서는 주소 변경이 막혀 있어 무시 */
+  const n=slides[cur].querySelector(".notes"), sec=+slides[cur].dataset.time;
+  $("notes-body").innerHTML=n?`<p>${n.innerHTML}</p>`:"";
+  meta();
+}
+function meta(){const el=Math.floor((Date.now()-t0)/1000), sec=+slides[cur].dataset.time;
+  $("notes-meta").textContent=`슬라이드 ${cur+1} · 권장 ${sec?sec+"초":"부록"} · 전체 권장 약 ${Math.round(total/60*10)/10}분 · 경과 ${Math.floor(el/60)}:${String(el%60).padStart(2,"0")} (T 키로 초기화)`}
+setInterval(meta,1000);
+function fit(){const sc=Math.min(innerWidth/1320,innerHeight/760);$("stage").style.transform=`scale(${sc})`}
+addEventListener("resize",fit); fit();
+addEventListener("keydown",e=>{
+  if(["ArrowRight","PageDown"," ","Enter"].includes(e.key)){e.preventDefault();show(cur+1)}
+  else if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();show(cur-1)}
+  else if(e.key==="Home")show(0); else if(e.key==="End")show(slides.length-1);
+  else if(e.key.toLowerCase()==="n")$("notes").classList.toggle("on");
+  else if(e.key.toLowerCase()==="t"){t0=Date.now();meta()}
+  else if(e.key.toLowerCase()==="f")document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();
+});
+$("next").onclick=()=>show(cur+1); $("prev").onclick=()=>show(cur-1); $("notes-btn").onclick=()=>$("notes").classList.toggle("on");
+show(cur);
+
+</script>
+</body>
+</html>

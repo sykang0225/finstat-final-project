@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>한국 주식시장 업종 비교 · 금융통계 면담</title>
+<style>
+:root{--forest:#00482f;--green:#008254;--deep:#006642;--mint:#effcf8;--lime:#e8fdac;--muted:#4d5b55;--ink:#14231c;--line:#d8e5dd}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.55 "DM Sans","Malgun Gothic",system-ui,sans-serif;background:#fff}a{color:var(--deep)}.wrap{width:min(1100px,calc(100% - 44px));margin:auto}
+header{background:linear-gradient(104deg,var(--forest),var(--deep));color:white;padding:43px 0 39px}header p{color:var(--lime);margin:0 0 8px;font-weight:700}h1{font-size:clamp(30px,6vw,53px);line-height:1.13;margin:0;letter-spacing:-.05em}header small{display:block;margin-top:14px;color:#dcf5e8;font-size:14px}
+nav{background:#fff;border-bottom:1px solid var(--line)}nav .wrap{display:flex;gap:4px 22px;flex-wrap:wrap;padding:10px 0}nav a{font-size:14px;font-weight:700;text-decoration:none;padding:5px 0}
+section{padding:26px 0 24px;border-bottom:1px solid var(--line);scroll-margin:20px}h2{font-size:clamp(22px,3.2vw,31px);margin:0 0 8px;letter-spacing:-.035em;line-height:1.25}h3{font-size:16px;margin:0 0 6px}
+.number{color:var(--green);font-size:14px;margin-right:8px;vertical-align:middle}.result{background:var(--mint);border-left:4px solid var(--green);padding:9px 12px;margin:10px 0 15px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.grid>*{min-width:0}.controls{margin:8px 0;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select,button{font:inherit;color:var(--forest);background:white;border:1px solid #9fb8ab;border-radius:3px;padding:4px 9px}button{cursor:pointer}button[aria-pressed=true]{background:var(--deep);color:white;border-color:var(--deep)}
+svg{width:100%;height:auto;display:block}svg text{font:12px "Malgun Gothic",system-ui,sans-serif;fill:var(--muted)}summary{cursor:pointer;color:var(--deep);font-size:14px;font-weight:700}details{margin-top:10px}.small,details p,footer{font-size:14px;color:var(--muted)}p{margin:7px 0}
+.selection{min-height:2.7em;margin:3px 0 0;padding:7px 10px;border:1px solid var(--line);background:var(--mint);font-size:14px}
+.caption{color:var(--muted);font-size:14px;margin:8px 0 15px}.chart-block{margin:16px 0}.formula{padding:8px 12px;background:var(--mint);font-variant-numeric:tabular-nums}.scroll td:first-child{white-space:normal}dl{display:grid;grid-template-columns:minmax(110px,auto) 1fr;gap:6px 14px;margin:10px 0}dt{font-weight:700}dd{margin:0}
+.read-chart{margin:5px 0 12px;color:var(--muted);font-size:15px;line-height:1.6;max-width:66ch}.read-chart strong{color:var(--forest)}.chart-example{margin:5px 0 8px;padding:8px 10px;background:var(--mint);color:var(--ink);font-size:14px}.grid>div>h3,.chart-block>h3{font-size:18px}
+.rank-board{min-width:500px}.rank-board th,.rank-board td{padding:10px 12px}.rank-board td:nth-child(3),.rank-board td:nth-child(4){font-variant-numeric:tabular-nums;font-weight:bold}.up{color:#006642}.down{color:#973d2f}.movement-list{display:grid;gap:10px;max-width:690px}.movement-item{display:grid;grid-template-columns:minmax(130px,1.15fr) 2fr minmax(120px,auto);align-items:center;gap:12px;font-size:14px}.movement-track{height:13px;background:#effcf8;border:1px solid var(--line)}.movement-fill{display:block;height:100%;background:var(--green)}@media(max-width:530px){.movement-item{grid-template-columns:minmax(95px,1fr) 1fr auto;gap:6px;font-size:12px}}
+.rank-point{cursor:pointer}.rank-point:focus-visible{outline:none}.rank-point:focus-visible circle:last-of-type,.rank-point[aria-pressed=true] circle:last-of-type{stroke:var(--ink);stroke-width:2.5}
+.scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:450px;font-size:14px}td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{background:var(--mint);color:var(--forest)}footer{padding:16px 0 26px}
+@media(max-width:700px){.grid{grid-template-columns:1fr;gap:12px}.wrap{width:calc(100% - 28px)}header{padding:30px 0}}
+@media print{header{background:white;color:var(--forest);padding:10px 0}header p,header small{color:var(--deep)}nav{display:none}section{break-inside:avoid}.wrap{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><p>금융통계 기말 프로젝트 · 2주차 면담</p><h1>한국 주식시장의 업종별 변화</h1><small id="data-scope">공통 질문 4개 · 기업실적 표 변경 사례</small></div></header>
+<nav aria-label="분석 질문"><div class="wrap"><a href="#cap">시총 순위</a><a href="#gap">수익률 격차</a><a href="#sync">업종 동조</a><a href="#volume">거래량 급증</a><a href="#earnings">실적 표</a></div></nav>
+<main class="wrap">
+<section id="coverage"><h2>어떤 자료를 읽었나?</h2>
+<p>교수님 아카이브의 <strong>2024-03-27~2026-09-02</strong> 자료를 읽었다. HTML <strong>2,403,074개</strong>에서 거래일과 종목이 같은 행을 정리해 <strong>550거래일 · 4,813개 종목코드 · 2,236,862행</strong>을 얻었다.</p>
+<details><summary>자료 결함 처리 기록</summary><ul><li>종가를 얻지 못한 294개 파일(헤더 누락 1개, 유효하지 않은 종가 293개)을 제외했다. 중복 관측 165,918행을 정리했다.</li><li>누락 42일, 평소보다 자료가 적은 7일, 앞선 비교일이 부족한 10일을 날짜 품질 검사에서 걸렀다. 2025년 7월 자료 공백에는 가격을 채우지 않았다.</li><li>업종 수익률은 전일과 당일 업종이 같은 종목만 넣었다. 전일 종가가 맞지 않거나 하루 수익률의 절댓값이 35%를 넘으면 제외했다. 액면분할·감자 여부를 건별로 확정한 것은 아니다.</li><li>기간 중 처음 나타나거나 빠진 종목은 관측된 구간만 사용했다. 마지막 날 관측 여부만으로 상장폐지를 판정하지 않았다. 수익률은 종가 기준이며 배당을 포함하지 않는다.</li></ul></details></section>
+<section id="cap">
+<h2><span class="number">01</span>시가총액 상위 30위는 얼마나 바뀌었나?</h2>
+<p class="result" id="cap-result"></p>
+<details open><summary>정의 메모 · 시총 순위</summary><p><strong>무엇을 재나?</strong> 두 날짜 모두 30위 안에 든 종목 수와 순위가 바뀐 폭.</p><p><strong>계산법과 선택 이유</strong> (a) 두 날짜의 관측 종목을 각각 시총 순으로 나열하면 신규 진입을 볼 수 있다. (b) 두 날에 모두 있는 종목만 다시 순위를 매기면 같은 종목끼리 비교할 수 있다. 본문은 (a)를 사용했다.</p><p><strong>제외 대상</strong> 코스피·코스닥 밖의 종목, 시총이 비었거나 원자료가 충돌한 종목을 제외했다. 초반 자료가 947종목으로 적어 3,891종목을 확인한 4월 15일을 시작점으로 잡았다.</p><p id="rank-alternative"></p></details>
+<div class="chart-block"><h3>두 날짜에 모두 30위 안에 든 종목은 몇 개였나?</h3><p class="read-chart" id="rank-dates"></p><svg id="rank-flow" viewBox="0 0 510 99" style="max-width:670px" role="img" aria-label="두 시점의 상위권 구성 비교"></svg></div>
+<div class="chart-block"><h3>어떤 종목이 상위 30위에 들어오고 나갔나?</h3><p class="read-chart">종목 이름과 업종 옆에 두 날짜의 순위를 나란히 표시했다. 예를 들어 우리금융지주는 은행 업종으로, 44위에서 29위가 되면서 30위 안에 들어왔다.</p>
+<div class="controls" aria-label="순위 목록 선택"><button type="button" id="show-new">새로 들어온 종목</button><button type="button" id="show-exit">30위 밖으로 나간 종목</button><button type="button" id="show-keep">30위 안에 남은 종목</button></div>
+<p id="rank-count" class="small" aria-live="polite"></p><div class="scroll"><table class="rank-board"><thead><tr><th>종목</th><th>업종</th><th id="rank-start">시작 순위</th><th id="rank-end">종료 순위</th><th>변화</th></tr></thead><tbody id="rank-rows"></tbody></table></div></div>
+<div class="chart-block"><h3>순위가 크게 바뀐 종목이 많은 업종은?</h3><p class="read-chart" id="move-rule"></p><div class="movement-list" id="moves"></div><p class="chart-example" id="move-example"></p></div>
+<details><summary>순위 계산 기준</summary><p id="cap-method"></p></details>
+</section>
+<section id="gap">
+<h2><span class="number">02</span>업종 간 누적 수익률 격차가 벌어졌나?</h2>
+<p class="result" id="gap-result"></p>
+<details open><summary>정의 메모 · 업종 수익률과 업종 간 격차</summary>
+<p><strong>업종 수익률</strong> (a) 전일 시총이 큰 종목에 비중을 더 주거나 (b) 모든 종목을 같은 비중으로 평균할 수 있다. 시장에서 큰 종목의 영향을 반영하려고 (a)를 본문에 썼다.</p>
+<p><strong>업종 간 격차</strong> (a) 매달 말까지 쌓인 업종 수익률의 퍼짐과 (b) 그달에만 오른 폭의 퍼짐을 볼 수 있다. 전체 기간에 걸쳐 쌓인 차이가 질문의 중심이라 (a)를 썼다.</p>
+<p><strong>제외 대상</strong> 자료가 부족한 날과 12개 업종을 모두 비교할 수 없는 날을 뺐다. 업종 내 유효 종목이 5개 미만이거나 시총 확인 비율이 80% 미만이면 그날 비교에서 제외했다.</p>
+<p id="gap-alternative"></p></details>
+<div class="grid"><div><h3>업종마다 처음보다 얼마나 올랐나?</h3><p class="read-chart">업종마다 100에서 출발해 관측된 날의 등락을 차례대로 반영했다. 110이 되면 누적 수익률은 +10%다.</p><div class="controls"><label>강조 업종 <select id="sector"></select></label></div><svg id="levels" viewBox="0 0 510 220" role="img" aria-label="업종별 누적 수익률 추이"></svg><p id="sector-example" class="chart-example" aria-live="polite"></p></div>
+<div><h3>업종별 수익률은 평균에서 얼마나 벌어졌나?</h3><p class="read-chart">매달 마지막 비교일에 12개 업종의 누적 수익률이 평균에서 얼마나 퍼져 있는지 계산했다. 세로축은 그 차이를 수익률과 같은 단위로 나타낸 <strong>표준편차(%p)</strong>다. 선이 높을수록 격차가 크다.</p><svg id="variance" viewBox="0 0 510 220" role="img" aria-label="업종 간 누적 수익률 표준편차 추이"></svg><p id="gap-example" class="chart-example"></p><details><summary>가이드의 ‘분산’과 어떻게 연결되나?</summary><p id="variance-definition"></p></details></div></div>
+<div class="chart-block"><h3>마지막 비교일에 가장 많이 오른 업종은?</h3><p class="read-chart">위 선 그래프의 마지막 값을 높은 순서로 놓았다. 0보다 왼쪽이면 관측한 기간의 누적 수익률이 마이너스다.</p><svg id="sector-end" viewBox="0 0 510 319" style="max-width:670px" role="img" aria-label="12개 업종 종료일 누적 수익률"></svg></div>
+<div class="chart-block"><h3>종목의 비중만 바꾸면 1위 업종도 바뀌나?</h3><p id="leader-change" class="chart-example"></p><div class="grid"><div><h3>큰 종목에 더 큰 비중</h3><svg id="weighted-leaders" viewBox="0 0 510 105" role="img" aria-label="시총가중 누적 수익률 상위 업종"></svg></div><div><h3>모든 종목에 같은 비중</h3><svg id="equal-leaders" viewBox="0 0 510 105" role="img" aria-label="동일가중 누적 수익률 상위 업종"></svg></div></div></div>
+<details open><summary>왜 12개 업종을 골랐나?</summary><p>기존 급락 9건에서 모두 비교할 수 있었던 업종 중 IT·제조·건설·소비·필수재·금융을 고루 넣고, 2차 발표 대상인 은행을 포함했다. 같은 목록을 전 기간에 적용했다. 이 결과는 12개 비교 업종에 대한 분석이다.</p></details>
+<details open><summary>업종 범위와 실제 계산에 들어간 종목 수</summary><p>시총 종목 수는 두 기준일 아카이브에서 해당 업종으로 확인된 종목 수다. 수익률 표본은 전일 종가와 시총을 연결할 수 있었던 종목이며, 비교일별 종목 수의 중앙값을 표시했다.</p><div class="scroll"><table><thead><tr><th>업종</th><th>어떤 기업인가</th><th>시총 표본 시작 → 종료</th><th>수익률 표본 중앙값</th></tr></thead><tbody id="sector-sizes"></tbody></table></div></details>
+<details open><summary>수익률 계산식과 가중 이유</summary>
+<p class="formula">종목 일간 수익률 = (당일 종가 ÷ 전일 종가 − 1) × 100<br>업종 일간 수익률 = Σ(종목 수익률 × 직전 거래일 시총) ÷ Σ(직전 거래일 시총)<br>업종 누적 수익률 = [∏(1 + 업종 일간 수익률 ÷ 100) − 1] × 100</p>
+<p>시총이 큰 기업의 움직임을 업종 성과에 더 반영하고, 가중치에 당일 가격 변동이 들어가지 않도록 전일 시총을 썼다. 시총 확인률은 종목 수 기준 80% 이상을 요구했다.</p><p id="gap-method"></p></details>
+</section>
+<section id="sync">
+<h2><span class="number">03</span>업종은 언제 더 비슷하게 움직였나?</h2>
+<p class="result" id="sync-result"></p>
+<details open><summary>정의 메모 · 함께 움직이는 정도</summary><p><strong>무엇을 재나?</strong> 두 업종의 일간 수익률이 비슷한 방향과 크기로 움직이는 경향을 상관계수로 잰다.</p><p><strong>계산법과 선택 이유</strong> (a) 코스피가 크게 움직인 상위 10%의 날과 (b) 상위 20%의 날을 급변일로 볼 수 있다. 큰 움직임에 집중하려고 (a)를 썼다.</p><p><strong>제외 대상</strong> 빠진 값이 있으면 업종마다 비교 날짜가 달라지므로, 12개 업종 수익률이 모두 있는 품질 통과일만 사용했다.</p><p id="sync-alternative"></p></details>
+<div class="grid"><div><h3>어떤 업종끼리 같이 움직였나?</h3><p class="read-chart">행과 열이 만나는 칸은 두 업종의 <strong>일간 수익률 상관</strong>이다. +1에 가까우면 같은 방향, −1에 가까우면 반대 방향으로 움직이는 경향이 강하다. 진한 초록은 높은 양의 상관이다.</p><div class="controls"><label>시장 구간 <select id="regime"><option>전체</option><option>급변일</option><option>보통일</option></select></label></div><svg id="heat" viewBox="0 0 510 255" role="img" aria-label="업종 간 상관행렬"></svg><p class="chart-example" id="heat-info" aria-live="polite"></p></div>
+<div><h3>업종이 함께 움직이는 정도는 언제 달라졌나?</h3><p class="read-chart">그래프의 날짜마다 직전까지의 60개 비교일로 업종 쌍별 상관을 다시 계산하고, 서로 다른 업종 쌍의 값을 평균했다. 선이 높을수록 그 무렵 업종들이 비슷하게 움직였다.</p><svg id="rolling" viewBox="0 0 510 220" role="img" aria-label="업종 평균 상관 추이"></svg><p id="rolling-example" class="chart-example"></p></div></div>
+<div class="chart-block"><h3>코스피가 크게 움직인 날에는 업종도 더 비슷했나?</h3><p class="read-chart" id="rho-example"></p><svg id="rho-bars" viewBox="0 0 510 112" style="max-width:670px" role="img" aria-label="시장 구간별 업종 쌍 평균 상관"></svg></div>
+<details><summary>급변일과 상관의 정의</summary><p id="sync-method"></p></details>
+</section>
+<section id="volume">
+<h2><span class="number">04</span>거래량 급증 전후 수익률은 어땠나?</h2>
+<p class="result" id="volume-result"></p>
+<details open><summary>정의 메모 · 거래량 급증과 가격 변화</summary><p><strong>무엇을 재나?</strong> 거래량이 튄 종목·날짜를 한 사건으로 세고, 급증 뒤 5·10·20거래일 수익률의 가운데값을 본다.</p><p><strong>계산법과 선택 이유</strong> (a) 직전 20거래일 거래량 가운데값의 2배 이상을 기본으로, (b) 3배 이상을 더 엄격한 기준으로 썼다. 두 기준에서 수익률 방향이 같은지 확인할 수 있다.</p><p><strong>제외 대상</strong> 거래일이 끊기거나 가격이 이어지지 않는 종목, 직전 20일 거래량 가운데값이 0 이하인 경우, 이후 20일까지 관측할 수 없는 사건을 제외했다.</p><p id="volume-alternative"></p></details>
+<p class="read-chart"><strong>가로축은 급증 전후 며칠을 봤는지, 세로축은 급증 사건별 수익률을 낮은 순서로 놓았을 때의 가운데값이다.</strong> 평소 100주가 거래되던 종목은 200주부터 2배 기준, 300주부터 3배 기준에 들어간다.</p>
+<svg id="vol" viewBox="0 0 510 205" style="max-width:670px" role="img" aria-label="거래량 급증 전후 수익률 비교"></svg>
+<p class="chart-example" id="volume-example"></p>
+<div class="scroll"><table><thead><tr><th>기준</th><th>사건 수</th><th>직전 5일</th><th>이후 5일</th><th>이후 10일</th><th>이후 20일</th></tr></thead><tbody id="volume-table"></tbody></table></div>
+<details open><summary>급증을 어떻게 정했고, 왜 2배와 3배를 비교했나?</summary><p class="formula">급증 배율 = 당일 거래량 ÷ 직전 20거래일 거래량 중앙값</p><p>20거래일은 약 한 달의 평소 거래 수준을 나타낸다. 중앙값을 쓰면 직전 며칠의 거래 폭증에 기준이 덜 흔들린다. 2배를 기본 기준으로 두고, 3배는 더 큰 급증만 남겨 수익률 방향이 기준에 따라 바뀌는지 확인했다. 3배 사건은 2배 사건에 포함되며, 전후 수익률 비교는 인과관계를 판단하기에는 부족하다.</p><p id="volume-method"></p></details>
+</section>
+<section id="glossary"><h2>용어 정리</h2><dl>
+<dt>시가총액</dt><dd>주가 × 상장주식 수. 시장이 평가한 해당 종목의 규모.</dd>
+<dt>신규 진입·이탈</dt><dd>두 기준일 사이에 시총 상위 30위에 들어오거나 벗어난 경우.</dd>
+<dt>시총가중</dt><dd>시가총액이 큰 종목에 더 큰 비중을 주는 평균.</dd>
+<dt>분산</dt><dd>업종별 누적 수익률이 평균으로부터 떨어진 정도를 제곱해 평균한 값. 클수록 격차가 크다.</dd>
+<dt>상관계수</dt><dd>두 수익률이 같은 방향으로 움직이는 정도. +1에 가까울수록 동조가 강하다.</dd>
+<dt>거래량 급증</dt><dd>당일 거래 주식 수가 직전 20거래일 중앙값의 2배 또는 3배 이상인 사건.</dd>
+<dt>추정치·확정치</dt><dd>영업이익 전망값과 실적 표에 실제로 반영된 값.</dd>
+</dl></section>
+<section id="earnings">
+<h2>기업실적 표 변경 사례</h2>
+<p class="small">재무제표 문항을 위한 준비 · 같은 분기 영업이익이 추정치에서 확정치로 바뀐 시점을 찾아, 발표 전후 주가 반응과 추정 오차 분석에 활용한다.</p>
+<p class="result" id="earnings-result"></p><div class="scroll"><table><thead><tr><th>종목코드</th><th>결산 분기</th><th>추정치 버전일</th><th>확정치 최초 보관일</th><th>영업이익 추정치 → 확정치 (억 원)</th></tr></thead><tbody id="earnings-data"></tbody></table></div>
+<p class="read-chart" id="earnings-example"></p><p class="small">확정치 최초 보관일은 저장본에서 그 숫자를 처음 확인한 날이다. 실제 공시일은 별도 대조가 필요하다.</p>
+</section>
+</main><footer class="wrap">학교 서버 네이버금융 아카이브 · <a href="https://enook.jbnu.ac.kr/courses/393/#!/p/11">공통 질문 안내</a> · <a href="https://getdesign.md/nerdwallet/design-md">디자인 참고</a></footer>
+<script id="data" type="application/json">/* DATA */</script>
+<script>
+const D=JSON.parse(document.getElementById("data").textContent), S=D.sector, M=D.market;
+const el=id=>document.getElementById(id), set=(id,value)=>el(id).textContent=value;
+const fmt=n=>Number(n).toLocaleString("ko-KR",{maximumFractionDigits:2}), fixed=n=>n.toFixed(2);
+const add=(s,name,attrs,text)=>{const n=document.createElementNS("http://www.w3.org/2000/svg",name);for(const [k,v] of Object.entries(attrs)) n.setAttribute(k,v);if(text!==undefined)n.textContent=text;s.append(n);return n};
+const label=(s,x,y,text,attrs={})=>add(s,"text",{x,y,...attrs},text);
+const row=(id,values)=>{const tr=el(id).insertRow();values.forEach(v=>tr.insertCell().textContent=v)};
+const med=arr=>{const a=[...arr].sort((x,y)=>x-y);return (a[Math.floor((a.length-1)/2)]+a[Math.floor(a.length/2)])/2};
+function graph(id, dates, series, domain, height=220){
+ const s=el(id);s.replaceChildren();
+ const a=domain?domain[0]:Math.min(0,...series.flatMap(q=>q.values));
+ const b=domain?domain[1]:Math.max(1,...series.flatMap(q=>q.values));
+ const y=v=>height-33-(v-a)/(b-a)*(height-53), x=i=>57+i/Math.max(1,dates.length-1)*429;
+ for(let i=0;i<5;i++){const v=a+i*(b-a)/4;add(s,"line",{x1:57,x2:486,y1:y(v),y2:y(v),stroke:"#d8e5dd"});label(s,52,y(v)+4,fmt(v),{"text-anchor":"end"})}
+ const marks=[0,Math.floor((dates.length-1)/2),dates.length-1];
+ for(const i of new Set(marks)) label(s,x(i),height-9,dates[i],{"text-anchor":i===0?"start":i===dates.length-1?"end":"middle"});
+ for(const q of series) add(s,"polyline",{points:q.values.map((v,i)=>[x(i),y(v)].join(",")).join(" "),fill:"none",stroke:q.color,"stroke-width":q.weight||2});
+}
+const final=S.returns.at(-1)[1], mid=Math.floor(S.returns.length/2);
+const before=med(S.returns.slice(0,mid).map(r=>r[2])), after=med(S.returns.slice(mid).map(r=>r[2]));
+const avg=final.reduce((a,b)=>a+b,0)/final.length;
+const contribution=S.sectors.map((s,i)=>[s,final[i]]).sort((a,b)=>Math.abs(b[1]-avg)-Math.abs(a[1]-avg)).slice(0,3);
+const gapDirection=after>before?"벌어졌다":after<before?"좁아졌다":"비슷했다";
+set("gap-result",`비교한 12개 업종의 누적 수익률 격차는 후반부에 ${gapDirection}. 평균 수익률에서 떨어진 정도를 읽기 쉬운 단위로 바꾸면 전반부 약 ${fmt(Math.sqrt(before))}%p, 후반부 약 ${fmt(Math.sqrt(after))}%p였다.`);
+set("gap-example",`전반부에는 업종 수익률이 평균에서 퍼진 정도가 약 ${fmt(Math.sqrt(before))}%p였고, 후반부에는 약 ${fmt(Math.sqrt(after))}%p였다. 각각 월별 수치의 가운데값이다.`);
+set("variance-definition",`평균과 각 업종의 수익률 차이를 제곱해 평균한 값이 분산이고, 그 제곱근이 표준편차다. 전·후반 분산의 가운데값은 ${fmt(before)}와 ${fmt(after)}%p²였다.`);
+set("gap-method",`전일 시가총액 가중으로 관측일 수익률을 복리 연결했다. 자료가 없는 날은 건너뛰므로 완전한 보유수익률과 차이가 있다. ${S.dates.join(" ~ ")}. 월말은 관측 가능한 마지막 비교일이다. 마지막 관측일 평균에서 가장 멀리 떨어진 업종은 ${contribution.map(([s,v])=>s+" "+fmt(v)+"%").join(", ")}이었다.`);
+S.sectors.forEach(s=>el("sector").add(new Option(s,s)));el("sector").value="은행";
+const dates=S.returns.map(r=>r[0].slice(0,7));
+function levels(){
+ const i=S.sectors.indexOf(el("sector").value);
+ graph("levels",dates,S.sectors.map((_,j)=>({values:S.returns.map(r=>r[1][j]),color:i===j?"#006642":"#c4d5cb",weight:i===j?3:1})).sort((a,b)=>a.weight-b.weight));
+ if(i>=0) set("sector-example",`${S.sectors[i]}의 마지막 누적 수익률은 ${fixed(final[i])}%다. 100에서 시작했다면 관측한 날의 등락을 반영한 마지막 값은 ${fmt(100+final[i])}이다.`);
+}
+el("sector").onchange=levels;levels();
+graph("variance",dates,[{values:S.returns.map(r=>Math.sqrt(r[2])),color:"#008254"}]);
+const syncDirection=S.rho[1]>S.rho[2]?"더 비슷하게 움직였다":S.rho[1]<S.rho[2]?"함께 움직이는 정도가 낮았다":"비슷한 정도로 함께 움직였다";
+set("sync-result",`12개 업종은 시장 급변일에 ${syncDirection}. 업종 쌍의 평균 상관은 급변일 ${fixed(S.rho[1])}, 보통일 ${fixed(S.rho[2])}였다.`);
+set("sync-method",`12개 업종 일간 시총가중 수익률의 피어슨 상관. 코스피 절대 등락률 ${fixed(S.threshold)}% 이상을 급변일로 잡았다. ${S.groups[1]}일과 ${S.groups[2]}일 비교. 이동 평균은 각 60개 비교일 안의 업종 쌍 상관 평균이다.`);
+const lastRoll=S.roll.at(-1);
+set("rolling-example",`${lastRoll[0]}의 ${fixed(lastRoll[1])}은 그날까지 최근 60개 비교 거래일로 계산한 업종 쌍별 상관의 평균이다.`);
+set("rho-example",`코스피가 하루 ${fixed(S.threshold)}% 이상 오르거나 내린 ${S.groups[1]}일과 나머지 ${S.groups[2]}일을 비교했다. 12개 업종에서 만든 서로 다른 66쌍의 상관을 각 구간에서 평균했다. 0.76의 단위는 %가 아니다.`);
+graph("rolling",S.roll.map(r=>r[0].slice(0,7)),[{values:S.roll.map(r=>r[1]),color:"#008254"}],[-.25,1]);
+const short=s=>({"반도체와반도체장비":"반도체","가스유틸리티":"가스"}[s]||s);
+const scope={"반도체와반도체장비":"반도체 설계·제조 및 장비","IT서비스":"시스템 구축·운영 등 IT 서비스","자동차":"완성차 제조","자동차부품":"자동차 부품 제조","조선":"선박 건조·관련 장비","화학":"석유화학·화학 소재","철강":"제철·철강 제품","건설":"건축·토목 시공","제약":"의약품 개발·제조","식품":"가공식품·식품 원료","가스유틸리티":"도시가스 등 가스 공급","은행":"은행과 은행 중심 금융지주"};
+function horizontal(id, entries, width, step, left=80, ceiling=0){
+ const svg=el(id), low=Math.min(0,...entries.map(r=>r.value)), high=Math.max(ceiling,...entries.map(r=>r.value));
+ const x=v=>left+(v-low)/(high-low||1)*width;
+ entries.forEach((r,i)=>{
+  const y=13+i*step;
+  label(svg,1,y+13,short(r.name));
+  add(svg,"rect",{x:Math.min(x(0),x(r.value)),y,width:Math.abs(x(r.value)-x(0)),height:16,fill:r.color||"#008254"});
+  label(svg,x(r.value)+(r.value<0?-5:5),y+13,r.display,{"text-anchor":r.value<0?"end":"start"});
+ });
+}
+horizontal("sector-end",S.sectors.map((name,i)=>({name,value:final[i],display:fmt(final[i])+"%"})).sort((a,b)=>b.value-a.value),330,25);
+const winners=values=>S.sectors.map((name,i)=>({name,value:values[i],display:fmt(values[i])+"%"}))
+ .sort((a,b)=>b.value-a.value).slice(0,3);
+const weighted=winners(final), equal=winners(S.equal_returns.at(-1)[1]);
+horizontal("weighted-leaders",weighted,300,28,85,weighted[0].value);
+horizontal("equal-leaders",equal,300,28,85,weighted[0].value);
+set("leader-change",`같은 날짜와 종목으로 계산해도 1위가 바뀌었다. 시총가중은 ${short(weighted[0].name)} ${weighted[0].display}, 동일가중은 ${short(equal[0].name)} ${equal[0].display}가 1위였다. 두 그림의 막대 눈금은 같다.`);
+const monthValues=S.monthly_spread.map(row=>row[1]);
+set("gap-alternative",`격차를 그달 수익률만으로 계산하면 월별 퍼짐의 가운데값은 전반 ${fmt(med(monthValues.slice(0,mid)))}%p, 후반 ${fmt(med(monthValues.slice(mid)))}%p였다. 종목을 같은 비중으로 바꿨을 때 1위가 어떻게 바뀌는지는 아래 그림에서 확인할 수 있다.`);
+set("sync-alternative",`급변일을 상위 20%로 넓혀도 더 비슷하게 움직였다. 급변 ${S.wider.n}일의 평균 상관은 ${fixed(S.wider.fast)}, 나머지 날은 ${fixed(S.wider.normal)}이었다.`);
+horizontal("rho-bars",["급변일","보통일"].map((name,i)=>({name,value:S.rho[i+1],display:fixed(S.rho[i+1]),color:i?"#78bba0":"#008254"})),340,40);
+function heat(){
+ const svg=el("heat"), i=el("regime").selectedIndex, mat=S.correlations[i];svg.replaceChildren();
+ const bank=S.sectors.indexOf("은행"), auto=S.sectors.indexOf("자동차");
+ set("heat-info",`예시 · 은행과 자동차의 상관은 ${fixed(mat[bank][auto])}이다. 다른 칸을 누르면 해당 두 업종의 값을 볼 수 있다.`);
+ for(const [r,sector] of S.sectors.entries()){
+   label(svg,100,25+r*17,short(sector),{"text-anchor":"end"});
+   label(svg,116+r*31,229,short(sector),{transform:`rotate(40 ${116+r*31} 229)`});
+   for(const [c,v] of mat[r].entries()){
+    const cell=add(svg,"rect",{x:107+c*31,y:13+r*17,width:29,height:15,fill:v>=0?`rgba(0,110,73,${.12+.88*v})`:`rgba(165,58,42,${.12-.88*v})`});
+    const caption=`${sector} · ${S.sectors[c]} ${fixed(v)}`;
+    add(cell,"title",{},caption);cell.onclick=()=>set("heat-info",caption);
+   }
+ }
+}
+el("regime").onchange=heat;heat();
+if(M){
+ if(M.final) set("data-scope",`전체 추출 완료 · 공통 질문 4개 · 기업실적 표 변경 사례`);
+ const R=M.ranks;
+ set("cap-result",`시작일 상위 30종목 중 ${R.retained}개가 종료일에도 상위권에 남았고, ${30-R.retained}개가 새로 들어왔다. ${R.retained===20?"상위권의 3분의 1이 바뀐 셈이다.":""}`.trim());
+ set("rank-dates",`${R.dates[0]}과 ${R.dates[1]}에 종목을 시가총액 순으로 줄 세운 뒤, 상위 30개 명단을 대조했다. 막대 하나가 그날의 30종목이다.`);
+ if(R.common_retained!==undefined) set("rank-alternative",`두 날짜에 모두 관측된 종목만 다시 순위를 매겨도 30위 안에 남은 수는 ${R.common_retained}개였다. 전체 관측 종목 기준과 같은 결과다.`);
+ set("cap-method",`${R.dates.join(" → ")} · 코스피·코스닥 관측 종목 ${fmt(R.sizes[0])} → ${fmt(R.sizes[1])}개. 초기 표본이 작은 날은 시작점 후보에서 제외했다. 동률은 종목코드순. 업종별 이동은 같은 업종에 남아 있고 두 날짜 모두 시총이 있는 공통 종목이 5개 이상일 때 계산했다.`);
+ const flow=el("rank-flow"), changed=30-R.retained;
+ for(const [i,title,change] of [[0,"시작일","이탈"],[1,"종료일","진입"]]){
+  const y=16+i*38, kept=R.retained*12, swap=changed*12;
+  label(flow,0,y+16,title);
+  add(flow,"rect",{x:67,y,width:kept,height:23,fill:"#006642"});
+  add(flow,"rect",{x:67+kept,y,width:swap,height:23,fill:i?"#a8ddba":"#f3c4a0"});
+  if(kept>24)label(flow,77,y+16,`유지 ${R.retained}`,{style:"fill:white"});
+  if(swap>24)label(flow,77+kept,y+16,`${change} ${changed}`);
+ }
+ for(const s of S.sectors){
+  const caps=R.sector_sizes?.[s];
+  row("sector-sizes",[s,scope[s],caps?caps.join(" → ")+"개":"—",fmt(S.sizes[s][1])+"개"]);
+ }
+ const boards={
+  "show-new":R.current.filter(r=>r.prior===null||r.prior>30).map(r=>({...r,start:r.prior,end:r.rank})),
+  "show-exit":(R.exits||[]).map(r=>({...r,start:r.rank,end:r.current})),
+  "show-keep":R.current.filter(r=>r.prior!==null&&r.prior<=30).map(r=>({...r,start:r.prior,end:r.rank}))
+ };
+ set("rank-start",R.dates[0]);set("rank-end",R.dates[1]);
+ function showRanks(id){
+  el("rank-rows").replaceChildren();
+  for(const key of Object.keys(boards))el(key).setAttribute("aria-pressed",key===id);
+  const entries=boards[id];
+  set("rank-count",entries.length+"종목");
+  for(const r of entries){
+   const delta=r.start!==null&&r.end!==null?r.start-r.end:null;
+   row("rank-rows",[r.name,r.sector,r.start===null?"관측 없음":r.start+"위",
+      r.end===null?"관측 없음":r.end+"위",
+      delta===null?"비교 불가":delta>0?"↑ 순위 상승":delta<0?"↓ 순위 하락":"순위 유지"]);
+   const change=el("rank-rows").lastElementChild.lastElementChild;
+   if(delta)change.className=delta>0?"up":"down";
+  }
+ }
+ for(const id of Object.keys(boards))el(id).onclick=()=>showRanks(id);
+ showRanks("show-new");
+ const movers=R.movement_rates||[];
+ if(movers.length){
+  set("move-rule",`두 날짜에 모두 있는 ${fmt(R.common_n)}종목만 다시 줄 세웠다. 그중 전체 명단의 10분의 1에 해당하는 ${fmt(R.movement_cutoff)}자리 이상 순위가 오른 종목과 내린 종목을 합쳐, 업종마다 몇 개였는지 비교했다.`);
+  for(const item of movers){
+   const line=document.createElement("div");line.className="movement-item";
+   const name=document.createElement("strong");name.textContent=item.sector;
+   const track=document.createElement("span");track.className="movement-track";track.setAttribute("aria-hidden","true");
+   const fill=document.createElement("span");fill.className="movement-fill";fill.style.width=item.rate+"%";track.append(fill);
+   const value=document.createElement("span");value.textContent=`${item.n}개 중 ${item.large}개 (${fmt(item.rate)}%)`;
+   line.append(name,track,value);el("moves").append(line);
+  }
+  const top=movers[0], [distance,from,to,name]=top.example;
+  set("move-example",`예시 · ${top.sector}의 ${name}는 공통 종목 안에서 ${fmt(from)}위 → ${fmt(to)}위였다. 두 순위의 차이 ${fmt(distance)}가 기준 ${fmt(R.movement_cutoff)}자리 ${distance>=R.movement_cutoff?"이상이므로 크게 이동한 종목에 들어간다.":"미만이므로 크게 이동한 종목에서 빠진다."}`);
+ }
+ const V=M.volume;
+ set("volume-method",`${V.dates.join(" ~ ")}에 확보한 ${V.days}개 품질 통과 거래일. 직전 20거래일 거래량 중앙값의 2·3배. KRX 거래일과 전일 종가가 이어지고 전후 기간을 모두 관측한 사건만 포함했다. 급증일 수익률을 빼고 직전 5일 및 이후 5·10·20일을 비교했다. 중복 사건을 허용한 기술통계다.`);
+ const usable=V.results.filter(r=>r.n>0);
+ if(usable.length){
+  for(const r of usable) row("volume-table",[`${r.cutoff}배 이상`,fmt(r.n),...r.returns.map(v=>fixed(v)+"%")]);
+  const base=usable[0];
+  set("volume-alternative",`3배로 높여도 이후 5·10·20일 모두 수익률 가운데값이 마이너스였다. 20일 값은 2배 기준 ${fixed(base.returns[3])}%, 3배 기준 ${fixed(usable.at(-1).returns[3])}%였다.`);
+  set("volume-example",`예시 · ${base.cutoff}배 이상 급증한 ${fmt(base.n)}건에서 급증일 종가와 20거래일 뒤 종가를 비교했다. 수익률을 작은 순서로 놓았을 때 가운데값은 ${fixed(base.returns[3])}%였다. 같은 종목의 다른 날짜는 별도 사건으로 센다.`);
+  const fellBoth=usable.length===2&&usable.every(r=>r.returns[0]>0&&r.returns[3]<0);
+  const horizon=usable.map(r=>r.cutoff+"배 기준 "+fixed(r.returns[3])+"%").join(", ");
+  set("volume-result",`${fellBoth?"두 급증 기준 모두 직전 5일 수익률 중앙값은 양수였고, 이후 20일은 음수였다. ":""}이후 20거래일 수익률 중앙값은 ${horizon}였다${M.final?".":" (중간 집계)."}`);
+  graph("vol",["직전 5일","이후 5일","이후 10일","이후 20일"],usable.map(r=>({values:r.returns,color:r.cutoff===2?"#007d51":"#9c6617"})),null,205);
+  label(el("vol"),60,15,"초록 2배 · 갈색 3배");
+ }else set("volume-result","관측 기간을 충족한 사건이 아직 없다.");
+ set("earnings-result",`${M.final?"전체 추출":"5개 종목 시험"}에서 확인한 분기 추정치→확정치 ${fmt(M.earnings.n)}건`);
+ const bankEarnings=M.earnings.examples.find(r=>r.code==="105560");
+ if(bankEarnings) set("earnings-example",`예시 · KB금융(105560)의 ${bankEarnings.period} 결산 분기 영업이익은 추정 ${fmt(bankEarnings.operating_profit_estimate)}억 원에서 확정 ${fmt(bankEarnings.operating_profit_actual)}억 원으로 바뀌었고, 확정값은 ${bankEarnings.first_actual_archive_date} 저장본에서 처음 확인했다.`);
+ M.earnings.examples.forEach(r=>row("earnings-data",[r.code,r.period,r.estimate_observed_date,r.first_actual_archive_date,fmt(r.operating_profit_estimate)+" → "+fmt(r.operating_profit_actual)]));
+}else{
+ for(const [id,svg] of [["cap-result",["rank-flow","moves"]],["volume-result",["vol"]],["earnings-result",[]]]){set(id,"학교 서버 결과 확인 중");for(const element of svg)el(element).hidden=true}
+}
+</script>
+</body>
+</html>

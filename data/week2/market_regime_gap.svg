@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="390" viewBox="0 0 900 390" role="img" aria-label="국면별 업종 수익률 격차">
+<rect width="900" height="390" fill="white"/>
+<g font-family="Malgun Gothic, Noto Sans CJK KR, sans-serif" fill="#17283c">
+<text x="27" y="43" font-size="25" font-weight="bold">시장 국면에 따른 업종 간 수익률 격차</text>
+<text x="27" y="73" font-size="15" fill="#52677d">12개 업종의 일별 최고–최저 차이 중앙값 · 시총이 확인된 동일 종목 표본</text>
+<text x="27" y="136" font-size="17">하락 · 107일</text>
+<rect x="141" y="111" width="323.03" height="18" rx="4" fill="#4276a8"/>
+<text x="474.03" y="126" font-size="14">동일가중 4.09%p</text>
+<rect x="141" y="136" width="446.00" height="18" rx="4" fill="#13796a"/>
+<text x="597.00" y="151" font-size="14">시총가중 5.65%p</text>
+<text x="27" y="212" font-size="17">중간 · 305일</text>
+<rect x="141" y="187" width="267.14" height="18" rx="4" fill="#4276a8"/>
+<text x="418.14" y="202" font-size="14">동일가중 3.39%p</text>
+<rect x="141" y="212" width="392.73" height="18" rx="4" fill="#13796a"/>
+<text x="543.73" y="227" font-size="14">시총가중 4.98%p</text>
+<text x="27" y="288" font-size="17">상승 · 112일</text>
+<rect x="141" y="263" width="326.64" height="18" rx="4" fill="#4276a8"/>
+<text x="477.64" y="278" font-size="14">동일가중 4.14%p</text>
+<rect x="141" y="288" width="508.00" height="18" rx="4" fill="#13796a"/>
+<text x="659.00" y="303" font-size="14">시총가중 6.44%p</text>
+<text x="27" y="369" font-size="14" fill="#52677d">자료: 교수님 네이버금융 HTML 아카이브 · 시총 기준: 직전 거래일</text></g></svg>

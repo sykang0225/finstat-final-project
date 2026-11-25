@@ -1,0 +1,31 @@
+event_date,kospi_return_pct,status,reason
+2024-08-05,-8.767688,selected,
+2025-04-07,-5.565786,selected,
+2025-08-01,-3.883295,excluded,2025-07-31:missing|2025-08-01:baseline_short|2025-08-04:baseline_short|2025-08-05:baseline_short|2025-08-06:baseline_short|2025-08-07:baseline_short|2025-08-08:low_coverage
+2026-02-02,-5.257869,selected,
+2026-02-05,-3.863827,overlap,stronger event window already selected
+2026-03-03,-7.242322,overlap,stronger event window already selected
+2026-03-04,-12.057680,selected,
+2026-03-09,-5.962538,overlap,stronger event window already selected
+2026-03-23,-6.494326,selected,
+2026-03-31,-4.260512,overlap,stronger event window already selected
+2026-04-02,-4.465475,overlap,stronger event window already selected
+2026-05-15,-6.117090,excluded,2026-05-28:missing|2026-05-29:missing
+2026-06-05,-5.542277,selected,
+2026-06-08,-8.285921,overlap,stronger event window already selected
+2026-06-10,-4.521590,overlap,stronger event window already selected
+2026-06-23,-9.991826,selected,
+2026-06-26,-5.812683,overlap,stronger event window already selected
+2026-07-02,-7.892179,overlap,stronger event window already selected
+2026-07-07,-4.906270,overlap,stronger event window already selected
+2026-07-08,-5.348791,overlap,stronger event window already selected
+2026-07-13,-8.948841,overlap,stronger event window already selected
+2026-07-16,-6.367159,overlap,stronger event window already selected
+2026-07-20,-4.461924,overlap,stronger event window already selected
+2026-07-24,-5.724620,overlap,stronger event window already selected
+2026-07-28,-10.836547,selected,
+2026-07-29,-5.983405,overlap,stronger event window already selected
+2026-08-03,-5.124745,overlap,stronger event window already selected
+2026-08-06,-4.575146,overlap,stronger event window already selected
+2026-08-19,-5.803055,selected,
+2026-09-02,-3.994851,excluded,short_future_window

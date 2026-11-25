@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시장 국면과 업종 수익률 | 금융통계 2주차 면담</title>
+<style>
+:root{color-scheme:light;--ink:#17283c;--muted:#52677d;--line:#dce5ee;--navy:#143a5d;--paper:#f4f7fa;--red:#a23932}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 "Malgun Gothic",system-ui,sans-serif}
+main{max-width:1160px;margin:auto;padding:0 24px 45px}header{padding:44px 0 26px;border-bottom:2px solid var(--navy)}h1{font-size:clamp(29px,4.6vw,53px);line-height:1.2;max-width:880px;margin:8px 0 14px;letter-spacing:-.045em}
+h2{font-size:clamp(22px,3vw,30px);line-height:1.3;margin:0 0 10px;letter-spacing:-.035em}p{margin:0 0 12px}.label{font-size:14px;color:#17615e;font-weight:700}.muted,caption{color:var(--muted);font-size:14px}
+section{background:white;border:1px solid var(--line);border-radius:16px;padding:24px;margin:19px 0}.question{font-size:18px;font-weight:700}
+.layout{display:grid;grid-template-columns:minmax(0,3fr) minmax(190px,1fr);gap:20px;align-items:start}.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:12px 0}
+select,button{font:inherit;border:1px solid #aebed0;border-radius:7px;background:white;color:var(--ink);padding:5px 10px}button{cursor:pointer}button.active{color:white;background:var(--navy)}
+svg{display:block;width:100%;height:auto;overflow:visible}svg text{font-family:inherit;fill:var(--muted);font-size:14px}.point{cursor:pointer;outline:none}.point:focus{stroke:#151b29;stroke-width:3}
+.note{padding:14px 16px;background:#eef4f9;border-radius:8px;min-height:104px}.note strong{color:var(--navy)}.note p{margin-bottom:6px}
+.table-scroll{overflow:auto}table{width:100%;border-collapse:collapse;min-width:560px}th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}th{background:#eef4f9}tr:last-child td{border-bottom:0}caption{text-align:left;margin-bottom:6px}
+a{color:#155582}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #ad5b11;outline-offset:2px}details{margin-top:10px}summary{cursor:pointer;color:var(--navy);font-weight:700}li{margin-bottom:5px}
+@media(max-width:700px){main{padding:0 12px 24px}header{padding-top:28px}section{padding:14px}.layout{display:block}.note{margin-top:8px}}
+@media print{body{background:white}section{break-inside:avoid}}
+</style>
+</head>
+<body><main>
+<header>
+<div class="label">금융통계 기말 프로젝트 · 2주차 면담</div>
+<h1>시장 국면에 따라 업종별 수익률 격차와 주도 업종은 어떻게 달라졌는가?</h1>
+<p>1차 발표는 코스피·코스닥에서 고른 12개 업종을 분석한다. 2차 발표는 그 결과 안에서 은행의 위치를 확인한 뒤 은행 업종 내 종목으로 내려간다.</p>
+<p id="scope" class="muted"></p>
+</header>
+<section>
+<h2>시장 국면별 수익률 격차와 1위 업종</h2>
+<p class="question">하락·중간·상승일 중 언제 업종 간 격차가 컸고, 시가총액을 반영하면 1위가 얼마나 바뀌었는가?</p>
+<div class="controls" aria-label="가중 방식">
+<label>비교 기간 <select id="year"><option value="all">전체 기간</option></select></label>
+<button id="all" type="button">동일가중 · 전체 표본</button><button id="paired" type="button">동일가중과 시총가중 · 같은 표본</button>
+</div>
+<div class="layout">
+<svg id="regimes" viewBox="0 0 630 245" role="img" aria-label="시장 국면별 업종 수익률 격차"></svg>
+<div class="note" id="regime-insight" aria-live="polite"></div>
+</div>
+<div class="table-scroll"><table><caption>국면별로 일간 수익률 1위를 가장 자주 기록한 업종</caption><thead><tr><th>시장 국면</th><th>비교 거래일</th><th>동일가중 1위 빈도</th><th>시총가중 1위 빈도</th><th>같은 표본에서 1위가 바뀐 날</th></tr></thead><tbody id="leaders"></tbody></table></div>
+<p id="regime-rule" class="muted"></p>
+</section>
+<section>
+<h2>급락일별 낙폭과 이후 반등</h2>
+<p class="question">급락일에 덜 떨어진 업종은 이후 더 강하게 반등했는가?</p>
+<div class="controls">
+<label>급락일 <select id="date"></select></label>
+<label>세로축 <select id="metric"><option value="rebound">급락일 종가 대비 T+10 반등률</option><option value="end">급락 전 종가 대비 T+10 수익률</option></select></label>
+<label>업종 <select id="sector"></select></label>
+</div>
+<div class="layout">
+<svg id="scatter" viewBox="0 0 650 365" role="group" aria-label="급락일 업종별 산점도"></svg>
+<div><div class="note" id="event-info" aria-live="polite"></div><div class="note" id="sector-info" aria-live="polite" style="margin-top:8px"></div></div>
+</div>
+<p class="muted">은행은 적갈색, 다른 업종은 업종별 색으로 표시했다. 점 면적은 해당 사건 직전 거래일의 관측 시총에 비례한다. 빈 원은 시총 확인 종목 비중 80% 미만 또는 시총 결측이다. 시총은 당일 수익률 표본 기준이며, 산점도 수익률은 T−1부터 T+10까지 연속 관측된 종목의 동일가중 결과다.</p>
+<p class="muted" id="event-takeaway"></p>
+<details><summary>급락일 9건과 당시 시장 이슈 출처</summary>
+<p class="muted">당시 보도와 리서치에 나타난 시장 배경이다. 각 이슈가 지수 하락을 얼마나 설명하는지는 추정하지 않았다.</p>
+<div class="table-scroll"><table><thead><tr><th>거래일</th><th>코스피</th><th>당시 시장 이슈</th><th>출처</th></tr></thead><tbody id="events"></tbody></table></div>
+</details>
+</section>
+<section>
+<h2>재무제표 질문 · 부채비율과 급락 민감도</h2>
+<p class="question">부채비율이 높은 업종의 수익률 순위가 급락일에 더 낮았는가?</p>
+<div class="layout"><svg id="debt" viewBox="0 0 630 220" role="img" aria-label="급락일과 중간일 부채비율 순위 상관"></svg><div id="debt-info" class="note"></div></div>
+<p class="muted">각 거래일에 비은행 11개 업종의 부채비율 중앙값과 동일가중 수익률의 스피어만 순위상관을 계산하고, 국면별 중앙값을 비교했다. T−1 HTML의 최근 확정 분기를 사용했다. 추정치(E), 음수 부채비율, 관측월 이후의 결산기는 제외했다. 업종별 부채비율 확인 종목 5개 이상·80% 이상을 요구했다. 은행은 예금 부채 구조를 고려해 이 비교에서 제외했다. 급락 기준은 1주차 코스피 하위 5%인 −3.8638%다.</p>
+</section>
+<section>
+<h2>표본과 2차 발표 연결</h2>
+<p>교수님 아카이브에서 2024-03-27~2026-09-02 사이 HTML 2,403,074개를 읽었다. 가격 추출 실패 294건과 거래일·종목 중복 165,918건을 제외한 패널은 2,236,862행(550거래일, 4,813개 종목코드)이다. 원본이 없는 날과 자료가 적은 날은 품질 검사에 기록했다.</p>
+<p id="sectors"></p>
+<p>급락 사례 9건에서 비교할 수 있었던 업종 중 IT·제조·건설·소비·필수재·금융이 함께 보이도록 12개를 정했다. 전체 기간에서도 같은 목록을 사용했다. 장중 관측, 전일 종가 불일치, 업종·시장 변경, 일간 수익률 절댓값 35% 초과를 제외하고 업종마다 유효 종목 5개 이상을 요구했다.</p>
+<p>2차 발표에서는 은행 업종 전체의 시장 내 위치를 먼저 제시하고, 이후 은행 종목별 낙폭과 회복 차이를 비교한다. 교수 아카이브와 깃허브 수집분이 겹치는 날짜 및 변수를 확인해 연결하고, 중간 프로젝트에서 읽은 은행 보고서의 주장 한 가지를 데이터로 검토한다.</p>
+<details><summary>학교 서버 자료 확인 내역</summary><p class="muted" id="audit"></p></details>
+</section>
+</main>
+<script id="data" type="application/json">/* DATA */</script>
+<script>
+const D = JSON.parse(document.getElementById("data").textContent);
+const el = id => document.getElementById(id);
+const pct = n => n == null ? "자료 부족" : n.toFixed(2) + "%";
+const nfmt = n => Number(n).toLocaleString("ko-KR");
+const colors = ["#3069ab","#218478","#a16728","#7956a0","#546bb7","#a9571e","#526e79","#607e34","#8a5576","#02749d","#437352","#a23932"];
+const svgEl = (svg, type, attr, content) => {
+  const node=document.createElementNS("http://www.w3.org/2000/svg",type);
+  for(const [key,value] of Object.entries(attr)) node.setAttribute(key,value);
+  if(content!==undefined) node.textContent=content;
+  svg.append(node); return node;
+};
+const median = values => {const a=[...values].sort((x,y)=>x-y); return (a[Math.floor((a.length-1)/2)]+a[Math.floor(a.length/2)])/2};
+function tableRow(id, cells) {
+  const row=el(id).insertRow();
+  for(const item of cells) {
+    const cell=row.insertCell();
+    if(item instanceof Node) cell.append(item); else cell.textContent=item;
+  }
+}
+function sourceLink(context) {
+  const a=document.createElement("a"); a.href=context.url; a.textContent=context.source; return a;
+}
+const addOption=(node,key,label)=>node.add(new Option(label,key));
+el("scope").textContent=`${D.dates.join(" ~ ")} · 12개 업종이 모두 관측된 비교일 ${nfmt(D.summary.reduce((n,r)=>n+r.n,0))}일 · 급락 사례 9건`;
+el("regime-rule").textContent=`코스피 일간 수익률 하위 20%(${pct(D.cutoff[0])} 이하), 중간 60%, 상위 20%(${pct(D.cutoff[1])} 이상). 업종 격차는 그날 최고와 최저 업종 수익률의 차이이며, 그림은 국면별 중앙값이다. 시총가중 비교는 각 업종에서 T−1 시총 확인률이 80% 이상인 공통일에 같은 종목으로 계산했다. 12개 업종이 모두 관측된 날 중 자료 부족 기준에 걸린 ${D.excluded_days}일도 제외했다.`;
+const leaders = a => a.map(([name,count])=>`${name} ${count}회`).join(" · ") || "자료 부족";
+for(const year of Object.keys(D.yearly)) addOption(el("year"),year,year+"년");
+let weightedView=false;
+function regimeChart(paired) {
+  weightedView=paired;
+  const data=D.yearly[el("year").value]||D.summary;
+  const svg=el("regimes"); svg.replaceChildren();
+  for(const [id,on] of [["all",!paired],["paired",paired]]) {
+    el(id).classList.toggle("active",on); el(id).setAttribute("aria-pressed",on);
+  }
+  const maximum=Math.max(1,...[D.summary,...Object.values(D.yearly)].flatMap(
+    series=>series.flatMap(r=>[r.gap,r.weighted,r.equal_paired])).filter(v=>v!==null));
+  for(const [i,r] of data.entries()) {
+    const y=35+i*69;
+    svgEl(svg,"text",{x:7,y:y+16},r.regime);
+    const bars=paired?[[r.equal_paired,"#5386b9","동일"],[r.weighted,"#178071","시총"]]:[[r.gap,"#3069ab","동일"]];
+    for(const [j,[value,color,label]] of bars.entries()) {
+      const by=y+j*24, width=value===null?0:400*value/maximum;
+      svgEl(svg,"rect",{x:73,y:by,width,height:17,rx:4,fill:color});
+      svgEl(svg,"text",{x:79+width,y:by+14},value===null?`${label} · 자료 부족`:`${label} ${value.toFixed(2)}%p`);
+    }
+  }
+  const best=[...data].filter(r=>r.gap!==null).sort((a,b)=>b.gap-a.gap)[0];
+  const changed=data.reduce((n,r)=>n+r.paired-r.same,0), total=data.reduce((n,r)=>n+r.paired,0);
+  el("regime-insight").textContent=paired?(total?`시총을 반영했을 때 같은 표본의 1위 업종은 ${total}일 중 ${changed}일에 바뀌었다.`:"이 기간에는 가중 방식을 비교할 수 있는 날이 없다."):
+    `동일가중 기준 수익률 격차 중앙값은 ${best.regime}일에 가장 컸다(${best.gap.toFixed(2)}%p).`;
+  el("leaders").replaceChildren();
+  for(const r of data) tableRow("leaders",[r.regime,paired?`${r.paired}일`:`${r.n}일`,leaders(paired?r.paired_leaders:r.leaders),paired?leaders(r.cap_leaders):"시총가중 보기에서 확인",paired&&r.paired?`${r.paired-r.same}일 / ${r.paired}일`:"—"]);
+}
+el("all").onclick=()=>regimeChart(false); el("paired").onclick=()=>regimeChart(true); regimeChart(false);
+el("year").onchange=()=>regimeChart(weightedView);
+for(const [date,value] of Object.entries(D.selected)) {
+  addOption(el("date"),date,`${date} · ${pct(value)}`);
+  const c=D.context[date];
+  tableRow("events",[date,pct(value),c.issue,sourceLink(c)]);
+}
+for(const sector of D.sectors) addOption(el("sector"),sector,sector);
+el("date").value="2026-03-04"; el("sector").value="은행";
+const hasCap=r=>r.cap!==null && Number(r.cap_n)/Number(r.cap_total)>=.8;
+const maxCap=Math.max(1,...D.events.filter(hasCap).map(r=>r.cap));
+function drawScatter() {
+  const svg=el("scatter"); svg.replaceChildren();
+  const day=el("date").value, metric=el("metric").value, selected=el("sector").value;
+  const visible=D.events.filter(r=>r.day===day);
+  const span=values=>{const low=Math.min(0,...values),high=Math.max(0,...values),pad=Math.max((high-low)*.13,1);return [low-pad,high+pad]};
+  const [xmin,xmax]=span(D.events.map(r=>r.start)),[ymin,ymax]=span(D.events.map(r=>r[metric]));
+  const x=v=>64+(v-xmin)/(xmax-xmin)*556, y=v=>307-(v-ymin)/(ymax-ymin)*274;
+  const axis=(x1,y1,x2,y2,stroke)=>svgEl(svg,"line",{x1,y1,x2,y2,stroke});
+  for(let i=0;i<=5;i++){
+    const xv=xmin+i*(xmax-xmin)/5, yv=ymin+i*(ymax-ymin)/5;
+    axis(x(xv),33,x(xv),307,"#e4ebf2"); axis(64,y(yv),620,y(yv),"#e4ebf2");
+    svgEl(svg,"text",{x:x(xv),y:326,"text-anchor":"middle"},xv.toFixed(0)+"%");
+    svgEl(svg,"text",{x:57,y:y(yv)+5,"text-anchor":"end"},yv.toFixed(0)+"%");
+  }
+  axis(x(0),33,x(0),307,"#9daebe"); axis(64,y(0),620,y(0),"#9daebe");
+  svgEl(svg,"text",{x:342,y:352,"text-anchor":"middle"},"급락일 수익률 (T−1 대비)");
+  svgEl(svg,"text",{x:64,y:19},metric==="end"?"급락 전 종가 대비 T+10":"급락일 종가 대비 T+10");
+  for(const r of [...visible].sort((a,b)=>(b.cap||0)-(a.cap||0))) {
+    const color=colors[D.sectors.indexOf(r.sector)], active=r.sector===selected;
+    const point=svgEl(svg,"circle",{cx:x(r.start),cy:y(r[metric]),r:hasCap(r)?Math.max(4,24*Math.sqrt(r.cap/maxCap)):7,
+      fill:hasCap(r)?color:"#fff","fill-opacity":active?1:.68,stroke:active?"#19283c":color,
+      "stroke-width":active?3:1.6,role:"button",tabindex:0,class:"point",
+      "aria-label":`${r.sector}, 급락일 ${pct(r.start)}, 10거래일 후 ${pct(r[metric])}`});
+    svgEl(point,"title",{},`${r.sector} · ${pct(r.start)} → ${pct(r[metric])}`);
+    const choose=()=>{el("sector").value=r.sector;drawScatter();};
+    point.onclick=choose;
+    point.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();choose();el("sector").focus();}};
+  }
+  const r=visible.find(item=>item.sector===selected);
+  const c=D.context[day];
+  const eventBox=el("event-info"), detail=el("sector-info");
+  eventBox.replaceChildren(); detail.replaceChildren();
+  const paragraph=(target,t,tag="p")=>{const node=document.createElement(tag);node.textContent=t;target.append(node);};
+  paragraph(eventBox,`${day} · 코스피 ${pct(D.selected[day])}`,"strong");
+  paragraph(eventBox,c.issue); eventBox.append(sourceLink(c));
+  const stats=D.event_summary[day];
+  paragraph(eventBox,`하락 업종 ${stats.dropped}개 중 ${stats.recovered}개가 10거래일 내 회복`);
+  if(stats.rho!==null) paragraph(eventBox,`하락 업종의 당일 수익률과 이후 반등률 순위상관 ${stats.rho.toFixed(2)}`);
+  paragraph(detail,r.sector,"strong");
+  paragraph(detail,`당일 ${pct(r.start)} · 급락일 종가 대비 반등 ${pct(r.rebound)}`);
+  paragraph(detail,`급락 전 종가 대비 T+10 ${pct(r.end)} · 연속 관측 ${r.n}종목`);
+  paragraph(detail,r.status==="recovered"?`${r.recovered}거래일 만에 급락 전 수준 회복`:r.status==="no_initial_drop"?"당일 낙폭 없음":"10거래일 내 미회복");
+  paragraph(detail,hasCap(r)?`${r.cap_date} 시총 ${r.cap.toFixed(2)}조 원 · ${r.cap_n}/${r.cap_total}종목`:
+    `직전 시총 표본 부족 · ${r.cap_n||0}/${r.cap_total||0}종목`);
+}
+for(const id of ["date","metric","sector"]) el(id).onchange=drawScatter;
+drawScatter();
+const associations=Object.values(D.event_summary).map(r=>r.rho).filter(v=>v!==null);
+el("event-takeaway").textContent=`당일 수익률과 이후 반등률의 순위상관은 ${associations.filter(v=>v>0).length}건에서 양수, ${associations.filter(v=>v<0).length}건에서 음수였다. 낙폭과 반등의 관계는 사건에 따라 방향이 달랐다.`;
+const debt=el("debt");
+const debtMedians={};
+svgEl(debt,"line",{x1:318,y1:31,x2:318,y2:162,stroke:"#a3b3c3"});
+for(const [i,bucket] of ["급락","중간"].entries()){
+  const sample=D.debt.filter(r=>r.regime===bucket), y=55+65*i;
+  const rho=sample.length?median(sample.map(r=>r.rho)):null;
+  debtMedians[bucket]=rho;
+  svgEl(debt,"text",{x:6,y:y+14},bucket);
+  if(rho!==null) svgEl(debt,"rect",{x:Math.min(318,318+rho*224),y,width:Math.abs(rho)*224,height:21,rx:4,fill:i?"#3069ab":"#a23932"});
+  svgEl(debt,"text",{x:558,y:y+15},rho===null?"표본 없음":rho.toFixed(2));
+  svgEl(debt,"text",{x:66,y:y+14},`${sample.length}일`);
+}
+for(const [x,label] of [[94,"−1"],[318,"0"],[542,"+1"]])svgEl(debt,"text",{x,y:193,"text-anchor":"middle"},label);
+el("debt-info").textContent=(debtMedians["급락"]!==null&&debtMedians["급락"]>=0
+  ?"이 표본에서 급락일 상관의 중앙값은 음수가 아니었다. 부채비율이 높은 업종일수록 급락일에 더 떨어졌다는 패턴은 확인되지 않았다."
+  :"음의 상관은 부채비율 순위가 높을수록 당일 수익률 순위가 낮았음을 뜻한다.")+" 순위상관은 인과효과를 추정하지 않는다.";
+el("sectors").textContent=D.sectors.join(" · ");
+const a=D.audit;
+el("audit").textContent=`시총 확인 ${nfmt(a.cap_found||0)}건 · 시총 미확인 ${nfmt(a.cap_missing||0)}건 · 부채비율 확인 ${nfmt(a.debt_found||0)}건 · 부채비율 미확인 ${nfmt(a.debt_missing||0)}건 · 보관일과 거래일 불일치로 재무 확인 생략 ${nfmt(a.archive_date_mismatch||0)}건 · 파일 없음 ${nfmt(a.file_missing||0)}건 · 읽기 오류 ${nfmt(a.read_error||0)}건`;
+</script>
+</body>
+</html>
